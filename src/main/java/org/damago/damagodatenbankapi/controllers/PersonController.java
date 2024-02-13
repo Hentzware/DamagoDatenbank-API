@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/damago/api/v1/personen")
@@ -33,7 +32,7 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable String id, @RequestBody Person updatedPerson) {
+    public ResponseEntity<Person> Put(@PathVariable String id, @RequestBody Person updatedPerson) {
         Optional<Person> optionalPerson = personRepository.findById(id);
 
         if(optionalPerson.isPresent()) {
