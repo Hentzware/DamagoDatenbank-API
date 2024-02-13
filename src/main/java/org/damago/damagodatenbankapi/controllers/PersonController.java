@@ -31,4 +31,25 @@ public class PersonController {
         Person result = personRepository.save(person);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable String id, @RequestBody Person updatedPerson) {
+        Optional<Person> optionalPerson = personRepository.findById(id);
+
+        if(optionalPerson.isPresent()) {
+            Person existingPerson = optionalPerson.get();
+            existingPerson.setGeburtsdatum(updatedPerson.getGeburtsdatum());
+            //existingPerson.setAdresse(updatedPerson.getAdresse());
+            //existingPerson.setKontakt(updatedPerson.getKontakt());
+            existingPerson.setNachname(updatedPerson.getNachname());
+            existingPerson.setVorname(updatedPerson.getVorname());
+            //existingPerson.setRolle(updatedPerson.getRolle());
+            //existingPerson.setStandort(updatedPerson.getStandort());
+            Person savedPerson = personRepository.save(existingPerson);
+            return new ResponseEntity<>(savedPerson, HttpStatus.OK);
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
