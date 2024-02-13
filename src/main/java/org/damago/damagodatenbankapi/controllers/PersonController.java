@@ -1,6 +1,7 @@
 package org.damago.damagodatenbankapi.controllers;
 
-import org.damago.damagodatenbankapi.entities.Person;
+import org.damago.damagodatenbankapi.entities.*;
+import org.damago.damagodatenbankapi.repositories.AdresseRepository;
 import org.damago.damagodatenbankapi.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,9 @@ public class PersonController {
     @Autowired
     PersonRepository personRepository;
 
+    @Autowired
+    AdresseRepository adresseRepository;
+
     @GetMapping
     public Iterable<Person> Get() {
         return personRepository.findAll();
@@ -27,6 +31,12 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Person> Post(@RequestBody Person person) {
+        Adresse adresse;
+
+        if (person.getAdresse() != null) {
+            person.setAdresse(adresseRepository.save(person.getAdresse()));
+        }
+
         Person result = personRepository.save(person);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
