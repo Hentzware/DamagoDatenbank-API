@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/damago/api/v2/adressen")
+@RequestMapping("/damago/api/v2/personen")
 public class PersonController2 {
     @Autowired
     Person2Repository personRepository;
