@@ -34,4 +34,7 @@ public class Adresse {
     @Getter
     @Setter
     private String land;
+
+    @Getter @Setter
+    private String personId;
 }

@@ -1,11 +1,14 @@
-package org.damago.damagodatenbankapi.requests.person;
+package org.damago.damagodatenbankapi.responses;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
-public class AddPersonRequest {
+public class PersonResponse {
+    @Getter @Setter
+    private String id;
+
     @Getter @Setter
     private String nachname;
 
@@ -16,17 +19,17 @@ public class AddPersonRequest {
     private Date geburtsdatum;
 
     @Getter @Setter
-    private String adresseId;
+    private KontaktResponse kontakt;
 
     @Getter @Setter
-    private String kontaktId;
+    private RolleResponse rolle;
 
     @Getter @Setter
-    private String rolleId;
+    private AdresseResponse adresse;
 
     @Getter @Setter
-    private String klasseId;
+    private KlasseResponse klasse;
 
     @Getter @Setter
-    private String standortId;
+    private StandortResponse standort;
 }
