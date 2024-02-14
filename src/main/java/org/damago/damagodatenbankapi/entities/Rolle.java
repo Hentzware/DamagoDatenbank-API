@@ -5,12 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-@Table(name = "Rollen")
+@NamedStoredProcedureQuery(
+        name = "spRolesGet",
+        procedureName = "sp_Roles_Get"
+)
 public class Rolle {
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Getter
     @Setter
     private String id;
