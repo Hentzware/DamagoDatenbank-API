@@ -1,4 +1,4 @@
 CREATE DEFINER=`root`@`%` PROCEDURE `sp_Email_Get`()
 BEGIN
-    SELECT * FROM Email WHERE IsDeleted = false;
+    SELECT * FROM Emails WHERE IsDeleted = false;
 END

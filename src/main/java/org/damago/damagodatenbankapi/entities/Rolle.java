@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-@NamedStoredProcedureQuery(
-        name = "spRolesGet",
-        procedureName = "sp_Roles_Get"
-)
+@Entity
 public class Rolle {
+    @Id
     @Getter
     @Setter
     private String id;

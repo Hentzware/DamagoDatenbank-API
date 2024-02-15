@@ -8,12 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "Personen")
 public class Person {
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Getter
     @Setter
     private String id;
