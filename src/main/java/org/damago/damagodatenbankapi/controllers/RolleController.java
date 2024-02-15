@@ -37,5 +37,12 @@ public class RolleController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/search/name/{name}")
+    @Transactional
+    public ResponseEntity<Iterable<Rolle>> GetByName(@PathVariable String name) {
+        Iterable<Rolle> response = rolleRepository.sp_Roles_GetByName(name);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
 }

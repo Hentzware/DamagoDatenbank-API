@@ -10,17 +10,14 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Repository
 public interface RolleRepository extends JpaRepository<Rolle, String> {
     @Procedure
     @Transactional(readOnly = true)
-    Iterable<Rolle> sp_Roles_Get();
-
-    @Procedure
-    @Transactional(readOnly = true)
-    Optional<Rolle> sp_Roles_GetById(String id);
+    Rolle sp_Roles_Add(AddRolleRequest request);
 
     @Procedure
     @Transactional(readOnly = true)
@@ -32,7 +29,19 @@ public interface RolleRepository extends JpaRepository<Rolle, String> {
 
     @Procedure
     @Transactional(readOnly = true)
-    Rolle sp_Roles_Add(AddRolleRequest request);
+    Iterable<Rolle> sp_Roles_Get();
+
+    @Procedure
+    @Transactional(readOnly = true)
+    Optional<Rolle> sp_Roles_GetById(String id);
+
+    @Procedure
+    @Transactional(readOnly = true)
+    Iterable<Rolle> sp_Roles_GetByName(String name);
+
+    @Procedure
+    @Transactional(readOnly = true)
+    Iterable<Rolle> sp_Roles_GetDeleted();
 
     @Procedure
     @Transactional(readOnly = true)
