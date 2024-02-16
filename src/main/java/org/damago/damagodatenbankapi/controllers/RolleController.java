@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
-@RequestMapping("/damago/api/v2/rollen")
+@RequestMapping("/damago/api/v1/rollen")
 public class RolleController {
     private final RolleRepository rolleRepository;
 
@@ -42,6 +42,12 @@ public class RolleController {
     public ResponseEntity<Iterable<Rolle>> GetByName(@PathVariable String name) {
         Iterable<Rolle> response = rolleRepository.sp_Roles_GetByName(name);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Rolle> Post(@RequestBody AddRolleRequest request) {
+        Rolle response = rolleRepository.sp_Roles_Add(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
 
