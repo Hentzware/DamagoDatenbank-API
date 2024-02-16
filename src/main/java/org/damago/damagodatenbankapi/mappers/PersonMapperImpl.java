@@ -15,11 +15,6 @@ public class PersonMapperImpl implements PersonMapper {
         personResponse.setVorname(person.getVorname());
         personResponse.setGeburtsdatum(person.getGeburtsdatum());
 
-        // personResponse.setAdresse(person.getAdresse());
-        // personResponse.setKontakt(person.getKontakt());
-        // personResponse.setKlasse(person.getKlasse());
-        // personResponse.setStandort(person.getStandort());
-
         return personResponse;
     }
 
