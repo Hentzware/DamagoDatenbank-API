@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+@Entity
 public class Adresse {
+    @Id
     @Getter
     @Setter
     private String id;
@@ -29,8 +31,4 @@ public class Adresse {
     @Getter
     @Setter
     private String land;
-
-    @Getter
-    @Setter
-    private String personId;
 }

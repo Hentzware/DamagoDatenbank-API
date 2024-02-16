@@ -7,6 +7,7 @@ import org.damago.damagodatenbankapi.responses.PersonResponse;
 
 public interface PersonMapper {
     PersonResponse mapToPersonResponse(Person person);
+    Iterable<PersonResponse> mapToPersonResponses(Iterable<Person> persons);
     Person mapToPerson(AddPersonRequest addPersonRequest);
     Person mapToPerson(EditPersonRequest editPersonRequest);
 }

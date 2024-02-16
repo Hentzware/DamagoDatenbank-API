@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+@Entity
 public class Klasse {
+    @Id
     @Getter
     @Setter
     private String id;

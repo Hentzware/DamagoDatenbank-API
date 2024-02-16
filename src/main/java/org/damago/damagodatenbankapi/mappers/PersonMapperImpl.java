@@ -5,6 +5,10 @@ import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
 import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class PersonMapperImpl implements PersonMapper {
     @Override
     public PersonResponse mapToPersonResponse(Person person) {
@@ -16,6 +20,17 @@ public class PersonMapperImpl implements PersonMapper {
         personResponse.setGeburtsdatum(person.getGeburtsdatum());
 
         return personResponse;
+    }
+
+    @Override
+    public Iterable<PersonResponse> mapToPersonResponses(Iterable<Person> persons) {
+        List<PersonResponse> personResponses = new ArrayList<>();
+
+        for (Person p : persons) {
+            personResponses.add(mapToPersonResponse(p));
+        }
+
+        return personResponses;
     }
 
     @Override
@@ -31,6 +46,13 @@ public class PersonMapperImpl implements PersonMapper {
 
     @Override
     public Person mapToPerson(EditPersonRequest editPersonRequest) {
-        return null;
+        Person person = new Person();
+
+        person.setId(editPersonRequest.getId());
+        person.setNachname(editPersonRequest.getNachname());
+        person.setVorname(editPersonRequest.getVorname());
+        person.setGeburtsdatum(editPersonRequest.getGeburtsdatum());
+
+        return person;
     }
 }
