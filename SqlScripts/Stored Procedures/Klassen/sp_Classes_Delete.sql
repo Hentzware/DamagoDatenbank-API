@@ -1,4 +1,4 @@
-CREATE PROCEDURE sp_Klassen_Delete (IN in_id varchar(36))
+CREATE PROCEDURE sp_Classes_Delete (IN in_id varchar(36))
 BEGIN
     UPDATE Klasse SET IsDeleted = true WHERE Id = in_id;
 END
