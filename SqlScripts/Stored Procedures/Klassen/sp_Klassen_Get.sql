@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `sp_Klasse_Get`()
+CREATE PROCEDURE sp_Klassen_Get ()
 BEGIN
     SELECT * FROM Klasse WHERE IsDeleted = false;
 END
