@@ -24,16 +24,36 @@ public class PersonController {
 
     @GetMapping
     @Transactional
-    public ResponseEntity<Iterable<Person>> Get() {
+    public ResponseEntity<Iterable<Person>> GetAll() {
         Iterable<Person> result = personRepository.sp_Persons_Get();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/deleted")
+    @Transactional
+    public ResponseEntity<Iterable<Person>> GetAllDeleted() {
+        Iterable<Person> result = personRepository.sp_Persons_GetDeleted();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Object> GetById(@PathVariable String id) {
+        Person result = personRepository.sp_Persons_GetById(id);
+
+        if (result == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Optional<Person>> Post(@RequestBody AddPersonRequest request) {
-        personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    public ResponseEntity<Person> Post(@RequestBody AddPersonRequest request) {
+        String id = personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        Person result = personRepository.sp_Persons_GetById(id);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
