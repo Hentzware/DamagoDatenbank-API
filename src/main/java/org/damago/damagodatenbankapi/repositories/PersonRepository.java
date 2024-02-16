@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Date;
 
 public interface PersonRepository extends JpaRepository<Person, String> {
@@ -26,7 +27,7 @@ public interface PersonRepository extends JpaRepository<Person, String> {
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_GetByGeburtsdatum(Date date);
+    Collection<? extends Person> sp_Persons_GetByGeburtsdatum(Date date);
 
     @Procedure
     @Transactional(readOnly = true)
@@ -34,17 +35,17 @@ public interface PersonRepository extends JpaRepository<Person, String> {
 
     @Procedure
     @Transactional(readOnly = true)
-    Iterable<Person> sp_Persons_GetByNachname(String nachname);
+    Collection<? extends Person> sp_Persons_GetByNachname(String nachname);
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_GetByVorname(String vorname);
+    Collection<? extends Person> sp_Persons_GetByVorname(String vorname);
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_GetDeleted();
+    Iterable<Person> sp_Persons_GetDeleted();
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
+    void sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
 }

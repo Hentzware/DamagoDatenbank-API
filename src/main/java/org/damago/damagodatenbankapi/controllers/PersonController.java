@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -42,8 +45,24 @@ public class PersonController {
 
     @GetMapping("/search")
     @Transactional
-    public ResponseEntity<Iterable<Person>> GetByNachname(@RequestParam String nachname) {
-        Iterable<Person> persons = personRepository.sp_Persons_GetByNachname(nachname);
+    public ResponseEntity<Iterable<Person>> GetBySearch(
+            @RequestParam(required = false, value = "nachname") String nachname,
+            @RequestParam(required = false, value = "vorname") String vorname,
+            @RequestParam(required = false, value = "geburtsdatum") Date geburtsdatum) {
+        List<Person> persons = new ArrayList<>();
+
+        if (nachname != null) {
+            persons.addAll(personRepository.sp_Persons_GetByNachname(nachname));
+        }
+
+        if (vorname != null) {
+            persons.addAll(personRepository.sp_Persons_GetByVorname(vorname));
+        }
+
+        if (geburtsdatum != null) {
+            persons.addAll(personRepository.sp_Persons_GetByGeburtsdatum(geburtsdatum));
+        }
+
         return new ResponseEntity<>(persons, HttpStatus.OK);
     }
 }
