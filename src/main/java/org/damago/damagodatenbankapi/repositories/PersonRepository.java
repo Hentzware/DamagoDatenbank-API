@@ -10,41 +10,41 @@ import java.util.Date;
 public interface PersonRepository extends JpaRepository<Person, String> {
     @Procedure
     @Transactional(readOnly = true)
-    public void sp_Persons_Add(String nachname, String vorname, Date geburtsdatum);
+    void sp_Persons_Add(String nachname, String vorname, Date geburtsdatum);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_Delete(String id);
+    Person sp_Persons_Delete(String id);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_DeletePermanent(String id);
+    Person sp_Persons_DeletePermanent(String id);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Iterable<Person> sp_Persons_Get();
+    Iterable<Person> sp_Persons_Get();
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_GetByGeburtsdatum(Date date);
+    Person sp_Persons_GetByGeburtsdatum(Date date);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_GetById(String id);
+    Person sp_Persons_GetById(String id);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_GetByNachname(String nachname);
+    Iterable<Person> sp_Persons_GetByNachname(String nachname);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_GetByVorname(String vorname);
+    Person sp_Persons_GetByVorname(String vorname);
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_GetDeleted();
+    Person sp_Persons_GetDeleted();
 
     @Procedure
     @Transactional(readOnly = true)
-    public Person sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
+    Person sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
 }
