@@ -6,7 +6,4 @@ import lombok.Setter;
 public class AddKlasseRequest {
     @Getter @Setter
     private String name;
-
-    @Getter @Setter
-    private String nr;
 }

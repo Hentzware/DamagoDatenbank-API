@@ -9,7 +9,4 @@ public class EditKlasseRequest {
 
     @Getter @Setter
     private String name;
-
-    @Getter @Setter
-    private String nr;
 }
