@@ -23,6 +23,21 @@ public class PersonController {
         this.personRepository = personRepository;
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Optional<Person>> Delete(
+            @PathVariable String id,
+            @RequestParam(required = false, defaultValue = "false") boolean permanent) {
+
+        if (permanent) {
+            personRepository.sp_Persons_DeletePermanent(id);
+        } else {
+            personRepository.sp_Persons_Delete(id);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping
     @Transactional
     public ResponseEntity<Iterable<Person>> GetAll() {
@@ -39,44 +54,13 @@ public class PersonController {
 
     @GetMapping("/{id}")
     @Transactional
-    public ResponseEntity<Object> GetById(@PathVariable String id) {
-        Person result = personRepository.sp_Persons_GetById(id);
+    public ResponseEntity<Optional<Person>> GetById(@PathVariable String id) {
+        Optional<Person> result = personRepository.sp_Persons_GetById(id);
 
-        if (result == null) {
+        if (result.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @PostMapping
-    @Transactional
-    public ResponseEntity<Person> Post(@RequestBody AddPersonRequest request) {
-        String id = personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        Person result = personRepository.sp_Persons_GetById(id);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Optional<Person>> Delete(
-            @PathVariable String id,
-            @RequestParam(required = false, defaultValue = "false") boolean permanent) {
-
-        if (permanent) {
-            personRepository.sp_Persons_DeletePermanent(id);
-        } else {
-            personRepository.sp_Persons_Delete(id);
-        }
-
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-    }
-
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Person> Put(EditPersonRequest request) {
-        personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        Person result = personRepository.sp_Persons_GetById(request.getId());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -86,20 +70,33 @@ public class PersonController {
             @RequestParam(required = false, value = "nachname") String nachname,
             @RequestParam(required = false, value = "vorname") String vorname,
             @RequestParam(required = false, value = "geburtsdatum") Date geburtsdatum) {
-        List<Person> persons = new ArrayList<>();
+        Iterable<Person> result = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
-        if (nachname != null) {
-            persons.addAll(personRepository.sp_Persons_GetByNachname(nachname));
+    @PostMapping
+    @Transactional
+    public ResponseEntity<Optional<Person>> Post(@RequestBody AddPersonRequest request) {
+        String id = personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        Optional<Person> result = personRepository.sp_Persons_GetById(id);
+
+        if (result.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        if (vorname != null) {
-            persons.addAll(personRepository.sp_Persons_GetByVorname(vorname));
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Optional<Person>> Put(EditPersonRequest request) {
+        personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        Optional<Person> result = personRepository.sp_Persons_GetById(request.getId());
+
+        if (result.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        if (geburtsdatum != null) {
-            persons.addAll(personRepository.sp_Persons_GetByGeburtsdatum(geburtsdatum));
-        }
-
-        return new ResponseEntity<>(persons, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
