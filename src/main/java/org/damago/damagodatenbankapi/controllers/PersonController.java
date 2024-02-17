@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -40,15 +38,15 @@ public class PersonController {
 
     @GetMapping
     @Transactional
-    public ResponseEntity<Iterable<Person>> GetAll() {
-        Iterable<Person> result = personRepository.sp_Persons_Get();
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+    public ResponseEntity<Iterable<Person>> Get(@RequestParam(required = false, value = "deleted", defaultValue = "false") boolean deleted) {
+        Iterable<Person> result;
 
-    @GetMapping("/deleted")
-    @Transactional
-    public ResponseEntity<Iterable<Person>> GetAllDeleted() {
-        Iterable<Person> result = personRepository.sp_Persons_GetDeleted();
+        if (deleted) {
+            result = personRepository.sp_Persons_GetDeleted();
+        } else {
+            result = personRepository.sp_Persons_Get();
+        }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -61,16 +59,6 @@ public class PersonController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @GetMapping("/search")
-    @Transactional
-    public ResponseEntity<Iterable<Person>> GetBySearch(
-            @RequestParam(required = false, value = "nachname") String nachname,
-            @RequestParam(required = false, value = "vorname") String vorname,
-            @RequestParam(required = false, value = "geburtsdatum") Date geburtsdatum) {
-        Iterable<Person> result = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -97,6 +85,16 @@ public class PersonController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    @Transactional
+    public ResponseEntity<Iterable<Person>> Search(
+            @RequestParam(required = false, value = "nachname") String nachname,
+            @RequestParam(required = false, value = "vorname") String vorname,
+            @RequestParam(required = false, value = "geburtsdatum") Date geburtsdatum) {
+        Iterable<Person> result = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
