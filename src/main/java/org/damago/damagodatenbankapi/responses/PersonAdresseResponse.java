@@ -8,8 +8,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class KlasseResponse {
+public class PersonAdresseResponse {
     @Id
     private String id;
-    private String name;
+    private String personId;
+    private String adresseId;
 }
