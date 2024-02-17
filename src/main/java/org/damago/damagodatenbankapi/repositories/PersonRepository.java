@@ -47,5 +47,5 @@ public interface PersonRepository extends JpaRepository<Person, String> {
 
     @Procedure
     @Transactional(readOnly = true)
-    void sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
+    Person sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
 }

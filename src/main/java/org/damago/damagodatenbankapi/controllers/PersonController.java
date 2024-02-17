@@ -3,6 +3,7 @@ package org.damago.damagodatenbankapi.controllers;
 import org.damago.damagodatenbankapi.entities.Person;
 import org.damago.damagodatenbankapi.repositories.PersonRepository;
 import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
+import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,9 +59,25 @@ public class PersonController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Optional<Person>> Delete(@PathVariable String id) {
-        personRepository.sp_Persons_Delete(id);
+    public ResponseEntity<Optional<Person>> Delete(
+            @PathVariable String id,
+            @RequestParam(required = false, defaultValue = "false") boolean permanent) {
+
+        if (permanent) {
+            personRepository.sp_Persons_DeletePermanent(id);
+        } else {
+            personRepository.sp_Persons_Delete(id);
+        }
+
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Person> Put(EditPersonRequest request) {
+        personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        Person result = personRepository.sp_Persons_GetById(request.getId());
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/search")
