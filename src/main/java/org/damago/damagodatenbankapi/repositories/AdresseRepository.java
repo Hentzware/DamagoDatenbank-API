@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional(readOnly = true)
 public interface AdresseRepository extends JpaRepository<Adresse, String> {
     @Procedure
@@ -20,22 +22,10 @@ public interface AdresseRepository extends JpaRepository<Adresse, String> {
     Iterable<Adresse> sp_Adresses_Get();
 
     @Procedure
-    Iterable<Adresse> sp_Adresses_GetByHausnummer(String hausnummer);
-
-    @Procedure
     Adresse sp_Adresses_GetById(String id);
 
     @Procedure
-    Iterable<Adresse> sp_Adresses_GetByLand(String land);
-
-    @Procedure
-    Iterable<Adresse> sp_Adresses_GetByOrt(String ort);
-
-    @Procedure
-    Iterable<Adresse> sp_Adresses_GetByPostleitzahl(String postleitzahl);
-
-    @Procedure
-    Iterable<Adresse> sp_Adresses_GetByStrasse(String strasse);
+    Iterable<Adresse> sp_Adresses_Search();
 
     @Procedure
     Iterable<Adresse> sp_Adresses_GetDeleted();
