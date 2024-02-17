@@ -15,11 +15,11 @@ public interface PersonRepository extends JpaRepository<Person, String> {
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_Delete(String id);
+    void sp_Persons_Delete(String id);
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_DeletePermanent(String id);
+    void sp_Persons_DeletePermanent(String id);
 
     @Procedure
     @Transactional(readOnly = true)
@@ -47,5 +47,5 @@ public interface PersonRepository extends JpaRepository<Person, String> {
 
     @Procedure
     @Transactional(readOnly = true)
-    Person sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
+    void sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
 }

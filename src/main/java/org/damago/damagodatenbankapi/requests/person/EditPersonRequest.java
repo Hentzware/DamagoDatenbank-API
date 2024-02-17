@@ -5,16 +5,10 @@ import lombok.Setter;
 
 import java.util.Date;
 
+@Getter @Setter
 public class EditPersonRequest {
-    @Getter @Setter
     private String id;
-
-    @Getter @Setter
     private String nachname;
-
-    @Getter @Setter
     private String vorname;
-
-    @Getter @Setter
     private Date geburtsdatum;
 }

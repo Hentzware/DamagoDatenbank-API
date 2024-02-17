@@ -3,7 +3,7 @@ package org.damago.damagodatenbankapi.requests.person;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter @Setter
 public class DeletePersonRequest {
-    @Getter @Setter
     private String id;
 }

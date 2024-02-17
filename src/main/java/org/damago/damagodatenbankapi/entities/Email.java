@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter @Setter
 public class Email {
-    @Id @Getter @Setter
+    @Id
     private String id;
-
-    @Getter @Setter
     private String email;
 }

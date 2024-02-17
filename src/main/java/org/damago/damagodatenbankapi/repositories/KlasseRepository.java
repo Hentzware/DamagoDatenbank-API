@@ -4,7 +4,6 @@ import org.damago.damagodatenbankapi.entities.Klasse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 public interface KlasseRepository extends JpaRepository<Klasse, String> {
     @Procedure

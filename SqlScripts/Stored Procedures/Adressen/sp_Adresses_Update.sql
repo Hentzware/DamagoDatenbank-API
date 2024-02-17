@@ -6,5 +6,6 @@ BEGIN
             Hausnummer = IF (in_hausnummer IS NOT NULL, in_hausnummer, Hausnummer),
             Postleitzahl = IF (in_postleitzahl IS NOT NULL, in_postleitzahl, Postleitzahl),
             Ort = IF (in_ort IS NOT NULL, in_ort, Ort),
-            Land = IF (in_land IS NOT NULL, in_land, Land);
+            Land = IF (in_land IS NOT NULL, in_land, Land)
+    WHERE Id = in_id;
 END

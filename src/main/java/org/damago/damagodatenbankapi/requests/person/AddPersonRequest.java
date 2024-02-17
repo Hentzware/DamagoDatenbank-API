@@ -5,13 +5,9 @@ import lombok.Setter;
 
 import java.util.Date;
 
+@Getter @Setter
 public class AddPersonRequest {
-    @Getter @Setter
     private String nachname;
-
-    @Getter @Setter
     private String vorname;
-
-    @Getter @Setter
     private Date geburtsdatum;
 }

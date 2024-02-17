@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Classes_GetDeleted ()
 BEGIN
-    SELECT * FROM Klasse WHERE IsDeleted = true;
+    SELECT * FROM Klassen WHERE IsDeleted = true;
 END

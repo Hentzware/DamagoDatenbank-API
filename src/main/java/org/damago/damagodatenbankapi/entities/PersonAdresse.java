@@ -6,13 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter @Setter
 public class PersonAdresse {
-    @Id @Getter @Setter
+    @Id
     private String id;
-
-    @Getter @Setter
     private String personId;
-
-    @Getter @Setter
     private String adresseId;
 }

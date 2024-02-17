@@ -2,15 +2,12 @@ package org.damago.damagodatenbankapi.repositories;
 
 import org.damago.damagodatenbankapi.entities.Rolle;
 import org.damago.damagodatenbankapi.requests.rolle.AddRolleRequest;
-import org.damago.damagodatenbankapi.requests.rolle.DeleteRolleRequest;
 import org.damago.damagodatenbankapi.requests.rolle.EditRolleRequest;
-import org.damago.damagodatenbankapi.requests.rolle.GetRolleRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Repository

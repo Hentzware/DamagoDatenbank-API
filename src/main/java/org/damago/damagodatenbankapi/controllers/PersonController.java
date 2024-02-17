@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/damago/api/v1/personen")
 public class PersonController {
-    PersonRepository personRepository;
+    final PersonRepository personRepository;
 
     public PersonController(PersonRepository personRepository) {
         this.personRepository = personRepository;

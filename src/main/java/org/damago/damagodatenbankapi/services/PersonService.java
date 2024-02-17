@@ -7,9 +7,9 @@ import org.damago.damagodatenbankapi.requests.person.GetPersonRequest;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
 
 public interface PersonService {
-    public Iterable<PersonResponse> Get();
-    public PersonResponse Get(GetPersonRequest request);
-    public PersonResponse Add(AddPersonRequest request);
-    public PersonResponse Edit(EditPersonRequest request);
-    public PersonResponse Delete(DeletePersonRequest request);
+    Iterable<PersonResponse> Get();
+    PersonResponse Get(GetPersonRequest request);
+    PersonResponse Add(AddPersonRequest request);
+    PersonResponse Edit(EditPersonRequest request);
+    PersonResponse Delete(DeletePersonRequest request);
 }

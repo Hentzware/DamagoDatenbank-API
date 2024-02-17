@@ -6,7 +6,6 @@ import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class PersonMapperImpl implements PersonMapper {
