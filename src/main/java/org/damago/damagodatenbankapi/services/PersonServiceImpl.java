@@ -35,9 +35,9 @@ public class PersonServiceImpl implements PersonService {
     public void Delete(DeletePersonRequest request, boolean permanent) {
         if (permanent) {
             personRepository.sp_Persons_DeletePermanent(request.getId());
-        } else {
-            personRepository.sp_Persons_Delete(request.getId());
+            return;
         }
+        personRepository.sp_Persons_Delete(request.getId());
     }
 
     @Override
@@ -45,18 +45,6 @@ public class PersonServiceImpl implements PersonService {
         personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
         Person person = personRepository.sp_Persons_GetById(request.getId());
         return modelMapper.map(person, PersonResponse.class);
-    }
-
-    @Override
-    public PersonResponse GetById(GetPersonRequest request) {
-        Person person = personRepository.sp_Persons_GetById(request.getId());
-        return modelMapper.map(person, PersonResponse.class);
-    }
-
-    @Override
-    public Iterable<PersonResponse> Search(String nachname, String vorname, Date geburtsdatum) {
-        Iterable<Person> persons = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
-        return modelMapper.map(persons, new TypeToken<Iterable<PersonResponse>>(){}.getType());
     }
 
     @Override
@@ -69,6 +57,19 @@ public class PersonServiceImpl implements PersonService {
             persons = personRepository.sp_Persons_Get();
         }
 
+        return modelMapper.map(persons, new TypeToken<Iterable<PersonResponse>>() {
+        }.getType());
+    }
+
+    @Override
+    public PersonResponse GetById(GetPersonRequest request) {
+        Person person = personRepository.sp_Persons_GetById(request.getId());
+        return modelMapper.map(person, PersonResponse.class);
+    }
+
+    @Override
+    public Iterable<PersonResponse> Search(String nachname, String vorname, Date geburtsdatum) {
+        Iterable<Person> persons = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
         return modelMapper.map(persons, new TypeToken<Iterable<PersonResponse>>() {
         }.getType());
     }
