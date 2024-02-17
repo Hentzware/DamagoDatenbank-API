@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GetStandortRequest {
-    private String id;
+public class SearchStandortRequest {
+    private String name;
 }

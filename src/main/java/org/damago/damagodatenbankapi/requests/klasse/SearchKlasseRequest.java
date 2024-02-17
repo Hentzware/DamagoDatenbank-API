@@ -1,12 +1,11 @@
-package org.damago.damagodatenbankapi.requests.raum;
+package org.damago.damagodatenbankapi.requests.klasse;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class EditRaumRequest {
-    private String id;
+public class SearchKlasseRequest {
     private String name;
     private String nr;
 }

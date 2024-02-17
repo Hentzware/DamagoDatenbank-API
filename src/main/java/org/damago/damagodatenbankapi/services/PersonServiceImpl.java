@@ -9,7 +9,6 @@ import org.damago.damagodatenbankapi.requests.person.GetPersonRequest;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EditRaumRequest {
-    private String id;
+public class SearchRaumRequest {
     private String name;
     private String nr;
 }
