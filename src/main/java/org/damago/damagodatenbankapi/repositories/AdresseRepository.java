@@ -5,12 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Transactional(readOnly = true)
 public interface AdresseRepository extends JpaRepository<Adresse, String> {
     @Procedure
-    Adresse sp_Adresses_Add(String strasse, String hausnummer, String postleitzahl, String ort, String land);
+    String sp_Adresses_Add(String strasse, String hausnummer, String postleitzahl, String ort, String land);
 
     @Procedure
     void sp_Adresses_Delete(String id);
@@ -25,10 +23,10 @@ public interface AdresseRepository extends JpaRepository<Adresse, String> {
     Adresse sp_Adresses_GetById(String id);
 
     @Procedure
-    Iterable<Adresse> sp_Adresses_Search();
+    Iterable<Adresse> sp_Adresses_GetDeleted();
 
     @Procedure
-    Iterable<Adresse> sp_Adresses_GetDeleted();
+    Iterable<Adresse> sp_Adresses_Search(String strasse, String hausnummer, String postleitzahl, String ort, String land);
 
     @Procedure
     void sp_Adresses_Undelete(String id);

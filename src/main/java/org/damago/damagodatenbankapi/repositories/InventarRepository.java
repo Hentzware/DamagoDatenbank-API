@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface InventarRepository extends JpaRepository<Inventar, String> {
     @Procedure
-    Inventar sp_Inventory_Add(String name, int anzahl);
+    String sp_Inventory_Add(String name, int anzahl);
 
     @Procedure
     void sp_Inventory_Delete(String id);
@@ -23,10 +23,10 @@ public interface InventarRepository extends JpaRepository<Inventar, String> {
     Inventar sp_Inventory_GetById(String id);
 
     @Procedure
-    Iterable<Inventar> sp_Inventory_GetByName(String name);
+    Iterable<Inventar> sp_Inventory_GetDeleted();
 
     @Procedure
-    Iterable<Inventar> sp_Inventory_GetDeleted();
+    Iterable<Inventar> sp_Inventory_Search(String name, int anzahl);
 
     @Procedure
     void sp_Inventory_Undelete(String id);

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface KlasseRepository extends JpaRepository<Klasse, String> {
     @Procedure
-    Klasse sp_Classes_Add(String name, String nr);
+    String sp_Classes_Add(String name, String nr);
 
     @Procedure
     void sp_Classes_Delete(String id);
@@ -23,13 +23,10 @@ public interface KlasseRepository extends JpaRepository<Klasse, String> {
     Klasse sp_Classes_GetById(String id);
 
     @Procedure
-    Iterable<Klasse> sp_Classes_GetByName(String name);
-
-    @Procedure
-    Iterable<Klasse> sp_Classes_GetByNr(String nr);
-
-    @Procedure
     Iterable<Klasse> sp_Classes_GetDeleted();
+
+    @Procedure
+    Iterable<Klasse> sp_Classes_Search(String name);
 
     @Procedure
     void sp_Classes_Undelete(String id);

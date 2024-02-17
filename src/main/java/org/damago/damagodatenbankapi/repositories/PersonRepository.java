@@ -23,7 +23,7 @@ public interface PersonRepository extends JpaRepository<Person, String> {
     Iterable<Person> sp_Persons_Get();
 
     @Procedure
-    Optional<Person> sp_Persons_GetById(String id);
+    Person sp_Persons_GetById(String id);
 
     @Procedure
     Iterable<Person> sp_Persons_GetDeleted();

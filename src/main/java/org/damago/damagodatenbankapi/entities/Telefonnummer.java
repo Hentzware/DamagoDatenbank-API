@@ -8,9 +8,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Raum {
+public class Telefonnummer {
     @Id
     private String id;
-    private String name;
-    private String nummer;
+    private String telefonnummer;
 }

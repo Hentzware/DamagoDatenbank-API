@@ -59,10 +59,10 @@ public class PersonController {
 
     // Get Pfad einzelne Person anzeigen -> http://localhost:8080/damago/api/v1/personen/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Person>> GetById(@PathVariable String id) {
-        Optional<Person> result = personRepository.sp_Persons_GetById(id);
+    public ResponseEntity<Person> GetById(@PathVariable String id) {
+        Person result = personRepository.sp_Persons_GetById(id);
 
-        if (result.isEmpty()) {
+        if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
@@ -71,11 +71,11 @@ public class PersonController {
 
     // Post Pfad einzelne Person hinzufügen -> http://localhost:8080/damago/api/v1/personen
     @PostMapping
-    public ResponseEntity<Optional<Person>> Post(@RequestBody AddPersonRequest request) {
+    public ResponseEntity<Person> Post(@RequestBody AddPersonRequest request) {
         String id = personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        Optional<Person> result = personRepository.sp_Persons_GetById(id);
+        Person result = personRepository.sp_Persons_GetById(id);
 
-        if (result.isEmpty()) {
+        if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
@@ -84,11 +84,11 @@ public class PersonController {
 
     // Put Pfad einzelne Person aktualisieren -> http://localhost:8080/damago/api/v1/personen/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<Person>> Put(EditPersonRequest request) {
+    public ResponseEntity<Person> Put(EditPersonRequest request) {
         personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        Optional<Person> result = personRepository.sp_Persons_GetById(request.getId());
+        Person result = personRepository.sp_Persons_GetById(request.getId());
 
-        if (result.isEmpty()) {
+        if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
