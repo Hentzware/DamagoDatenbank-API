@@ -3,7 +3,11 @@ package org.damago.damagodatenbankapi.controllers;
 import org.damago.damagodatenbankapi.entities.Person;
 import org.damago.damagodatenbankapi.repositories.PersonRepository;
 import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
+import org.damago.damagodatenbankapi.requests.person.DeletePersonRequest;
 import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
+import org.damago.damagodatenbankapi.requests.person.GetPersonRequest;
+import org.damago.damagodatenbankapi.responses.PersonResponse;
+import org.damago.damagodatenbankapi.services.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +20,10 @@ import java.util.Optional;
 @RequestMapping("/damago/api/v1/personen")
 @Transactional
 public class PersonController {
-    final PersonRepository personRepository;
+    private final PersonService personService;
 
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     /*
@@ -28,14 +32,10 @@ public class PersonController {
     * Delete Pfad mit hard delete                   -> http://localhost:8080/damago/api/v1/personen/{id}?permanent=true
     */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Optional<Person>> Delete(@PathVariable String id, @RequestParam(required = false, value = "permanent", defaultValue = "false") boolean permanent) {
-
-        if (permanent) {
-            personRepository.sp_Persons_DeletePermanent(id);
-        } else {
-            personRepository.sp_Persons_Delete(id);
-        }
-
+    public ResponseEntity<Void> Delete(@PathVariable String id, @RequestParam(required = false, value = "permanent", defaultValue = "false") boolean permanent) {
+        DeletePersonRequest request = new DeletePersonRequest();
+        request.setId(id);
+        personService.Delete(request, permanent);
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
@@ -45,22 +45,17 @@ public class PersonController {
     * Get Pfad nur gelöschte                            -> http://localhost:8080/damago/api/v1/personen?deleted=true
     */
     @GetMapping
-    public ResponseEntity<Iterable<Person>> Get(@RequestParam(required = false, value = "deleted", defaultValue = "false") boolean deleted) {
-        Iterable<Person> result;
-
-        if (deleted) {
-            result = personRepository.sp_Persons_GetDeleted();
-        } else {
-            result = personRepository.sp_Persons_Get();
-        }
-
+    public ResponseEntity<Iterable<PersonResponse>> Get(@RequestParam(required = false, value = "deleted", defaultValue = "false") boolean deleted) {
+        Iterable<PersonResponse> result = personService.Get(deleted);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // Get Pfad einzelne Person anzeigen -> http://localhost:8080/damago/api/v1/personen/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<Person> GetById(@PathVariable String id) {
-        Person result = personRepository.sp_Persons_GetById(id);
+    public ResponseEntity<PersonResponse> GetById(@PathVariable String id) {
+        GetPersonRequest request = new GetPersonRequest();
+        request.setId(id);
+        PersonResponse result = personService.GetById(request);
 
         if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -71,9 +66,8 @@ public class PersonController {
 
     // Post Pfad einzelne Person hinzufügen -> http://localhost:8080/damago/api/v1/personen
     @PostMapping
-    public ResponseEntity<Person> Post(@RequestBody AddPersonRequest request) {
-        String id = personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        Person result = personRepository.sp_Persons_GetById(id);
+    public ResponseEntity<PersonResponse> Post(@RequestBody AddPersonRequest request) {
+        PersonResponse result = personService.Add(request);
 
         if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -84,9 +78,9 @@ public class PersonController {
 
     // Put Pfad einzelne Person aktualisieren -> http://localhost:8080/damago/api/v1/personen/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<Person> Put(EditPersonRequest request) {
-        personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
-        Person result = personRepository.sp_Persons_GetById(request.getId());
+    public ResponseEntity<PersonResponse> Put(@PathVariable String id, @RequestBody EditPersonRequest request) {
+        request.setId(id);
+        PersonResponse result = personService.Edit(request);
 
         if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -100,11 +94,11 @@ public class PersonController {
     * Jeder Parameter ist optional
     */
     @GetMapping("/search")
-    public ResponseEntity<Iterable<Person>> Search(
+    public ResponseEntity<Iterable<PersonResponse>> Search(
             @RequestParam(required = false, value = "nachname") String nachname,
             @RequestParam(required = false, value = "vorname") String vorname,
             @RequestParam(required = false, value = "geburtsdatum") Date geburtsdatum) {
-        Iterable<Person> result = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
+        Iterable<PersonResponse> result = personService.Search(nachname, vorname, geburtsdatum);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
