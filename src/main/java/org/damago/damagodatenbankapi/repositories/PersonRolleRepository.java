@@ -33,5 +33,5 @@ public interface PersonRolleRepository extends JpaRepository<PersonRolle, String
     void sp_PersonRole_Undelete(String id);
 
     @Procedure
-    PersonRolle sp_PersonRole_Update(String id, String personId, String rolleId);
+    void sp_PersonRole_Update(String id, String personId, String rolleId);
 }

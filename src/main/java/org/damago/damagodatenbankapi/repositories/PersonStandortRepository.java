@@ -32,5 +32,5 @@ public interface PersonStandortRepository {
     void sp_PersonLocation_Undelete(String id);
 
     @Procedure
-    PersonStandort sp_PersonLocation_Update(String id, String personId, String standortId);
+    void sp_PersonLocation_Update(String id, String personId, String standortId);
 }

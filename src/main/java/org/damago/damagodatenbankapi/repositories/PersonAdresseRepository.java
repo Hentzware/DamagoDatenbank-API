@@ -32,5 +32,5 @@ public interface PersonAdresseRepository extends JpaRepository<PersonAdresse, St
     void sp_PersonAdress_Undelete(String id);
 
     @Procedure
-    PersonAdresse sp_PersonAdress_Update(String id, String personId, String adresseId);
+    void sp_PersonAdress_Update(String id, String personId, String adresseId);
 }

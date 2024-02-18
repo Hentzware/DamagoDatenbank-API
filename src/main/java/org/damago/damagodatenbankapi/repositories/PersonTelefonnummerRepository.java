@@ -31,5 +31,5 @@ public interface PersonTelefonnummerRepository {
     void sp_PersonPhone_Undelete(String id);
 
     @Procedure
-    PersonTelefonnummer sp_PersonPhone_Update(String id, String personId, String telefonnummerId);
+    void sp_PersonPhone_Update(String id, String personId, String telefonnummerId);
 }

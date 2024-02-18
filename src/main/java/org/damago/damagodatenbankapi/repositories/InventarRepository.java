@@ -32,5 +32,5 @@ public interface InventarRepository extends JpaRepository<Inventar, String> {
     void sp_Inventory_Undelete(String id);
 
     @Procedure
-    Inventar sp_Inventory_Update(String id, String name, int anzahl);
+    void sp_Inventory_Update(String id, String name, int anzahl);
 }

@@ -29,5 +29,5 @@ public interface RolleRepository extends JpaRepository<Rolle, String> {
     Iterable<Rolle> sp_Roles_Search(String name);
 
     @Procedure
-    Rolle sp_Roles_Update(String id, String name);
+    void sp_Roles_Update(String id, String name);
 }

@@ -32,5 +32,5 @@ public interface KlasseRepository extends JpaRepository<Klasse, String> {
     void sp_Classes_Undelete(String id);
 
     @Procedure
-    Klasse sp_Classes_Update(String id, String name, String nr);
+    void sp_Classes_Update(String id, String name, String nr);
 }

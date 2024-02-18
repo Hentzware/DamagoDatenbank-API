@@ -32,5 +32,5 @@ public interface TelefonnummerRepository extends JpaRepository<Telefonnummer, St
     void sp_Phones_Undelete(String id);
 
     @Procedure
-    Telefonnummer sp_Phones_Update(String id, String telefonnummer);
+    void sp_Phones_Update(String id, String telefonnummer);
 }

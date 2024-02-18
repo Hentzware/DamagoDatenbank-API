@@ -32,5 +32,5 @@ public interface RaumRepository extends JpaRepository<Raum, String> {
     void sp_Room_Undelete(String id);
 
     @Procedure
-    Raum sp_Room_Update(String id, String name, String nr);
+    void sp_Room_Update(String id, String name, String nr);
 }

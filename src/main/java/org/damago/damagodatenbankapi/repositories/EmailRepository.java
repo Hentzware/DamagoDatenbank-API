@@ -32,5 +32,5 @@ public interface EmailRepository extends JpaRepository<Email, String> {
     void sp_Emails_Undelete(String id);
 
     @Procedure
-    Email sp_Emails_Update(String id, String email);
+    void sp_Emails_Update(String id, String email);
 }
