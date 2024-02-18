@@ -7,5 +7,4 @@ import lombok.Setter;
 @Setter
 public class SearchKlasseRequest {
     private String name;
-    private String nr;
 }
