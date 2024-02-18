@@ -1,10 +1,8 @@
 package org.damago.damagodatenbankapi.services;
 
-import org.damago.damagodatenbankapi.entities.Adresse;
 import org.damago.damagodatenbankapi.entities.Email;
 import org.damago.damagodatenbankapi.repositories.EmailRepository;
 import org.damago.damagodatenbankapi.requests.email.*;
-import org.damago.damagodatenbankapi.responses.AdresseResponse;
 import org.damago.damagodatenbankapi.responses.EmailResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
