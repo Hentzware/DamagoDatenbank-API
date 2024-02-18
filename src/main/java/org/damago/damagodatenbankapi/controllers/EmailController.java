@@ -2,9 +2,7 @@ package org.damago.damagodatenbankapi.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.damago.damagodatenbankapi.requests.email.*;
-import org.damago.damagodatenbankapi.requests.personAdresse.*;
 import org.damago.damagodatenbankapi.responses.EmailResponse;
-import org.damago.damagodatenbankapi.responses.PersonAdresseResponse;
 import org.damago.damagodatenbankapi.services.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/damago/api/v1/emails")
 @Transactional
-@Tag(name = "Email")
+@Tag(name = "Emails")
 public class EmailController {
     private final EmailService emailService;
 
