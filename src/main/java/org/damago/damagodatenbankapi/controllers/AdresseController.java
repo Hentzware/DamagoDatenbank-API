@@ -1,5 +1,6 @@
 package org.damago.damagodatenbankapi.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.damago.damagodatenbankapi.requests.adresse.*;
 import org.damago.damagodatenbankapi.responses.AdresseResponse;
 import org.damago.damagodatenbankapi.services.AdresseService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/damago/api/v1/adressen")
 @Transactional
+@Tag(name = "Adressen")
 public class AdresseController {
     private final AdresseService adresseService;
 

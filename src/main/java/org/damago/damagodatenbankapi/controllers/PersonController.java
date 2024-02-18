@@ -1,5 +1,9 @@
 package org.damago.damagodatenbankapi.controllers;
 
+import io.swagger.v3.oas.annotations.OpenAPI31;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.damago.damagodatenbankapi.entities.Person;
 import org.damago.damagodatenbankapi.repositories.PersonRepository;
 import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
@@ -19,6 +23,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/damago/api/v1/personen")
 @Transactional
+@OpenAPIDefinition(info = @Info(title = "Damago Datenbank", version = "v1"))
+@Tag(name = "Personen")
 public class PersonController {
     private final PersonService personService;
 
