@@ -28,11 +28,6 @@ public class PersonController {
         this.personService = personService;
     }
 
-    /*
-    * Delete Pfad mit defaultValue (soft delete)    -> http://localhost:8080/damago/api/v1/personen/{id}
-    * Delete Pfad mit soft delete                   -> http://localhost:8080/damago/api/v1/personen/{id}?permanent=false
-    * Delete Pfad mit hard delete                   -> http://localhost:8080/damago/api/v1/personen/{id}?permanent=true
-    */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> Delete(@PathVariable String id, @RequestParam(required = false, value = "permanent", defaultValue = "false") boolean permanent) {
         DeletePersonRequest request = new DeletePersonRequest();
@@ -41,18 +36,12 @@ public class PersonController {
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
-    /*
-    * Get Pfad mit defaultValue (nur nicht gelöschte)   -> http://localhost:8080/damago/api/v1/personen
-    * Get Pfad nur nicht gelöschte                      -> http://localhost:8080/damago/api/v1/personen?deleted=false
-    * Get Pfad nur gelöschte                            -> http://localhost:8080/damago/api/v1/personen?deleted=true
-    */
     @GetMapping
     public ResponseEntity<Iterable<PersonResponse>> Get(@RequestParam(required = false, value = "deleted", defaultValue = "false") boolean deleted) {
         Iterable<PersonResponse> result = personService.Get(deleted);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // Get Pfad einzelne Person anzeigen -> http://localhost:8080/damago/api/v1/personen/{id}
     @GetMapping("/{id}")
     public ResponseEntity<PersonResponse> GetById(@PathVariable String id) {
         GetPersonRequest request = new GetPersonRequest();
@@ -66,7 +55,6 @@ public class PersonController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // Post Pfad einzelne Person hinzufügen -> http://localhost:8080/damago/api/v1/personen
     @PostMapping
     public ResponseEntity<PersonResponse> Post(@RequestBody AddPersonRequest request) {
         PersonResponse result = personService.Add(request);
@@ -78,7 +66,6 @@ public class PersonController {
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
-    // Put Pfad einzelne Person aktualisieren -> http://localhost:8080/damago/api/v1/personen/{id}
     @PutMapping("/{id}")
     public ResponseEntity<PersonResponse> Put(@PathVariable String id, @RequestBody EditPersonRequest request) {
         request.setId(id);
@@ -91,10 +78,6 @@ public class PersonController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    /*
-    * Get Pfad Personensuche -> http://localhost:8080/damago/api/v1/personen/search?nachname=test&vorname=test&geburtsdatum=2000/01/01
-    * Jeder Parameter ist optional
-    */
     @GetMapping("/search")
     public ResponseEntity<Iterable<PersonResponse>> Search(
             @RequestParam(required = false, value = "nachname") String nachname,
