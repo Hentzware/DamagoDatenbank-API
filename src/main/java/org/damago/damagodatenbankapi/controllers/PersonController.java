@@ -3,11 +3,14 @@ package org.damago.damagodatenbankapi.controllers;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.damago.damagodatenbankapi.requests.adresse.AddAdresseRequest;
 import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
 import org.damago.damagodatenbankapi.requests.person.DeletePersonRequest;
 import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
 import org.damago.damagodatenbankapi.requests.person.GetPersonRequest;
+import org.damago.damagodatenbankapi.requests.personAdresse.AddPersonAdresseRequest;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
+import org.damago.damagodatenbankapi.services.PersonAdresseService;
 import org.damago.damagodatenbankapi.services.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +32,8 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> Delete(@PathVariable String id, @RequestParam(required = false, value = "permanent", defaultValue = "false") boolean permanent) {
+    public ResponseEntity<Void> Delete(@PathVariable String id,
+                                       @RequestParam(required = false, value = "permanent", defaultValue = "false") boolean permanent) {
         DeletePersonRequest request = new DeletePersonRequest();
         request.setId(id);
         personService.Delete(request, permanent);

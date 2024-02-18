@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.damago.damagodatenbankapi.requests.adresse.*;
 import org.damago.damagodatenbankapi.responses.AdresseResponse;
 import org.damago.damagodatenbankapi.services.AdresseService;
+import org.damago.damagodatenbankapi.services.PersonAdresseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
