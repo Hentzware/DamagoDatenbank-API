@@ -1,6 +1,5 @@
 package org.damago.damagodatenbankapi.repositories;
 
-import org.damago.damagodatenbankapi.entities.PersonAdresse;
 import org.damago.damagodatenbankapi.entities.PersonStandort;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;

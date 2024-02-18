@@ -1,10 +1,8 @@
 package org.damago.damagodatenbankapi.services;
 
-import org.damago.damagodatenbankapi.entities.Email;
 import org.damago.damagodatenbankapi.entities.Rolle;
 import org.damago.damagodatenbankapi.repositories.RolleRepository;
 import org.damago.damagodatenbankapi.requests.rolle.*;
-import org.damago.damagodatenbankapi.responses.EmailResponse;
 import org.damago.damagodatenbankapi.responses.RolleResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

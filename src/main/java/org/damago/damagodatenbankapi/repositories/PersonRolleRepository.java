@@ -1,6 +1,5 @@
 package org.damago.damagodatenbankapi.repositories;
 
-import org.damago.damagodatenbankapi.entities.Adresse;
 import org.damago.damagodatenbankapi.entities.PersonRolle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;

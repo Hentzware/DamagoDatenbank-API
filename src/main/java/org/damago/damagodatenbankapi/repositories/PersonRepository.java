@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface PersonRepository extends JpaRepository<Person, String> {

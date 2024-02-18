@@ -1,11 +1,8 @@
 package org.damago.damagodatenbankapi.controllers;
 
-import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.damago.damagodatenbankapi.entities.Person;
-import org.damago.damagodatenbankapi.repositories.PersonRepository;
 import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
 import org.damago.damagodatenbankapi.requests.person.DeletePersonRequest;
 import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
@@ -18,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/damago/api/v1/personen")
