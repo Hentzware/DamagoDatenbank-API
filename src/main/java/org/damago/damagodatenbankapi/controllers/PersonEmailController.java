@@ -1,11 +1,8 @@
 package org.damago.damagodatenbankapi.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.damago.damagodatenbankapi.requests.email.*;
 import org.damago.damagodatenbankapi.requests.personEmail.*;
-import org.damago.damagodatenbankapi.responses.EmailResponse;
 import org.damago.damagodatenbankapi.responses.PersonEmailResponse;
-import org.damago.damagodatenbankapi.services.EmailService;
 import org.damago.damagodatenbankapi.services.PersonEmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
