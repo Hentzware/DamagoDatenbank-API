@@ -32,5 +32,5 @@ public interface AdresseRepository extends JpaRepository<Adresse, String> {
     void sp_Adresses_Undelete(String id);
 
     @Procedure
-    Adresse sp_Adresses_Update(String id, String strasse, String hausnummer, String postleitzahl, String ort, String land);
+    void sp_Adresses_Update(String id, String strasse, String hausnummer, String postleitzahl, String ort, String land);
 }
