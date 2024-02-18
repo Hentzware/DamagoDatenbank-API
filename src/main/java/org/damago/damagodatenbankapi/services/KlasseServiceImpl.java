@@ -6,7 +6,9 @@ import org.damago.damagodatenbankapi.requests.klasse.*;
 import org.damago.damagodatenbankapi.responses.KlasseResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
 
+@Service
 public class KlasseServiceImpl implements KlasseService {
     private final KlasseRepository klasseRepository;
     private final ModelMapper modelMapper;
