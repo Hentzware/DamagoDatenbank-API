@@ -9,7 +9,9 @@ import org.damago.damagodatenbankapi.requests.telefonnummer.GetTelefonnummerRequ
 import org.damago.damagodatenbankapi.responses.TelefonnummerResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TelefonnummerServiceImpl implements TelefonnummerService {
     private final ModelMapper modelMapper;
     private final TelefonnummerRepository telefonnummerRepository;

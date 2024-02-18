@@ -6,7 +6,9 @@ import org.damago.damagodatenbankapi.requests.rolle.*;
 import org.damago.damagodatenbankapi.responses.RolleResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RolleServiceImpl implements RolleService {
     private final RolleRepository rolleRepository;
     private final ModelMapper modelMapper;

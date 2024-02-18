@@ -1,11 +1,12 @@
 package org.damago.damagodatenbankapi.repositories;
 
 import org.damago.damagodatenbankapi.entities.Standort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public interface StandortRepository {
+public interface StandortRepository extends JpaRepository<Standort, String> {
     @Procedure
     String sp_Locations_Add(String name);
 

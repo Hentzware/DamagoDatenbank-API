@@ -6,7 +6,9 @@ import org.damago.damagodatenbankapi.requests.standort.*;
 import org.damago.damagodatenbankapi.responses.StandortResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StandortServiceImpl implements StandortService {
     private final StandortRepository standortRepository;
     private final ModelMapper modelMapper;
