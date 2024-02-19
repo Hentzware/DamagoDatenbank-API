@@ -1,9 +1,6 @@
 package org.damago.damagodatenbankapi.services;
 
-import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
-import org.damago.damagodatenbankapi.requests.person.DeletePersonRequest;
-import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
-import org.damago.damagodatenbankapi.requests.person.GetPersonRequest;
+import org.damago.damagodatenbankapi.requests.person.*;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
 
 import java.util.Date;
@@ -19,5 +16,5 @@ public interface PersonService {
 
     PersonResponse GetById(GetPersonRequest request);
 
-    Iterable<PersonResponse> Search(String nachname, String vorname, Date geburtsdatum);
+    Iterable<PersonResponse> Search(SearchPersonRequest request);
 }

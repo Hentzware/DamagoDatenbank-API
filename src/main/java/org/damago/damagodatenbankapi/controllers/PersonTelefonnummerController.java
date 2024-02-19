@@ -1,11 +1,8 @@
 package org.damago.damagodatenbankapi.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.damago.damagodatenbankapi.requests.personRolle.*;
 import org.damago.damagodatenbankapi.requests.personTelefonnummer.*;
-import org.damago.damagodatenbankapi.responses.PersonRolleResponse;
 import org.damago.damagodatenbankapi.responses.PersonTelefonnummerResponse;
-import org.damago.damagodatenbankapi.services.PersonRolleService;
 import org.damago.damagodatenbankapi.services.PersonTelefonnummerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

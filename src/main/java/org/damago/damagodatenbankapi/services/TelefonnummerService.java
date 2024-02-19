@@ -1,9 +1,6 @@
 package org.damago.damagodatenbankapi.services;
 
-import org.damago.damagodatenbankapi.requests.telefonnummer.AddTelefonnummerRequest;
-import org.damago.damagodatenbankapi.requests.telefonnummer.DeleteTelefonnummerRequest;
-import org.damago.damagodatenbankapi.requests.telefonnummer.EditTelefonnummerRequest;
-import org.damago.damagodatenbankapi.requests.telefonnummer.GetTelefonnummerRequest;
+import org.damago.damagodatenbankapi.requests.telefonnummer.*;
 import org.damago.damagodatenbankapi.responses.TelefonnummerResponse;
 
 public interface TelefonnummerService {
@@ -17,5 +14,5 @@ public interface TelefonnummerService {
 
     TelefonnummerResponse GetById(GetTelefonnummerRequest request);
 
-    Iterable<TelefonnummerResponse> Search(String telefonnummer);
+    Iterable<TelefonnummerResponse> Search(SearchTelefonnummerRequest request);
 }

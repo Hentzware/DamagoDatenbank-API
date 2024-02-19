@@ -2,10 +2,7 @@ package org.damago.damagodatenbankapi.services;
 
 import org.damago.damagodatenbankapi.entities.Telefonnummer;
 import org.damago.damagodatenbankapi.repositories.TelefonnummerRepository;
-import org.damago.damagodatenbankapi.requests.telefonnummer.AddTelefonnummerRequest;
-import org.damago.damagodatenbankapi.requests.telefonnummer.DeleteTelefonnummerRequest;
-import org.damago.damagodatenbankapi.requests.telefonnummer.EditTelefonnummerRequest;
-import org.damago.damagodatenbankapi.requests.telefonnummer.GetTelefonnummerRequest;
+import org.damago.damagodatenbankapi.requests.telefonnummer.*;
 import org.damago.damagodatenbankapi.responses.TelefonnummerResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -64,8 +61,8 @@ public class TelefonnummerServiceImpl implements TelefonnummerService {
     }
 
     @Override
-    public Iterable<TelefonnummerResponse> Search(String telefonnummer) {
-        Iterable<Telefonnummer> telefonnummern = telefonnummerRepository.sp_Phones_Search(telefonnummer);
+    public Iterable<TelefonnummerResponse> Search(SearchTelefonnummerRequest request) {
+        Iterable<Telefonnummer> telefonnummern = telefonnummerRepository.sp_Phones_Search(request.getTelefonnummer());
         return modelMapper.map(telefonnummern, new TypeToken<Iterable<TelefonnummerResponse>>(){}.getType());
     }
 }

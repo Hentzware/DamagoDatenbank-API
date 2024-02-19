@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/damago/api/v1/personAdresse")
+@RequestMapping("/damago/api/v1/person-adresse")
 @Transactional
 @Tag(name = "Person - Adresse")
 public class PersonAdresseController {
