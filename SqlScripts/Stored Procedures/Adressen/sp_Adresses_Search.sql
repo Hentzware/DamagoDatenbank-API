@@ -3,7 +3,7 @@ BEGIN
     SELECT * FROM Adressen
     WHERE (Strasse LIKE CONCAT('%', in_strasse, '%') OR in_strasse IS NULL)
       AND (Hausnummer LIKE CONCAT('%', in_hausnummer, '%') OR in_hausnummer IS NULL)
-      AND (Postleitzahl = in_postleitzahl OR in_postleitzahl IS NULL)
-      AND (Ort = in_ort OR in_ort IS NULL)
-      AND (Land = in_land OR in_land IS NULL);
+      AND (Postleitzahl LIKE CONCAT('%', in_postleitzahl, '%') OR in_postleitzahl IS NULL)
+      AND (Ort LIKE CONCAT('%', in_ort, '%') OR in_ort IS NULL)
+      AND (Land LIKE CONCAT('%', in_land, '%') OR in_land IS NULL);
 END
