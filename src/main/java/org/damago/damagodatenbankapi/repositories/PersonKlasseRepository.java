@@ -1,11 +1,12 @@
 package org.damago.damagodatenbankapi.repositories;
 
 import org.damago.damagodatenbankapi.entities.PersonKlasse;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public interface PersonKlasseRepository {
+public interface PersonKlasseRepository extends JpaRepository<PersonKlasse, String> {
     @Procedure
     String sp_PersonClass_Add(String name, String nr);
 
