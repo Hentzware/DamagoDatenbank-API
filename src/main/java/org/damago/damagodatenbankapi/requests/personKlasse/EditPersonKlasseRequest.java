@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EditPersonKlasseResponse {
+public class EditPersonKlasseRequest {
     private String id;
-    private String name;
+    private String personId;
+    private String klasseId;
 }

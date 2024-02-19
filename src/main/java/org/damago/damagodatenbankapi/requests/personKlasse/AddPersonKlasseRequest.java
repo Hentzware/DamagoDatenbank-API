@@ -6,5 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddPersonKlasseRequest {
-    private String name;
+    private String personId;
+    private String klasseId;
 }
