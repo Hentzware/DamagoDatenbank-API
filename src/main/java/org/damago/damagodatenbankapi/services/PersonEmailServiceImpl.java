@@ -20,7 +20,7 @@ public class PersonEmailServiceImpl implements PersonEmailService {
 
     @Override
     public PersonEmailResponse Add(AddPersonEmailRequest request) {
-        String id = personEmailRepository.sp_PersonEmail_Add(request.getPersonId(), request.getEmailId());
+        String id = personEmailRepository.sp_PersonEmail_Add(request.getPerson_id(), request.getEmail_id());
         PersonEmail personEmail = personEmailRepository.sp_PersonEmail_GetById(id);
 
         return modelMapper.map(personEmail, PersonEmailResponse.class);
@@ -38,7 +38,7 @@ public class PersonEmailServiceImpl implements PersonEmailService {
 
     @Override
     public PersonEmailResponse Edit(EditPersonEmailRequest request) {
-        personEmailRepository.sp_PersonEmail_Update(request.getId(), request.getPersonId(), request.getEmailId());
+        personEmailRepository.sp_PersonEmail_Update(request.getId(), request.getPerson_id(), request.getEmail_id());
         PersonEmail personEmail = personEmailRepository.sp_PersonEmail_GetById(request.getId());
 
         return modelMapper.map(personEmail, PersonEmailResponse.class);
@@ -66,7 +66,7 @@ public class PersonEmailServiceImpl implements PersonEmailService {
 
     @Override
     public Iterable<PersonEmailResponse> Search(SearchPersonEmailRequest request) {
-        Iterable<PersonEmail> personEmails = personEmailRepository.sp_PersonEmail_Search(request.getPersonId(), request.getEmailId());
+        Iterable<PersonEmail> personEmails = personEmailRepository.sp_PersonEmail_Search(request.getPerson_id(), request.getEmail_id());
 
         return modelMapper.map(personEmails, new TypeToken<Iterable<PersonEmailResponse>>(){}.getType());
     }

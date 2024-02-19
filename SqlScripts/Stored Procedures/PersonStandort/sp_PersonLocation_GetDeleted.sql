@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_PersonLocation_GetDeleted ()
 BEGIN
-    SELECT * FROM PersonStandort WHERE IsDeleted = true;
+    SELECT * FROM person_standort WHERE is_deleted = true;
 END

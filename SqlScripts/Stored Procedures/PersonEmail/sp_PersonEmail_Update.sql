@@ -1,8 +1,8 @@
 CREATE PROCEDURE sp_PersonEmail_Update (IN in_id VARCHAR(36), IN in_personId VARCHAR(36), IN in_emailId VARCHAR(36))
 BEGIN
-    UPDATE PersonEmail
+    UPDATE person_email
         SET
-            PersonId = IF (in_personId IS NOT NULL, in_personId, PersonId),
-            EmailId = IF (in_emailId IS NOT NULL, in_emailId, EmailId)
-    WHERE Id = in_id;
+            person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
+            email_id = IF (in_emailId IS NOT NULL, in_emailId, email_id)
+    WHERE id = in_id;
 END

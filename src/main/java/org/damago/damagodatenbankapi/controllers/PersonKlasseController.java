@@ -76,8 +76,8 @@ public class PersonKlasseController {
             @RequestParam(required = false, value = "personId") String personId,
             @RequestParam(required = false, value = "klasseId") String klasseId) {
         SearchPersonKlasseRequest request = new SearchPersonKlasseRequest();
-        request.setPersonId(personId);
-        request.setKlasseId(klasseId);
+        request.setPerson_id(personId);
+        request.setKlasse_id(klasseId);
         Iterable<PersonKlasseResponse> result = personKlasseService.Search(request);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

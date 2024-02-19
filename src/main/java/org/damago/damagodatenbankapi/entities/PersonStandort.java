@@ -11,6 +11,6 @@ import lombok.Setter;
 public class PersonStandort {
     @Id
     private String id;
-    private String personId;
-    private String standortId;
+    private String person_id;
+    private String standort_id;
 }

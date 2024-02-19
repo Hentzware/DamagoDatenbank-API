@@ -20,7 +20,7 @@ public class PersonStandortServiceImpl implements PersonStandortService {
 
     @Override
     public PersonStandortResponse Add(AddPersonStandortRequest request) {
-        String id = personStandortRepository.sp_PersonLocation_Add(request.getPersonId(), request.getStandortId());
+        String id = personStandortRepository.sp_PersonLocation_Add(request.getPerson_id(), request.getStandort_id());
         PersonStandort personStandort = personStandortRepository.sp_PersonLocation_GetById(id);
         return modelMapper.map(personStandort, PersonStandortResponse.class);
     }
@@ -36,7 +36,7 @@ public class PersonStandortServiceImpl implements PersonStandortService {
 
     @Override
     public PersonStandortResponse Edit(EditPersonStandortRequest request) {
-        personStandortRepository.sp_PersonLocation_Update(request.getId(), request.getPersonId(), request.getStandortId());
+        personStandortRepository.sp_PersonLocation_Update(request.getId(), request.getPerson_id(), request.getStandort_id());
         PersonStandort personStandort = personStandortRepository.sp_PersonLocation_GetById(request.getId());
         return modelMapper.map(personStandort, PersonStandortResponse.class);
     }
@@ -63,7 +63,7 @@ public class PersonStandortServiceImpl implements PersonStandortService {
 
     @Override
     public Iterable<PersonStandortResponse> Search(SearchPersonStandortRequest request) {
-        Iterable<PersonStandort> personStandorte = personStandortRepository.sp_PersonLocation_Search(request.getPersonId(), request.getStandortId());
+        Iterable<PersonStandort> personStandorte = personStandortRepository.sp_PersonLocation_Search(request.getPerson_id(), request.getStandort_id());
         return modelMapper.map(personStandorte, new TypeToken<Iterable<PersonStandortResponse>>() {
         }.getType());
     }

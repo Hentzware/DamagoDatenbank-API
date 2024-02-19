@@ -10,6 +10,6 @@ import lombok.Setter;
 public class PersonAdresse {
     @Id
     private String id;
-    private String personId;
-    private String adresseId;
+    private String person_id;
+    private String adresse_id;
 }

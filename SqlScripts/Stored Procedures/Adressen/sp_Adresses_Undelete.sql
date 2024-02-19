@@ -1,7 +1,7 @@
 CREATE PROCEDURE sp_Adresses_Undelete (IN in_id VARCHAR(36))
 BEGIN
-    UPDATE Adressen
+    UPDATE adressen
         SET
-            IsDeleted = false
-    WHERE Id = in_id;
+            is_deleted = false
+    WHERE id = in_id;
 END

@@ -76,8 +76,8 @@ public class PersonAdresseController {
             @RequestParam(required = false, value = "personId") String personId,
             @RequestParam(required = false, value = "adresseId") String adresseId) {
         SearchPersonAdresseRequest request = new SearchPersonAdresseRequest();
-        request.setPersonId(personId);
-        request.setAdresseId(adresseId);
+        request.setPerson_id(personId);
+        request.setAdresse_id(adresseId);
         Iterable<PersonAdresseResponse> result = personAdresseService.Search(request);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

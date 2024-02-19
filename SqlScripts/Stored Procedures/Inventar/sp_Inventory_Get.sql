@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Inventory_Get ()
 BEGIN
-    SELECT * FROM Inventar WHERE IsDeleted = false;
+    SELECT * FROM inventar WHERE is_deleted = false;
 END

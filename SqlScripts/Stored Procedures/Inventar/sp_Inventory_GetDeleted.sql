@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Inventory_GetDeleted()
 BEGIN
-    SELECT * FROM Inventar WHERE IsDeleted = true;
+    SELECT * FROM inventar WHERE is_deleted = true;
 END

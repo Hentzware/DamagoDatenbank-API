@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class EditPersonRolleRequest {
     private String id;
-    private String personId;
-    private String rolleId;
+    private String person_id;
+    private String rolle_id;
 }

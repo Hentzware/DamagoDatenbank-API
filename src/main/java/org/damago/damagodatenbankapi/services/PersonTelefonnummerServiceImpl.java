@@ -20,7 +20,7 @@ public class PersonTelefonnummerServiceImpl implements PersonTelefonnummerServic
 
     @Override
     public PersonTelefonnummerResponse Add(AddPersonTelefonnummerRequest request) {
-        String id = personTelefonnummerRepository.sp_PersonPhone_Add(request.getPersonId(), request.getTelefonnummerId());
+        String id = personTelefonnummerRepository.sp_PersonPhone_Add(request.getPerson_id(), request.getTelefonnummer_id());
         PersonTelefonnummer personTelefonnummer = personTelefonnummerRepository.sp_PersonPhone_GetById(id);
         return modelMapper.map(personTelefonnummer, PersonTelefonnummerResponse.class);
     }
@@ -36,7 +36,7 @@ public class PersonTelefonnummerServiceImpl implements PersonTelefonnummerServic
 
     @Override
     public PersonTelefonnummerResponse Edit(EditPersonTelefonnummerRequest request) {
-        personTelefonnummerRepository.sp_PersonPhone_Update(request.getId(), request.getPersonId(), request.getTelefonnummerId());
+        personTelefonnummerRepository.sp_PersonPhone_Update(request.getId(), request.getPerson_id(), request.getTelefonnummer_id());
         PersonTelefonnummer personTelefonnummer = personTelefonnummerRepository.sp_PersonPhone_GetById(request.getId());
         return modelMapper.map(personTelefonnummer, PersonTelefonnummerResponse.class);
     }
@@ -63,7 +63,7 @@ public class PersonTelefonnummerServiceImpl implements PersonTelefonnummerServic
 
     @Override
     public Iterable<PersonTelefonnummerResponse> Search(SearchPersonTelefonnummerRequest request) {
-        Iterable<PersonTelefonnummer> personTelefonnummern = personTelefonnummerRepository.sp_PersonPhone_Search(request.getPersonId(), request.getTelefonnummerId());
+        Iterable<PersonTelefonnummer> personTelefonnummern = personTelefonnummerRepository.sp_PersonPhone_Search(request.getPerson_id(), request.getTelefonnummer_id());
         return modelMapper.map(personTelefonnummern, new TypeToken<Iterable<PersonTelefonnummerResponse>>() {
         }.getType());
     }

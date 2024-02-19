@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class AddPersonStandortRequest {
-    private String personId;
-    private String standortId;
+    private String person_id;
+    private String standort_id;
 }

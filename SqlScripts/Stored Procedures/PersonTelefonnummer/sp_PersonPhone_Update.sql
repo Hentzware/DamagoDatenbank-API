@@ -1,8 +1,8 @@
  CREATE PROCEDURE sp_PersonPhone_Update (IN in_id varchar(36), IN in_personId varchar(36), IN in_telefonnummerId varchar(36))
  BEGIN
-    UPDATE PersonTelefonnummer
+    UPDATE person_telefonnummer
         SET
-            PersonId = IF (in_personId IS NOT NULL, in_personId, PersonId),
-            TelefonnummerId = IF (in_telefonnummerId IS NOT NULL, in_telefonnummerId, TelefonnummerId)
-     WHERE Id = in_id;
+            person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
+            telefonnummer_id = IF (in_telefonnummerId IS NOT NULL, in_telefonnummerId, telefonnummer_id)
+     WHERE id = in_id;
  END

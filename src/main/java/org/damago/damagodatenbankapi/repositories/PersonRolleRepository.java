@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PersonRolleRepository extends JpaRepository<PersonRolle, String> {
     @Procedure
-    String sp_PersonRole_Add(String personId, String rolleId);
+    String sp_PersonRole_Add(String person_id, String rolle_id);
 
     @Procedure
     void sp_PersonRole_Delete(String id);
@@ -26,11 +26,11 @@ public interface PersonRolleRepository extends JpaRepository<PersonRolle, String
     Iterable<PersonRolle> sp_PersonRole_GetDeleted();
 
     @Procedure
-    Iterable<PersonRolle> sp_PersonRole_Search(String personId, String rolleId);
+    Iterable<PersonRolle> sp_PersonRole_Search(String person_id, String rolle_id);
 
     @Procedure
     void sp_PersonRole_Undelete(String id);
 
     @Procedure
-    void sp_PersonRole_Update(String id, String personId, String rolleId);
+    void sp_PersonRole_Update(String id, String person_id, String rolle_id);
 }

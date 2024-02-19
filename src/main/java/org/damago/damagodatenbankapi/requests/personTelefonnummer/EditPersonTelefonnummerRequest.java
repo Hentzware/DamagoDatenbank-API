@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class EditPersonTelefonnummerRequest {
     private String id;
-    private String personId;
-    private String telefonnummerId;
+    private String person_id;
+    private String telefonnummer_id;
 }

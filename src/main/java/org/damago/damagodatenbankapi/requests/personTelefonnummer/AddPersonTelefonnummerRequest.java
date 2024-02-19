@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddPersonTelefonnummerRequest {
-    private String personId;
-    private String telefonnummerId;
+    private String person_id;
+    private String telefonnummer_id;
 }

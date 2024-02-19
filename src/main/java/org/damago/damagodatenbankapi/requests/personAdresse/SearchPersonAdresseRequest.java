@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchPersonAdresseRequest {
-    private String personId;
-    private String adresseId;
+    private String person_id;
+    private String adresse_id;
 }

@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Rooms_GetDeleted ()
 BEGIN
-    SELECT * FROM Raeume WHERE IsDeleted = true;
+    SELECT * FROM raeume WHERE is_deleted = true;
 END

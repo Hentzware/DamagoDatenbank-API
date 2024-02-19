@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Adresses_Get ()
 BEGIN
-    SELECT * FROM Adressen WHERE IsDeleted = false;
+    SELECT * FROM adressen WHERE is_deleted = false;
 END

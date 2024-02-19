@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_PersonRole_Get ()
 BEGIN
-    SELECT * FROM PersonRolle WHERE IsDeleted = false;
+    SELECT * FROM person_rolle WHERE is_deleted = false;
 END

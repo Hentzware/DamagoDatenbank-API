@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_PersonAdress_Get ()
 BEGIN
-    SELECT * FROM PersonAdresse WHERE IsDeleted = false;
+    SELECT * FROM person_adresse WHERE is_deleted = false;
 END

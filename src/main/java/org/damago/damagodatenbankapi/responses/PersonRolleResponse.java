@@ -11,6 +11,6 @@ import lombok.Setter;
 public class PersonRolleResponse {
     @Id
     private String id;
-    private String personId;
-    private String rolleId;
+    private String person_id;
+    private String rolle_id;
 }

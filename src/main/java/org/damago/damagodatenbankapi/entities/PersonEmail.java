@@ -11,6 +11,6 @@ import lombok.Setter;
 public class PersonEmail {
     @Id
     private String id;
-    private String personId;
-    private String emailId;
+    private String person_id;
+    private String email_id;
 }

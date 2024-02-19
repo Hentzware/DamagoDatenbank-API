@@ -20,7 +20,7 @@ public class PersonRolleServiceImpl implements PersonRolleService {
 
     @Override
     public PersonRolleResponse Add(AddPersonRolleRequest request) {
-        String id = personRolleRepository.sp_PersonRole_Add(request.getPersonId(), request.getRolleId());
+        String id = personRolleRepository.sp_PersonRole_Add(request.getPerson_id(), request.getRolle_id());
         PersonRolle personRolle = personRolleRepository.sp_PersonRole_GetById(id);
         return modelMapper.map(personRolle, PersonRolleResponse.class);
     }
@@ -36,7 +36,7 @@ public class PersonRolleServiceImpl implements PersonRolleService {
 
     @Override
     public PersonRolleResponse Edit(EditPersonRolleRequest request) {
-        personRolleRepository.sp_PersonRole_Update(request.getId(), request.getPersonId(), request.getRolleId());
+        personRolleRepository.sp_PersonRole_Update(request.getId(), request.getPerson_id(), request.getRolle_id());
         PersonRolle personRolle = personRolleRepository.sp_PersonRole_GetById(request.getId());
         return modelMapper.map(personRolle, PersonRolleResponse.class);
     }
@@ -63,7 +63,7 @@ public class PersonRolleServiceImpl implements PersonRolleService {
 
     @Override
     public Iterable<PersonRolleResponse> Search(SearchPersonRolleRequest request) {
-        Iterable<PersonRolle> personRollen = personRolleRepository.sp_PersonRole_Search(request.getPersonId(), request.getRolleId());
+        Iterable<PersonRolle> personRollen = personRolleRepository.sp_PersonRole_Search(request.getPerson_id(), request.getRolle_id());
         return modelMapper.map(personRollen, new TypeToken<Iterable<PersonRolleResponse>>() {
         }.getType());
     }

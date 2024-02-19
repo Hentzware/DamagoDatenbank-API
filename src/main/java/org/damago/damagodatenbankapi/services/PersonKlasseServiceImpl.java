@@ -19,7 +19,7 @@ public class PersonKlasseServiceImpl implements PersonKlasseService {
     }
     @Override
     public PersonKlasseResponse Add(AddPersonKlasseRequest request) {
-        String id = personKlasseRepository.sp_PersonClass_Add(request.getPersonId(), request.getKlasseId());
+        String id = personKlasseRepository.sp_PersonClass_Add(request.getPerson_id(), request.getKlasse_id());
         PersonKlasse personKlasse = personKlasseRepository.sp_PersonClass_GetById(id);
         return modelMapper.map(personKlasse, PersonKlasseResponse.class);
     }
@@ -35,7 +35,7 @@ public class PersonKlasseServiceImpl implements PersonKlasseService {
 
     @Override
     public PersonKlasseResponse Edit(EditPersonKlasseRequest request) {
-        personKlasseRepository.sp_PersonClass_Update(request.getId(), request.getPersonId(), request.getKlasseId());
+        personKlasseRepository.sp_PersonClass_Update(request.getId(), request.getPerson_id(), request.getKlasse_id());
         PersonKlasse personKlasse = personKlasseRepository.sp_PersonClass_GetById(request.getId());
         return modelMapper.map(personKlasse, PersonKlasseResponse.class);
     }
@@ -62,7 +62,7 @@ public class PersonKlasseServiceImpl implements PersonKlasseService {
 
     @Override
     public Iterable<PersonKlasseResponse> Search(SearchPersonKlasseRequest request) {
-        Iterable<PersonKlasse> personKlassen = personKlasseRepository.sp_PersonClass_Search(request.getPersonId(), request.getKlasseId());
+        Iterable<PersonKlasse> personKlassen = personKlasseRepository.sp_PersonClass_Search(request.getPerson_id(), request.getKlasse_id());
         return modelMapper.map(personKlassen, new TypeToken<Iterable<PersonKlasseResponse>>() {
         }.getType());
     }

@@ -20,7 +20,7 @@ public class PersonAdresseServiceImpl implements PersonAdresseService {
 
     @Override
     public PersonAdresseResponse Add(AddPersonAdresseRequest request) {
-        String id = personAdresseRepository.sp_PersonAdress_Add(request.getPersonId(), request.getAdresseId());
+        String id = personAdresseRepository.sp_PersonAdress_Add(request.getPerson_id(), request.getAdresse_id());
         PersonAdresse personAdresse = personAdresseRepository.sp_PersonAdress_GetById(id);
         return modelMapper.map(personAdresse, PersonAdresseResponse.class);
     }
@@ -36,7 +36,7 @@ public class PersonAdresseServiceImpl implements PersonAdresseService {
 
     @Override
     public PersonAdresseResponse Edit(EditPersonAdresseRequest request) {
-        personAdresseRepository.sp_PersonAdress_Update(request.getId(), request.getPersonId(), request.getAdresseId());
+        personAdresseRepository.sp_PersonAdress_Update(request.getId(), request.getPerson_id(), request.getAdresse_id());
         PersonAdresse personAdresse = personAdresseRepository.sp_PersonAdress_GetById(request.getId());
         return modelMapper.map(personAdresse, PersonAdresseResponse.class);
     }
@@ -63,7 +63,7 @@ public class PersonAdresseServiceImpl implements PersonAdresseService {
 
     @Override
     public Iterable<PersonAdresseResponse> Search(SearchPersonAdresseRequest request) {
-        Iterable<PersonAdresse> personAdressen = personAdresseRepository.sp_PersonAdress_Search(request.getPersonId(), request.getAdresseId());
+        Iterable<PersonAdresse> personAdressen = personAdresseRepository.sp_PersonAdress_Search(request.getPerson_id(), request.getAdresse_id());
         return modelMapper.map(personAdressen, new TypeToken<Iterable<PersonAdresse>>() {
         }.getType());
     }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PersonKlasseRepository extends JpaRepository<PersonKlasse, String> {
     @Procedure
-    String sp_PersonClass_Add(String name, String nr);
+    String sp_PersonClass_Add(String person_id, String klasse_id);
 
     @Procedure
     void sp_PersonClass_Delete(String id);
@@ -26,8 +26,8 @@ public interface PersonKlasseRepository extends JpaRepository<PersonKlasse, Stri
     Iterable<PersonKlasse> sp_PersonClass_GetDeleted();
 
     @Procedure
-    Iterable<PersonKlasse> sp_PersonClass_Search(String personId, String klasseId);
+    Iterable<PersonKlasse> sp_PersonClass_Search(String person_id, String klasse_id);
 
     @Procedure
-    void sp_PersonClass_Update(String id, String name, String nr);
+    void sp_PersonClass_Update(String id, String person_id, String klasse_id);
 }

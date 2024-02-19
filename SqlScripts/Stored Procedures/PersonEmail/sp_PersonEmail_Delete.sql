@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_PersonEmail_Delete (IN in_id VARCHAR(36))
 BEGIN
-   UPDATE PersonEmail SET IsDeleted = true WHERE Id = in_id;
+   UPDATE person_email SET is_deleted = true WHERE id = in_id;
 END

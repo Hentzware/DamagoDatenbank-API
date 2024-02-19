@@ -76,8 +76,8 @@ public class PersonEmailController {
             @RequestParam(required = false, value = "personId") String personId,
             @RequestParam(required = false, value = "emailId") String emailId) {
         SearchPersonEmailRequest request = new SearchPersonEmailRequest();
-        request.setPersonId(personId);
-        request.setEmailId(emailId);
+        request.setPerson_id(personId);
+        request.setEmail_id(emailId);
         Iterable<PersonEmailResponse> result = personEmailService.Search(request);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

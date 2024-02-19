@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_PersonEmail_Get ()
 BEGIN
-    SELECT * FROM PersonEmail WHERE IsDeleted = false;
+    SELECT * FROM person_email WHERE is_deleted = false;
 END

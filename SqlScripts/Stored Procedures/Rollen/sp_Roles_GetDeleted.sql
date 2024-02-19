@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Roles_GetDeleted ()
 BEGIN
-    SELECT * FROM Rollen WHERE IsDeleted = true;
+    SELECT * FROM rollen WHERE is_deleted = true;
 END

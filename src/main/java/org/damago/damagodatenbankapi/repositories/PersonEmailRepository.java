@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PersonEmailRepository extends JpaRepository<PersonEmail, String> {
     @Procedure
-    String sp_PersonEmail_Add(String personId, String emailId);
+    String sp_PersonEmail_Add(String person_id, String email_id);
 
     @Procedure
     void sp_PersonEmail_Delete(String id);
@@ -26,11 +26,11 @@ public interface PersonEmailRepository extends JpaRepository<PersonEmail, String
     Iterable<PersonEmail> sp_PersonEmail_GetDeleted();
 
     @Procedure
-    Iterable<PersonEmail> sp_PersonEmail_Search(String personId, String emailId);
+    Iterable<PersonEmail> sp_PersonEmail_Search(String person_id, String email_id);
 
     @Procedure
     void sp_PersonEmail_Undelete(String id);
 
     @Procedure
-    void sp_PersonEmail_Update(String id, String personId, String email);
+    void sp_PersonEmail_Update(String id, String person_id, String email_id);
 }

@@ -1,4 +1,4 @@
 CREATE PROCEDURE sp_Phones_GetDeleted ()
 BEGIN
-    SELECT * FROM Telefonnummern WHERE IsDeleted = true;
+    SELECT * FROM telefonnummern WHERE is_deleted = true;
 END
