@@ -2,10 +2,7 @@ package org.damago.damagodatenbankapi.services;
 
 import org.damago.damagodatenbankapi.entities.Person;
 import org.damago.damagodatenbankapi.repositories.PersonRepository;
-import org.damago.damagodatenbankapi.requests.person.AddPersonRequest;
-import org.damago.damagodatenbankapi.requests.person.DeletePersonRequest;
-import org.damago.damagodatenbankapi.requests.person.EditPersonRequest;
-import org.damago.damagodatenbankapi.requests.person.GetPersonRequest;
+import org.damago.damagodatenbankapi.requests.person.*;
 import org.damago.damagodatenbankapi.responses.PersonResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -68,8 +65,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Iterable<PersonResponse> Search(String nachname, String vorname, Date geburtsdatum) {
-        Iterable<Person> persons = personRepository.sp_Persons_Search(nachname, vorname, geburtsdatum);
+    public Iterable<PersonResponse> Search(SearchPersonRequest request) {
+        Iterable<Person> persons = personRepository.sp_Persons_Search(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
         return modelMapper.map(persons, new TypeToken<Iterable<PersonResponse>>() {
         }.getType());
     }

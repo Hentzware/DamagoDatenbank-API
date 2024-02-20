@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/damago/api/v1/personTelefonnummer")
+@RequestMapping("/damago/api/v1/person-telefonnummer")
 @Transactional
 @Tag(name = "Person - Telefonnummer")
 public class PersonTelefonnummerController {
@@ -74,7 +74,7 @@ public class PersonTelefonnummerController {
     @GetMapping("/search")
     public ResponseEntity<Iterable<PersonTelefonnummerResponse>> Search(
             @RequestParam(required = false, value = "person_id") String person_id,
-            @RequestParam(required = false, value = "telefonnummer_id") String telefonnummer_id){
+            @RequestParam(required = false, value = "telefonnummer_id") String telefonnummer_id) {
         SearchPersonTelefonnummerRequest request = new SearchPersonTelefonnummerRequest();
         request.setPerson_id(person_id);
         request.setTelefonnummer_id(telefonnummer_id);
