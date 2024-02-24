@@ -2,11 +2,9 @@ package org.damago.damagodatenbankapi.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.damago.damagodatenbankapi.requests.adresse.*;
-import org.damago.damagodatenbankapi.requests.modul.AddModulRequest;
-import org.damago.damagodatenbankapi.requests.modul.DeleteModulRequest;
-import org.damago.damagodatenbankapi.requests.modul.EditModulRequest;
-import org.damago.damagodatenbankapi.requests.modul.SearchModulRequest;
+import org.damago.damagodatenbankapi.requests.modul.*;
 import org.damago.damagodatenbankapi.responses.AdresseResponse;
+import org.damago.damagodatenbankapi.responses.ModulResponse;
 import org.damago.damagodatenbankapi.services.AdresseService;
 import org.damago.damagodatenbankapi.services.ModulService;
 import org.springframework.http.HttpStatus;
@@ -85,7 +83,7 @@ public class ModulController {
 
     @GetMapping("/search")
     public ResponseEntity<Iterable<ModulResponse>> Search(
-            @RequestParam(required = false, value = "name") String name,
+            @RequestParam(required = false, value = "name") String name)
         /*   @RequestParam(required = false, value = "dauer") String dauer)
        @RequestParam(required = false, value = "postleitzahl") String postleitzahl,
       @RequestParam(required = false, value = "ort") String ort,

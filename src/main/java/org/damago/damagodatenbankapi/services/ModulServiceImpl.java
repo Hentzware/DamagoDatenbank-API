@@ -37,7 +37,7 @@ public class ModulServiceImpl implements ModulService {
     @Override
     public ModulResponse Edit(EditModulRequest request) {
         modulRepository.sp_Module_Update(request.getId(), request.getName(), request.getDauer());
-        Modul modul = modulRepository.sp_Modul_GetById(request.getId());
+        Modul modul = modulRepository.sp_Module_GetById(request.getId());
         return modelMapper.map(modul, ModulResponse.class);
     }
 

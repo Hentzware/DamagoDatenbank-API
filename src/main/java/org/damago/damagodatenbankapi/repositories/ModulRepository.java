@@ -1,36 +1,37 @@
 package org.damago.damagodatenbankapi.repositories;
 
 import org.damago.damagodatenbankapi.entities.Klasse;
+import org.damago.damagodatenbankapi.entities.Modul;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public interface ModulRepository extends JpaRepository<Klasse, String> {
+public interface ModulRepository extends JpaRepository<Modul,String > {
     @Procedure
-    String sp_Classes_Add(String name);
+    String sp_Module_Add(String name, String dauer);
 
     @Procedure
-    void sp_Classes_Delete(String id);
+    void sp_Module_Delete(String id);
 
     @Procedure
-    void sp_Classes_DeletePermanent(String id);
+    void sp_Module_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Klasse> sp_Classes_Get();
+    Iterable<Modul> sp_Module_Get();
 
     @Procedure
-    Klasse sp_Classes_GetById(String id);
+    Modul sp_Module_GetById(String id);
 
     @Procedure
-    Iterable<Klasse> sp_Classes_GetDeleted();
+    Iterable<Modul> sp_Module_GetDeleted();
 
     @Procedure
-    Iterable<Klasse> sp_Classes_Search(String name);
+    Iterable<Modul> sp_Module_Search(String name);
 
     @Procedure
-    void sp_Classes_Undelete(String id);
+    void sp_Module_Undelete(String id);
 
     @Procedure
-    void sp_Classes_Update(String id, String name);
+    void sp_Module_Update(String id, String name, String dauer);
 }
