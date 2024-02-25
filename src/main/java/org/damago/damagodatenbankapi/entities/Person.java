@@ -12,7 +12,7 @@ import java.util.Date;
 public class Person {
     @Id
     private String id;
-    private String nachname;
-    private String vorname;
-    private Date geburtsdatum;
+    private String last_name;
+    private String first_name;
+    private Date birthdate;
 }

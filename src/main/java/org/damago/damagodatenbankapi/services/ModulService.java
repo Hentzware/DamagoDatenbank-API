@@ -1,8 +1,6 @@
 package org.damago.damagodatenbankapi.services;
 
-import org.damago.damagodatenbankapi.requests.inventar.*;
 import org.damago.damagodatenbankapi.requests.modul.*;
-import org.damago.damagodatenbankapi.responses.InventarResponse;
 import org.damago.damagodatenbankapi.responses.ModulResponse;
 
 public interface ModulService {

@@ -10,7 +10,7 @@ import java.util.Date;
 @Transactional(readOnly = true)
 public interface PersonRepository extends JpaRepository<Person, String> {
     @Procedure
-    String sp_Persons_Add(String nachname, String vorname, Date geburtsdatum);
+    String sp_Persons_Add(String last_name, String first_name, Date birthdate);
 
     @Procedure
     void sp_Persons_Delete(String id);
@@ -28,8 +28,8 @@ public interface PersonRepository extends JpaRepository<Person, String> {
     Iterable<Person> sp_Persons_GetDeleted();
 
     @Procedure
-    Iterable<Person> sp_Persons_Search(String nachname, String vorname, Date geburtsdatum);
+    Iterable<Person> sp_Persons_Search(String last_name, String first_name, Date birthdate);
 
     @Procedure
-    void sp_Persons_Update(String id, String nachname, String vorname, Date geburtsdatum);
+    void sp_Persons_Update(String id, String last_name, String first_name, Date birthdate);
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter @Setter
 public class AddPersonRequest {
-    private String nachname;
-    private String vorname;
-    private Date geburtsdatum;
+    private String last_name;
+    private String first_name;
+    private Date birthdate;
 }

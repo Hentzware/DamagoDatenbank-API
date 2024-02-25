@@ -8,22 +8,20 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class PersonServiceImpl implements PersonService {
 
     private final ModelMapper modelMapper;
     private final PersonRepository personRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository, ModelMapper modelMapper, ModelMapper modelMapper1) {
+    public PersonServiceImpl(PersonRepository personRepository, ModelMapper modelMapper) {
         this.personRepository = personRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public PersonResponse Add(AddPersonRequest request) {
-        String id = personRepository.sp_Persons_Add(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        String id = personRepository.sp_Persons_Add(request.getLast_name(), request.getFirst_name(), request.getBirthdate());
         Person person = personRepository.sp_Persons_GetById(id);
         return modelMapper.map(person, PersonResponse.class);
     }
@@ -39,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonResponse Edit(EditPersonRequest request) {
-        personRepository.sp_Persons_Update(request.getId(), request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        personRepository.sp_Persons_Update(request.getId(), request.getLast_name(), request.getFirst_name(), request.getBirthdate());
         Person person = personRepository.sp_Persons_GetById(request.getId());
         return modelMapper.map(person, PersonResponse.class);
     }
@@ -66,7 +64,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Iterable<PersonResponse> Search(SearchPersonRequest request) {
-        Iterable<Person> persons = personRepository.sp_Persons_Search(request.getNachname(), request.getVorname(), request.getGeburtsdatum());
+        Iterable<Person> persons = personRepository.sp_Persons_Search(request.getLast_name(), request.getFirst_name(), request.getBirthdate());
         return modelMapper.map(persons, new TypeToken<Iterable<PersonResponse>>() {
         }.getType());
     }

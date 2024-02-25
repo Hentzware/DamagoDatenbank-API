@@ -1,70 +1,70 @@
 package org.damago.damagodatenbankapi.services;
 
-import org.damago.damagodatenbankapi.entities.Adresse;
-import org.damago.damagodatenbankapi.repositories.AdresseRepository;
-import org.damago.damagodatenbankapi.requests.adresse.*;
-import org.damago.damagodatenbankapi.responses.AdresseResponse;
+import org.damago.damagodatenbankapi.entities.Address;
+import org.damago.damagodatenbankapi.repositories.AddressRepository;
+import org.damago.damagodatenbankapi.requests.address.*;
+import org.damago.damagodatenbankapi.responses.AddressResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdresseServiceImpl implements AdresseService{
-    private final AdresseRepository adresseRepository;
+public class AdresseServiceImpl implements AddressService {
+    private final AddressRepository adresseRepository;
     private final ModelMapper modelMapper;
 
-    public AdresseServiceImpl(AdresseRepository adresseRepository, ModelMapper modelMapper) {
+    public AdresseServiceImpl(AddressRepository adresseRepository, ModelMapper modelMapper) {
         this.adresseRepository = adresseRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public AdresseResponse Add(AddAdresseRequest request) {
-        String id = adresseRepository.sp_Adresses_Add(request.getStrasse(), request.getHausnummer(), request.getPostleitzahl(), request.getOrt(), request.getLand());
-        Adresse adresse = adresseRepository.sp_Adresses_GetById(id);
-        return modelMapper.map(adresse, AdresseResponse.class);
+    public AddressResponse Add(AddAddressRequest request) {
+        String id = adresseRepository.sp_Addresses_Add(request.getStreet(), request.getHouse_number(), request.getPostal_code(), request.getLocation(), request.getCountry());
+        Address address = adresseRepository.sp_Addresses_GetById(id);
+        return modelMapper.map(address, AddressResponse.class);
     }
 
     @Override
-    public void Delete(DeleteAdresseRequest request, boolean permanent) {
+    public void Delete(DeleteAddressRequest request, boolean permanent) {
         if (permanent) {
-            adresseRepository.sp_Adresses_DeletePermanent(request.getId());
+            adresseRepository.sp_Addresses_DeletePermanent(request.getId());
             return;
         }
-        adresseRepository.sp_Adresses_Delete(request.getId());
+        adresseRepository.sp_Addresses_Delete(request.getId());
     }
 
     @Override
-    public AdresseResponse Edit(EditAdresseRequest request) {
-        adresseRepository.sp_Adresses_Update(request.getId(), request.getStrasse(), request.getHausnummer(), request.getPostleitzahl(), request.getOrt(), request.getLand());
-        Adresse adresse = adresseRepository.sp_Adresses_GetById(request.getId());
-        return modelMapper.map(adresse, AdresseResponse.class);
+    public AddressResponse Edit(EditAddressRequest request) {
+        adresseRepository.sp_Addresses_Update(request.getId(), request.getStreet(), request.getHouse_number(), request.getPostal_code(), request.getLocation(), request.getCountry());
+        Address address = adresseRepository.sp_Addresses_GetById(request.getId());
+        return modelMapper.map(address, AddressResponse.class);
     }
 
     @Override
-    public Iterable<AdresseResponse> Get(boolean deleted) {
-        Iterable<Adresse> adressen;
+    public Iterable<AddressResponse> Get(boolean deleted) {
+        Iterable<Address> addresses;
 
         if (deleted) {
-            adressen = adresseRepository.sp_Adresses_GetDeleted();
+            addresses = adresseRepository.sp_Addresses_GetDeleted();
         } else {
-            adressen = adresseRepository.sp_Adresses_Get();
+            addresses = adresseRepository.sp_Addresses_Get();
         }
 
-        return modelMapper.map(adressen, new TypeToken<Iterable<AdresseResponse>>() {
+        return modelMapper.map(addresses, new TypeToken<Iterable<AddressResponse>>() {
         }.getType());
     }
 
     @Override
-    public AdresseResponse GetById(GetAdresseRequest request) {
-        Adresse adresse = adresseRepository.sp_Adresses_GetById(request.getId());
-        return modelMapper.map(adresse, AdresseResponse.class);
+    public AddressResponse GetById(GetAddressRequest request) {
+        Address address = adresseRepository.sp_Addresses_GetById(request.getId());
+        return modelMapper.map(address, AddressResponse.class);
     }
 
     @Override
-    public Iterable<AdresseResponse> Search(SearchAdresseRequest request) {
-        Iterable<Adresse> adressen = adresseRepository.sp_Adresses_Search(request.getStrasse(), request.getHausnummer(), request.getPostleitzahl(), request.getOrt(), request.getLand());
-        return modelMapper.map(adressen, new TypeToken<Iterable<AdresseResponse>>() {
+    public Iterable<AddressResponse> Search(SearchAdresseRequest request) {
+        Iterable<Address> addresses = adresseRepository.sp_Addresses_Search(request.getStreet(), request.getHouse_number(), request.getPostal_code(), request.getLocation(), request.getCountry());
+        return modelMapper.map(addresses, new TypeToken<Iterable<AddressResponse>>() {
         }.getType());
     }
 }
