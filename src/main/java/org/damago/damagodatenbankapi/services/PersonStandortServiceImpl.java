@@ -20,8 +20,8 @@ public class PersonStandortServiceImpl implements PersonStandortService {
 
     @Override
     public PersonStandortResponse Add(AddPersonStandortRequest request) {
-        String id = personStandortRepository.sp_PersonLocation_Add(request.getPerson_id(), request.getStandort_id());
-        PersonStandort personStandort = personStandortRepository.sp_PersonLocation_GetById(id);
+        String id = personStandortRepository.sp_LocationPerson_Add(request.getPerson_id(), request.getStandort_id());
+        PersonStandort personStandort = personStandortRepository.sp_LocationPerson_GetById(id);
         return modelMapper.map(personStandort, PersonStandortResponse.class);
     }
 
@@ -37,7 +37,7 @@ public class PersonStandortServiceImpl implements PersonStandortService {
     @Override
     public PersonStandortResponse Edit(EditPersonStandortRequest request) {
         personStandortRepository.sp_PersonLocation_Update(request.getId(), request.getPerson_id(), request.getStandort_id());
-        PersonStandort personStandort = personStandortRepository.sp_PersonLocation_GetById(request.getId());
+        PersonStandort personStandort = personStandortRepository.sp_LocationPerson_GetById(request.getId());
         return modelMapper.map(personStandort, PersonStandortResponse.class);
     }
 
@@ -48,7 +48,7 @@ public class PersonStandortServiceImpl implements PersonStandortService {
         if (deleted) {
             personStandorte = personStandortRepository.sp_PersonLocation_GetDeleted();
         } else {
-            personStandorte = personStandortRepository.sp_PersonLocation_Get();
+            personStandorte = personStandortRepository.sp_LocationPerson_Get();
         }
 
         return modelMapper.map(personStandorte, new TypeToken<Iterable<PersonStandortResponse>>() {
@@ -57,7 +57,7 @@ public class PersonStandortServiceImpl implements PersonStandortService {
 
     @Override
     public PersonStandortResponse GetById(GetPersonStandortRequest request) {
-        PersonStandort personStandort = personStandortRepository.sp_PersonLocation_GetById(request.getId());
+        PersonStandort personStandort = personStandortRepository.sp_LocationPerson_GetById(request.getId());
         return modelMapper.map(personStandort, PersonStandortResponse.class);
     }
 
