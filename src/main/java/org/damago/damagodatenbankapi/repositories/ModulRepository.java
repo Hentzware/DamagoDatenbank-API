@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface ModulRepository extends JpaRepository<Modul,String > {
     @Procedure
-    String sp_Module_Add(String name, String dauer);
+    String sp_Module_Add(String name, String beschreibung);
 
     @Procedure
     void sp_Module_Delete(String id);
@@ -33,5 +33,5 @@ public interface ModulRepository extends JpaRepository<Modul,String > {
     void sp_Module_Undelete(String id);
 
     @Procedure
-    void sp_Module_Update(String id, String name, String dauer);
+    void sp_Module_Update(String id, String name, String beschreibung);
 }

@@ -12,6 +12,6 @@ public class ModulResponse {
     @Id
     private String id;
     private String name;
-    private String dauer;
+    private String beschreibung;
 }
 

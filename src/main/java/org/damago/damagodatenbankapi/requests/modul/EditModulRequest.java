@@ -7,6 +7,6 @@ import lombok.Setter;
 public class EditModulRequest {
     private String id;
     private String name;
-    private String dauer;
+    private String beschreibung;
 
 }
