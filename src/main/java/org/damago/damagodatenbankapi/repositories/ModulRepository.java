@@ -1,6 +1,5 @@
 package org.damago.damagodatenbankapi.repositories;
 
-import org.damago.damagodatenbankapi.entities.Klasse;
 import org.damago.damagodatenbankapi.entities.Modul;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;

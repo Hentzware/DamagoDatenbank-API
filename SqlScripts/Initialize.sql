@@ -268,49 +268,49 @@ END;
 create procedure sp_Classes_Add(IN in_name varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO klassen (id, name, is_deleted)
+    INSERT INTO school_classes (id, name, is_deleted)
     VALUES (out_id, in_name, false);
 END;
 
 create procedure sp_Classes_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE klassen SET is_deleted = true WHERE id = in_id;
+    UPDATE school_classes SET is_deleted = true WHERE id = in_id;
 END;
 
 create procedure sp_Classes_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM klassen WHERE id = in_id;
+    DELETE FROM school_classes WHERE id = in_id;
 END;
 
 create procedure sp_Classes_Get()
 BEGIN
-    SELECT * FROM klassen WHERE is_deleted = false;
+    SELECT * FROM school_classes WHERE is_deleted = false;
 END;
 
 create procedure sp_Classes_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM klassen WHERE id = in_id;
+    SELECT * FROM school_classes WHERE id = in_id;
 END;
 
 create procedure sp_Classes_GetDeleted()
 BEGIN
-    SELECT * FROM klassen WHERE is_deleted = true;
+    SELECT * FROM school_classes WHERE is_deleted = true;
 END;
 
 create procedure sp_Classes_Search(IN in_name varchar(100))
 BEGIN
-    SELECT * FROM klassen
+    SELECT * FROM school_classes
     WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL);
 END;
 
 create procedure sp_Classes_Undelete(IN in_id varchar(36))
 BEGIN
-    UPDATE klassen SET is_deleted = false WHERE id = in_id;
+    UPDATE school_classes SET is_deleted = false WHERE id = in_id;
 END;
 
 create procedure sp_Classes_Update(IN in_id varchar(36), IN in_name varchar(100))
 BEGIN
-    UPDATE klassen
+    UPDATE school_classes
     SET
         name = IF (in_name IS NOT NULL, in_name, name)
     WHERE id = in_id;

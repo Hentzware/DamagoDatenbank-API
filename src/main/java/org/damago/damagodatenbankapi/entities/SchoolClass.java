@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Klasse {
+public class SchoolClass {
     @Id
     private String id;
     private String name;

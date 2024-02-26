@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class KlasseResponse {
+public class SchoolClassResponse {
     @Id
     private String id;
     private String name;
