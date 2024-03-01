@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DeleteAddressRequest {
+public class SearchAddressRequest {
     private String id;
 }

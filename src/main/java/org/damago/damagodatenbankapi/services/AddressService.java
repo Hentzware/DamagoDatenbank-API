@@ -14,5 +14,5 @@ public interface AddressService {
 
     AddressResponse GetById(GetAddressRequest request);
 
-    Iterable<AddressResponse> Search(SearchAdresseRequest request);
+    Iterable<AddressResponse> Search(SearchAddressRequest request);
 }

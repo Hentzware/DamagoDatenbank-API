@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class AddressResponse {
+public class RoleResponse {
     @Id
     private String id;
 }

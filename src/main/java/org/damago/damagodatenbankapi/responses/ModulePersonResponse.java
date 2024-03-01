@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class AddressResponse {
+public class ModulePersonResponse {
     @Id
     private String id;
 }
