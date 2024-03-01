@@ -20,24 +20,24 @@ public class ModulServiceImpl implements ModulService {
 
     @Override
     public ModulResponse Add(AddModulRequest request) {
-        String id = modulRepository.sp_Modules_Add(request.getName(), request.getBeschreibung());
-        Modul modul = modulRepository.sp_Modules_GetById(id);
+        String id = modulRepository.sp_Module_Add(request.getName(), request.getDauer());
+        Modul modul = modulRepository.sp_Module_GetById(id);
         return modelMapper.map(modul, ModulResponse.class);
     }
 
     @Override
     public void Delete(DeleteModulRequest request, boolean permanent) {
         if (permanent) {
-            modulRepository.sp_Modules_DeletePermanent(request.getId());
+            modulRepository.sp_Module_DeletePermanent(request.getId());
             return;
         }
-        modulRepository.sp_Modules_Delete(request.getId());
+        modulRepository.sp_Module_Delete(request.getId());
     }
 
     @Override
     public ModulResponse Edit(EditModulRequest request) {
-        modulRepository.sp_Modules_Update(request.getId(), request.getName(), request.getBeschreibung());
-        Modul modul = modulRepository.sp_Modules_GetById(request.getId());
+        modulRepository.sp_Module_Update(request.getId(), request.getName(), request.getDauer());
+        Modul modul = modulRepository.sp_Module_GetById(request.getId());
         return modelMapper.map(modul, ModulResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class ModulServiceImpl implements ModulService {
         Iterable<Modul> modul;
 
         if (deleted) {
-            modul = modulRepository.sp_Modules_GetDeleted();
+            modul = modulRepository.sp_Module_GetDeleted();
         } else {
-            modul = modulRepository.sp_Modules_Get();
+            modul = modulRepository.sp_Module_Get();
         }
 
         return modelMapper.map(modul, new TypeToken<Iterable<ModulResponse>>() {
@@ -57,13 +57,13 @@ public class ModulServiceImpl implements ModulService {
 
     @Override
     public ModulResponse GetById(GetModulRequest request) {
-        Modul modul = modulRepository.sp_Modules_GetById(request.getId());
+        Modul modul = modulRepository.sp_Module_GetById(request.getId());
         return modelMapper.map(modul, ModulResponse.class);
     }
 
     @Override
     public Iterable<ModulResponse> Search(SearchModulRequest request) {
-        Iterable<Modul> modul = modulRepository.sp_Modules_Search(request.getName());
+        Iterable<Modul> modul = modulRepository.sp_Module_Search(request.getName());
         return modelMapper.map(modul, new TypeToken<Iterable<ModulResponse>>() {
         }.getType());
     }

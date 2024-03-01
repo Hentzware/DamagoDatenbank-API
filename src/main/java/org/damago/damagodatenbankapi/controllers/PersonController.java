@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/damago/api/v1/personen")
+@RequestMapping("/damago/api/v1/person")
 @Transactional
 @OpenAPIDefinition(info = @Info(title = "Damago Datenbank", version = "v1"))
-@Tag(name = "Personen")
+@Tag(name = "Person")
 public class PersonController {
     private final PersonService personService;
 
@@ -78,13 +78,13 @@ public class PersonController {
 
     @GetMapping("/search")
     public ResponseEntity<Iterable<PersonResponse>> Search(
-            @RequestParam(required = false, value = "nachname") String nachname,
-            @RequestParam(required = false, value = "vorname") String vorname,
-            @RequestParam(required = false, value = "geburtsdatum") Date geburtsdatum) {
+            @RequestParam(required = false, value = "last_name") String last_name,
+            @RequestParam(required = false, value = "first_name") String first_name,
+            @RequestParam(required = false, value = "birthdate") Date birthdate) {
         SearchPersonRequest request = new SearchPersonRequest();
-        request.setNachname(nachname);
-        request.setVorname(vorname);
-        request.setGeburtsdatum(geburtsdatum);
+        request.setLast_name(last_name);
+        request.setFirst_name(first_name);
+        request.setBirthdate(birthdate);
         Iterable<PersonResponse> result = personService.Search(request);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

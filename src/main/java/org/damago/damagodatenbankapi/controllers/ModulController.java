@@ -84,7 +84,7 @@ public class ModulController {
     @GetMapping("/search")
     public ResponseEntity<Iterable<ModulResponse>> Search(
             @RequestParam(required = false, value = "name") String name)
-        /*   @RequestParam(required = false, value = "beschreibung") String dauer)
+        /*   @RequestParam(required = false, value = "dauer") String dauer)
        @RequestParam(required = false, value = "postleitzahl") String postleitzahl,
       @RequestParam(required = false, value = "ort") String ort,
       @RequestParam(required = false, value = "land") String land)*/ {

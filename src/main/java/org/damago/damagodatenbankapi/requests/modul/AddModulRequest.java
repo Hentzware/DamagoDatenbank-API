@@ -8,6 +8,6 @@ import java.util.Date;
 @Getter @Setter
 public class AddModulRequest {
     private String name;
-    private String beschreibung;
+    private String dauer;
 
 }

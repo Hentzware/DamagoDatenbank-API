@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class SearchPersonRequest {
-    private String nachname;
-    private String vorname;
-    private Date geburtsdatum;
+    private String last_name;
+    private String first_name;
+    private Date birthdate;
 }
