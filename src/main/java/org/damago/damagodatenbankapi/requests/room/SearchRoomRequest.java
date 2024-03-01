@@ -6,5 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchRoomRequest {
-    private String id;
+    private String name;
+    private String nr;
 }

@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchPhoneRequest {
-    private String id;
+    private String phone;
 }

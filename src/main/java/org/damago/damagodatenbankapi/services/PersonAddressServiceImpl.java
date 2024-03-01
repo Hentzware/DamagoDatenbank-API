@@ -20,24 +20,24 @@ public class PersonAddressServiceImpl implements PersonAddressService {
 
     @Override
     public PersonAddressResponse Add(AddPersonAddressRequest request) {
-        String id = personAddressRepository.sp_PersonsAddresses_Add();
-        PersonAddress personAddress = personAddressRepository.sp_PersonsAddresses_GetById(id);
+        String id = personAddressRepository.sp_PersonAddress_Add();
+        PersonAddress personAddress = personAddressRepository.sp_PersonAddress_GetById(id);
         return modelMapper.map(personAddress, PersonAddressResponse.class);
     }
 
     @Override
     public void Delete(DeletePersonAddressRequest request, boolean permanent) {
         if (permanent) {
-            personAddressRepository.sp_PersonsAddresses_DeletePermanent(request.getId());
+            personAddressRepository.sp_PersonAddress_DeletePermanent(request.getId());
             return;
         }
-        personAddressRepository.sp_PersonsAddresses_Delete(request.getId());
+        personAddressRepository.sp_PersonAddress_Delete(request.getId());
     }
 
     @Override
     public PersonAddressResponse Edit(EditPersonAddressRequest request) {
-        personAddressRepository.sp_PersonsAddresses_Update(request.getId());
-        PersonAddress personAddress = personAddressRepository.sp_PersonsAddresses_GetById(request.getId());
+        personAddressRepository.sp_PersonAddress_Update(request.getId());
+        PersonAddress personAddress = personAddressRepository.sp_PersonAddress_GetById(request.getId());
         return modelMapper.map(personAddress, PersonAddressResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class PersonAddressServiceImpl implements PersonAddressService {
         Iterable<PersonAddress> personsAddresses;
 
         if (deleted) {
-            personsAddresses = personAddressRepository.sp_PersonsAddresses_GetDeleted();
+            personsAddresses = personAddressRepository.sp_PersonAddress_GetDeleted();
         } else {
-            personsAddresses = personAddressRepository.sp_PersonsAddresses_Get();
+            personsAddresses = personAddressRepository.sp_PersonAddress_Get();
         }
 
         return modelMapper.map(personsAddresses, new TypeToken<Iterable<PersonAddressResponse>>() {
@@ -57,13 +57,13 @@ public class PersonAddressServiceImpl implements PersonAddressService {
 
     @Override
     public PersonAddressResponse GetById(GetPersonAddressRequest request) {
-        PersonAddress personAddress = personAddressRepository.sp_PersonsAddresses_GetById(request.getId());
+        PersonAddress personAddress = personAddressRepository.sp_PersonAddress_GetById(request.getId());
         return modelMapper.map(personAddress, PersonAddressResponse.class);
     }
 
     @Override
     public Iterable<PersonAddressResponse> Search(SearchPersonAddressRequest request) {
-        Iterable<PersonAddress> personsAddresses = personAddressRepository.sp_PersonsAddresses_Search();
+        Iterable<PersonAddress> personsAddresses = personAddressRepository.sp_PersonAddress_Search();
         return modelMapper.map(personsAddresses, new TypeToken<Iterable<PersonAddressResponse>>() {
         }.getType());
     }

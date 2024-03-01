@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/damago/api/v1/persons")
+@RequestMapping("/damago/api/v1/person")
 @Transactional
 @OpenAPIDefinition(info = @Info(title = "Damago Datenbank", version = "v1"))
-@Tag(name = "Persons")
+@Tag(name = "Person")
 public class PersonController {
     private final PersonService personService;
 

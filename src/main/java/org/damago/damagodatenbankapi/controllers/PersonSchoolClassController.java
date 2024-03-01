@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/damago/api/v1/personSchoolClass")
+@RequestMapping("/damago/api/v1/person-school-class")
 @Transactional
 @Tag(name = "PersonSchoolClass")
 public class PersonSchoolClassController {

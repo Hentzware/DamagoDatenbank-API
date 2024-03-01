@@ -10,4 +10,6 @@ import lombok.Setter;
 public class ModulePerson {
     @Id
     private String id;
+    private String module_id;
+    private String person_id;
 }

@@ -10,4 +10,6 @@ import lombok.Setter;
 public class PersonRole {
     @Id
     private String id;
+    private String person_id;
+    private String role_id;
 }

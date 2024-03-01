@@ -519,45 +519,45 @@ END;
 create procedure sp_PersonAdress_Add(IN in_personId varchar(36), IN in_adresseId varchar(36), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO person_adresse (id, person_id, adresse_id, is_deleted)
+    INSERT INTO person_address (id, person_id, adresse_id, is_deleted)
     VALUES (out_id, in_personId, in_adresseId, false);
 END;
 
 create procedure sp_PersonAdress_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE person_adresse SET is_deleted = true WHERE id = in_id;
+    UPDATE person_address SET is_deleted = true WHERE id = in_id;
 END;
 
 create procedure sp_PersonAdress_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM person_adresse WHERE id = in_id;
+    DELETE FROM person_address WHERE id = in_id;
 END;
 
 create procedure sp_PersonAdress_Get()
 BEGIN
-    SELECT * FROM person_adresse WHERE is_deleted = false;
+    SELECT * FROM person_address WHERE is_deleted = false;
 END;
 
 create procedure sp_PersonAdress_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM person_adresse WHERE id = in_id;
+    SELECT * FROM person_address WHERE id = in_id;
 end;
 
 create procedure sp_PersonAdress_Search(IN in_personId varchar(36), IN in_adressId varchar(36))
 BEGIN
-    SELECT * FROM person_adresse
+    SELECT * FROM person_address
     WHERE (person_id = in_personId OR in_personId IS NULL)
       AND (adresse_id = in_adressId OR in_adressId IS NULL);
 END;
 
 create procedure sp_PersonAdress_Undelete(IN in_id varchar(36))
 BEGIN
-    UPDATE person_adresse SET is_deleted = false WHERE id = in_id;
+    UPDATE person_address SET is_deleted = false WHERE id = in_id;
 END;
 
 create procedure sp_PersonAdress_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_adressId varchar(36))
 BEGIN
-    UPDATE person_adresse
+    UPDATE person_address
     SET
         person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
         adresse_id = IF (in_adressId IS NOT NULL, in_adressId, adresse_id)
@@ -713,45 +713,45 @@ END;
 create procedure sp_PersonRole_Add(IN in_personId varchar(36), IN in_RolleId varchar(36), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO person_rolle (id, person_id, rolle_id, is_deleted)
+    INSERT INTO person_role (id, person_id, rolle_id, is_deleted)
     VALUES (out_id, in_personId, in_RolleId, false);
 END;
 
 create procedure sp_PersonRole_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE person_rolle SET is_deleted = true WHERE id = in_id;
+    UPDATE person_role SET is_deleted = true WHERE id = in_id;
 END;
 
 create procedure sp_PersonRole_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM person_rolle WHERE id = in_id;
+    DELETE FROM person_role WHERE id = in_id;
 END;
 
 create procedure sp_PersonRole_Get()
 BEGIN
-    SELECT * FROM person_rolle WHERE is_deleted = false;
+    SELECT * FROM person_role WHERE is_deleted = false;
 END;
 
 create procedure sp_PersonRole_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM person_rolle WHERE id = in_id;
+    SELECT * FROM person_role WHERE id = in_id;
 end;
 
 create procedure sp_PersonRole_GetDeleted()
 BEGIN
-    SELECT * FROM person_rolle WHERE is_deleted = true;
+    SELECT * FROM person_role WHERE is_deleted = true;
 END;
 
 create procedure sp_PersonRole_Search(IN in_personId varchar(36), IN in_RolleId varchar(36))
 BEGIN
-    SELECT * FROM person_rolle
+    SELECT * FROM person_role
     WHERE (person_id = in_personId OR in_personId IS NULL)
       AND (rolle_id = in_RolleId OR in_RolleId IS NULL);
 END;
 
 create procedure sp_PersonRole_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_rolleId varchar(36))
 BEGIN
-    UPDATE person_rolle
+    UPDATE person_role
     SET
         person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
         rolle_id = IF (in_rolleId IS NOT NULL, in_rolleId, rolle_id)
@@ -762,38 +762,38 @@ create procedure sp_Persons_Add(IN in_last_name varchar(100), IN in_first_name v
                                 OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO persons (id, last_name, first_name, birthdate, is_deleted)
+    INSERT INTO person (id, last_name, first_name, birthdate, is_deleted)
     VALUES (out_id, in_last_name, in_first_name, in_birthdate, false);
 END;
 
 create procedure sp_Persons_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE persons SET is_deleted = true WHERE id = in_id;
+    UPDATE person SET is_deleted = true WHERE id = in_id;
 END;
 
 create procedure sp_Persons_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM persons WHERE id = in_id;
+    DELETE FROM person WHERE id = in_id;
 END;
 
 create procedure sp_Persons_Get()
 BEGIN
-    SELECT * FROM persons WHERE is_deleted = false;
+    SELECT * FROM person WHERE is_deleted = false;
 END;
 
 create procedure sp_Persons_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM persons WHERE id = in_id;
+    SELECT * FROM person WHERE id = in_id;
 end;
 
 create procedure sp_Persons_GetDeleted()
 BEGIN
-    SELECT * FROM persons WHERE is_deleted = true;
+    SELECT * FROM person WHERE is_deleted = true;
 END;
 
 create procedure sp_Persons_Search(IN in_last_name varchar(100), IN in_first_name varchar(100), IN in_birthdate date)
 BEGIN
-    SELECT * FROM persons
+    SELECT * FROM person
     WHERE (last_name LIKE CONCAT('%', in_last_name, '%') OR in_last_name IS NULL)
       AND (first_name LIKE CONCAT('%', in_first_name, '%') OR in_first_name IS NULL)
       AND (birthdate = in_birthdate OR in_birthdate IS NULL);
@@ -802,7 +802,7 @@ END;
 create procedure sp_Persons_Update(IN in_id varchar(36), IN in_last_name varchar(100), IN in_first_name varchar(100),
                                    IN in_birthdate date)
 BEGIN
-    UPDATE persons
+    UPDATE person
     SET
         last_name = IF (in_last_name IS NOT NULL, in_last_name, last_name),
         first_name = IF (in_first_name IS NOT NULL, in_first_name, first_name),

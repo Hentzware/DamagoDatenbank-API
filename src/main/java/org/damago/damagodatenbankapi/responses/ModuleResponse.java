@@ -11,4 +11,6 @@ import lombok.Setter;
 public class ModuleResponse {
     @Id
     private String id;
+    private String name;
+    private String description;
 }

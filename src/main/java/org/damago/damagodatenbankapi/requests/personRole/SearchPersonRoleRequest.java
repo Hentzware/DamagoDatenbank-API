@@ -6,5 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchPersonRoleRequest {
-    private String id;
+    private String person_id;
+    private String role_id;
 }

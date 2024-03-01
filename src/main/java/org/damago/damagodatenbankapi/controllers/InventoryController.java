@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/damago/api/v1/inventories")
+@RequestMapping("/damago/api/v1/inventory")
 @Transactional
-@Tag(name = "Inventories")
+@Tag(name = "Inventory")
 public class InventoryController {
     private final InventoryService inventoryService;
 

@@ -7,4 +7,6 @@ import lombok.Setter;
 @Setter
 public class EditRoomRequest {
     private String id;
+    private String name;
+    private String nr;
 }

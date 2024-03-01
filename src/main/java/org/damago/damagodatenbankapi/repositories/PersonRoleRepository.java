@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PersonRoleRepository extends JpaRepository<PersonRole, String> {
     @Procedure
-    String sp_PersonsRoles_Add();
+    String sp_PersonRole_Add();
 
     @Procedure
-    void sp_PersonsRoles_Delete(String id);
+    void sp_PersonRole_Delete(String id);
 
     @Procedure
-    void sp_PersonsRoles_DeletePermanent(String id);
+    void sp_PersonRole_DeletePermanent(String id);
 
     @Procedure
-    Iterable<PersonRole> sp_PersonsRoles_Get();
+    Iterable<PersonRole> sp_PersonRole_Get();
 
     @Procedure
-    PersonRole sp_PersonsRoles_GetById(String id);
+    PersonRole sp_PersonRole_GetById(String id);
 
     @Procedure
-    Iterable<PersonRole> sp_PersonsRoles_GetDeleted();
+    Iterable<PersonRole> sp_PersonRole_GetDeleted();
 
     @Procedure
-    Iterable<PersonRole> sp_PersonsRoles_Search();
+    Iterable<PersonRole> sp_PersonRole_Search();
 
     @Procedure
-    void sp_PersonsRoles_Undelete(String id);
+    void sp_PersonRole_Undelete(String id);
 
     @Procedure
-    void sp_PersonsRoles_Update(String id);
+    void sp_PersonRole_Update(String id);
 }

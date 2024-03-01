@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface SchoolClassRepository extends JpaRepository<SchoolClass, String> {
     @Procedure
-    String sp_SchoolClasses_Add(String name);
+    String sp_SchoolClass_Add(String name);
 
     @Procedure
-    void sp_SchoolClasses_Delete(String id);
+    void sp_SchoolClass_Delete(String id);
 
     @Procedure
-    void sp_SchoolClasses_DeletePermanent(String id);
+    void sp_SchoolClass_DeletePermanent(String id);
 
     @Procedure
-    Iterable<SchoolClass> sp_SchoolClasses_Get();
+    Iterable<SchoolClass> sp_SchoolClass_Get();
 
     @Procedure
-    SchoolClass sp_SchoolClasses_GetById(String id);
+    SchoolClass sp_SchoolClass_GetById(String id);
 
     @Procedure
-    Iterable<SchoolClass> sp_SchoolClasses_GetDeleted();
+    Iterable<SchoolClass> sp_SchoolClass_GetDeleted();
 
     @Procedure
-    Iterable<SchoolClass> sp_SchoolClasses_Search(String name);
+    Iterable<SchoolClass> sp_SchoolClass_Search(String name);
 
     @Procedure
-    void sp_SchoolClasses_Undelete(String id);
+    void sp_SchoolClass_Undelete(String id);
 
     @Procedure
-    void sp_SchoolClasses_Update(String id, String name);
+    void sp_SchoolClass_Update(String id, String name);
 }

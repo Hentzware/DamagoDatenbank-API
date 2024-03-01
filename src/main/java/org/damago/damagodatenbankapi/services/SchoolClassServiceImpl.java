@@ -20,24 +20,24 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 
     @Override
     public SchoolClassResponse Add(AddSchoolClassRequest request) {
-        String id = schoolClassRepository.sp_SchoolClasses_Add(request.getName());
-        SchoolClass schoolClass = schoolClassRepository.sp_SchoolClasses_GetById(id);
+        String id = schoolClassRepository.sp_SchoolClass_Add(request.getName());
+        SchoolClass schoolClass = schoolClassRepository.sp_SchoolClass_GetById(id);
         return modelMapper.map(schoolClass, SchoolClassResponse.class);
     }
 
     @Override
     public void Delete(DeleteSchoolClassRequest request, boolean permanent) {
         if (permanent) {
-            schoolClassRepository.sp_SchoolClasses_DeletePermanent(request.getId());
+            schoolClassRepository.sp_SchoolClass_DeletePermanent(request.getId());
             return;
         }
-        schoolClassRepository.sp_SchoolClasses_Delete(request.getId());
+        schoolClassRepository.sp_SchoolClass_Delete(request.getId());
     }
 
     @Override
     public SchoolClassResponse Edit(EditSchoolClassRequest request) {
-        schoolClassRepository.sp_SchoolClasses_Update(request.getId(), request.getName());
-        SchoolClass schoolClass = schoolClassRepository.sp_SchoolClasses_GetById(request.getId());
+        schoolClassRepository.sp_SchoolClass_Update(request.getId(), request.getName());
+        SchoolClass schoolClass = schoolClassRepository.sp_SchoolClass_GetById(request.getId());
         return modelMapper.map(schoolClass, SchoolClassResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class SchoolClassServiceImpl implements SchoolClassService {
         Iterable<SchoolClass> schoolClasses;
 
         if (deleted) {
-            schoolClasses = schoolClassRepository.sp_SchoolClasses_GetDeleted();
+            schoolClasses = schoolClassRepository.sp_SchoolClass_GetDeleted();
         } else {
-            schoolClasses = schoolClassRepository.sp_SchoolClasses_Get();
+            schoolClasses = schoolClassRepository.sp_SchoolClass_Get();
         }
 
         return modelMapper.map(schoolClasses, new TypeToken<Iterable<SchoolClassResponse>>() {
@@ -57,13 +57,13 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 
     @Override
     public SchoolClassResponse GetById(GetSchoolClassRequest request) {
-        SchoolClass schoolClass = schoolClassRepository.sp_SchoolClasses_GetById(request.getId());
+        SchoolClass schoolClass = schoolClassRepository.sp_SchoolClass_GetById(request.getId());
         return modelMapper.map(schoolClass, SchoolClassResponse.class);
     }
 
     @Override
     public Iterable<SchoolClassResponse> Search(SearchSchoolClassRequest request) {
-        Iterable<SchoolClass> schoolClasses = schoolClassRepository.sp_SchoolClasses_Search(request.getName());
+        Iterable<SchoolClass> schoolClasses = schoolClassRepository.sp_SchoolClass_Search(request.getName());
         return modelMapper.map(schoolClasses, new TypeToken<Iterable<SchoolClassResponse>>() {
         }.getType());
     }

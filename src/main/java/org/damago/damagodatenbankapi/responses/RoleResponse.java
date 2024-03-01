@@ -11,4 +11,5 @@ import lombok.Setter;
 public class RoleResponse {
     @Id
     private String id;
+    private String name;
 }

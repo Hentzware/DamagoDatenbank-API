@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/damago/api/v1/emails")
+@RequestMapping("/damago/api/v1/email")
 @Transactional
-@Tag(name = "Emails")
+@Tag(name = "Email")
 public class EmailController {
     private final EmailService emailService;
 

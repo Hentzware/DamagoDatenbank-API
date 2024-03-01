@@ -10,4 +10,5 @@ import lombok.Setter;
 public class Phone {
     @Id
     private String id;
+    private String phone;
 }

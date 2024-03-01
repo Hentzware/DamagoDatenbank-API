@@ -11,4 +11,9 @@ import lombok.Setter;
 public class AddressResponse {
     @Id
     private String id;
+    private String street;
+    private String house_number;
+    private String postal_code;
+    private String location;
+    private String country;
 }

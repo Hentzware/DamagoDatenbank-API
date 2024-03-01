@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/damago/api/v1/personPhone")
+@RequestMapping("/damago/api/v1/person-phone")
 @Transactional
-@Tag(name = "PersonPhone")
+@Tag(name = "Person - Phone")
 public class PersonPhoneController {
     private final PersonPhoneService personPhoneService;
 

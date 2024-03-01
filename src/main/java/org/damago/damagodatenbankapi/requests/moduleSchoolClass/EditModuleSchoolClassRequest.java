@@ -7,4 +7,6 @@ import lombok.Setter;
 @Setter
 public class EditModuleSchoolClassRequest {
     private String id;
+    private String module_id;
+    private String school_class_id;
 }

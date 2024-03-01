@@ -11,4 +11,5 @@ import lombok.Setter;
 public class PhoneResponse {
     @Id
     private String id;
+    private String phone;
 }

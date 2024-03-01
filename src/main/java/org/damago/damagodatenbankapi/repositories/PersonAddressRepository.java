@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PersonAddressRepository extends JpaRepository<PersonAddress, String> {
     @Procedure
-    String sp_PersonsAddresses_Add();
+    String sp_PersonAddress_Add();
 
     @Procedure
-    void sp_PersonsAddresses_Delete(String id);
+    void sp_PersonAddress_Delete(String id);
 
     @Procedure
-    void sp_PersonsAddresses_DeletePermanent(String id);
+    void sp_PersonAddress_DeletePermanent(String id);
 
     @Procedure
-    Iterable<PersonAddress> sp_PersonsAddresses_Get();
+    Iterable<PersonAddress> sp_PersonAddress_Get();
 
     @Procedure
-    PersonAddress sp_PersonsAddresses_GetById(String id);
+    PersonAddress sp_PersonAddress_GetById(String id);
 
     @Procedure
-    Iterable<PersonAddress> sp_PersonsAddresses_GetDeleted();
+    Iterable<PersonAddress> sp_PersonAddress_GetDeleted();
 
     @Procedure
-    Iterable<PersonAddress> sp_PersonsAddresses_Search();
+    Iterable<PersonAddress> sp_PersonAddress_Search();
 
     @Procedure
-    void sp_PersonsAddresses_Undelete(String id);
+    void sp_PersonAddress_Undelete(String id);
 
     @Procedure
-    void sp_PersonsAddresses_Update(String id);
+    void sp_PersonAddress_Update(String id);
 }

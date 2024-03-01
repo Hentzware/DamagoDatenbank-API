@@ -11,4 +11,6 @@ import lombok.Setter;
 public class PersonAddressResponse {
     @Id
     private String id;
+    private String person_id;
+    private String address_id;
 }

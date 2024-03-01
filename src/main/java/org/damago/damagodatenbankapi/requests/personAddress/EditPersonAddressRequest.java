@@ -7,4 +7,6 @@ import lombok.Setter;
 @Setter
 public class EditPersonAddressRequest {
     private String id;
+    private String person_id;
+    private String address_id;
 }
