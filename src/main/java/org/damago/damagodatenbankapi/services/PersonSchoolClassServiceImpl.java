@@ -20,24 +20,24 @@ public class PersonSchoolClassServiceImpl implements PersonSchoolClassService {
 
     @Override
     public PersonSchoolClassResponse Add(AddPersonSchoolClassRequest request) {
-        String id = personSchoolClassRepository.sp_PersonsSchoolClasses_Add();
-        PersonSchoolClass personSchoolClass = personSchoolClassRepository.sp_PersonsSchoolClasses_GetById(id);
+        String id = personSchoolClassRepository.sp_PersonSchoolClass_Add(request.getPerson_id(), request.getSchool_class_id());
+        PersonSchoolClass personSchoolClass = personSchoolClassRepository.sp_PersonSchoolClass_GetById(id);
         return modelMapper.map(personSchoolClass, PersonSchoolClassResponse.class);
     }
 
     @Override
     public void Delete(DeletePersonSchoolClassRequest request, boolean permanent) {
         if (permanent) {
-            personSchoolClassRepository.sp_PersonsSchoolClasses_DeletePermanent(request.getId());
+            personSchoolClassRepository.sp_PersonSchoolClass_DeletePermanent(request.getId());
             return;
         }
-        personSchoolClassRepository.sp_PersonsSchoolClasses_Delete(request.getId());
+        personSchoolClassRepository.sp_PersonSchoolClass_Delete(request.getId());
     }
 
     @Override
     public PersonSchoolClassResponse Edit(EditPersonSchoolClassRequest request) {
-        personSchoolClassRepository.sp_PersonsSchoolClasses_Update(request.getId());
-        PersonSchoolClass personSchoolClass = personSchoolClassRepository.sp_PersonsSchoolClasses_GetById(request.getId());
+        personSchoolClassRepository.sp_PersonSchoolClass_Update(request.getId(), request.getPerson_id(), request.getSchool_class_id());
+        PersonSchoolClass personSchoolClass = personSchoolClassRepository.sp_PersonSchoolClass_GetById(request.getId());
         return modelMapper.map(personSchoolClass, PersonSchoolClassResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class PersonSchoolClassServiceImpl implements PersonSchoolClassService {
         Iterable<PersonSchoolClass> personsSchoolClasses;
 
         if (deleted) {
-            personsSchoolClasses = personSchoolClassRepository.sp_PersonsSchoolClasses_GetDeleted();
+            personsSchoolClasses = personSchoolClassRepository.sp_PersonSchoolClass_GetDeleted();
         } else {
-            personsSchoolClasses = personSchoolClassRepository.sp_PersonsSchoolClasses_Get();
+            personsSchoolClasses = personSchoolClassRepository.sp_PersonSchoolClass_Get();
         }
 
         return modelMapper.map(personsSchoolClasses, new TypeToken<Iterable<PersonSchoolClassResponse>>() {
@@ -57,13 +57,13 @@ public class PersonSchoolClassServiceImpl implements PersonSchoolClassService {
 
     @Override
     public PersonSchoolClassResponse GetById(GetPersonSchoolClassRequest request) {
-        PersonSchoolClass personSchoolClass = personSchoolClassRepository.sp_PersonsSchoolClasses_GetById(request.getId());
+        PersonSchoolClass personSchoolClass = personSchoolClassRepository.sp_PersonSchoolClass_GetById(request.getId());
         return modelMapper.map(personSchoolClass, PersonSchoolClassResponse.class);
     }
 
     @Override
     public Iterable<PersonSchoolClassResponse> Search(SearchPersonSchoolClassRequest request) {
-        Iterable<PersonSchoolClass> personsSchoolClasses = personSchoolClassRepository.sp_PersonsSchoolClasses_Search();
+        Iterable<PersonSchoolClass> personsSchoolClasses = personSchoolClassRepository.sp_PersonSchoolClass_Search(request.getPerson_id(), request.getSchool_class_id());
         return modelMapper.map(personsSchoolClasses, new TypeToken<Iterable<PersonSchoolClassResponse>>() {
         }.getType());
     }

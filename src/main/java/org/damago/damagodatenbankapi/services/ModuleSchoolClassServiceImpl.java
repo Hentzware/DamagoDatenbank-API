@@ -20,24 +20,24 @@ public class ModuleSchoolClassServiceImpl implements ModuleSchoolClassService {
 
     @Override
     public ModuleSchoolClassResponse Add(AddModuleSchoolClassRequest request) {
-        String id = moduleSchoolClassRepository.sp_ModulesSchoolClasses_Add();
-        ModuleSchoolClass moduleSchoolClass = moduleSchoolClassRepository.sp_ModulesSchoolClasses_GetById(id);
+        String id = moduleSchoolClassRepository.sp_ModuleSchoolClass_Add(request.getModule_id(), request.getSchool_class_id());
+        ModuleSchoolClass moduleSchoolClass = moduleSchoolClassRepository.sp_ModuleSchoolClass_GetById(id);
         return modelMapper.map(moduleSchoolClass, ModuleSchoolClassResponse.class);
     }
 
     @Override
     public void Delete(DeleteModuleSchoolClassRequest request, boolean permanent) {
         if (permanent) {
-            moduleSchoolClassRepository.sp_ModulesSchoolClasses_DeletePermanent(request.getId());
+            moduleSchoolClassRepository.sp_ModuleSchoolClass_DeletePermanent(request.getId());
             return;
         }
-        moduleSchoolClassRepository.sp_ModulesSchoolClasses_Delete(request.getId());
+        moduleSchoolClassRepository.sp_ModuleSchoolClass_Delete(request.getId());
     }
 
     @Override
     public ModuleSchoolClassResponse Edit(EditModuleSchoolClassRequest request) {
-        moduleSchoolClassRepository.sp_ModulesSchoolClasses_Update(request.getId());
-        ModuleSchoolClass moduleSchoolClass = moduleSchoolClassRepository.sp_ModulesSchoolClasses_GetById(request.getId());
+        moduleSchoolClassRepository.sp_ModuleSchoolClass_Update(request.getId(), request.getModule_id(), request.getSchool_class_id());
+        ModuleSchoolClass moduleSchoolClass = moduleSchoolClassRepository.sp_ModuleSchoolClass_GetById(request.getId());
         return modelMapper.map(moduleSchoolClass, ModuleSchoolClassResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class ModuleSchoolClassServiceImpl implements ModuleSchoolClassService {
         Iterable<ModuleSchoolClass> modulesSchoolClasses;
 
         if (deleted) {
-            modulesSchoolClasses = moduleSchoolClassRepository.sp_ModulesSchoolClasses_GetDeleted();
+            modulesSchoolClasses = moduleSchoolClassRepository.sp_ModuleSchoolClass_GetDeleted();
         } else {
-            modulesSchoolClasses = moduleSchoolClassRepository.sp_ModulesSchoolClasses_Get();
+            modulesSchoolClasses = moduleSchoolClassRepository.sp_ModuleSchoolClass_Get();
         }
 
         return modelMapper.map(modulesSchoolClasses, new TypeToken<Iterable<ModuleSchoolClassResponse>>() {
@@ -57,13 +57,13 @@ public class ModuleSchoolClassServiceImpl implements ModuleSchoolClassService {
 
     @Override
     public ModuleSchoolClassResponse GetById(GetModuleSchoolClassRequest request) {
-        ModuleSchoolClass moduleSchoolClass = moduleSchoolClassRepository.sp_ModulesSchoolClasses_GetById(request.getId());
+        ModuleSchoolClass moduleSchoolClass = moduleSchoolClassRepository.sp_ModuleSchoolClass_GetById(request.getId());
         return modelMapper.map(moduleSchoolClass, ModuleSchoolClassResponse.class);
     }
 
     @Override
     public Iterable<ModuleSchoolClassResponse> Search(SearchModuleSchoolClassRequest request) {
-        Iterable<ModuleSchoolClass> modulesSchoolClasses = moduleSchoolClassRepository.sp_ModulesSchoolClasses_Search();
+        Iterable<ModuleSchoolClass> modulesSchoolClasses = moduleSchoolClassRepository.sp_ModuleSchoolClass_Search(request.getModule_id(), request.getSchool_class_id());
         return modelMapper.map(modulesSchoolClasses, new TypeToken<Iterable<ModuleSchoolClassResponse>>() {
         }.getType());
     }

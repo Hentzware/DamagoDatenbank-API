@@ -20,24 +20,24 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomResponse Add(AddRoomRequest request) {
-        String id = roomRepository.sp_Rooms_Add();
-        Room room = roomRepository.sp_Rooms_GetById(id);
+        String id = roomRepository.sp_Room_Add(request.getName(), request.getNr());
+        Room room = roomRepository.sp_Room_GetById(id);
         return modelMapper.map(room, RoomResponse.class);
     }
 
     @Override
     public void Delete(DeleteRoomRequest request, boolean permanent) {
         if (permanent) {
-            roomRepository.sp_Rooms_DeletePermanent(request.getId());
+            roomRepository.sp_Room_DeletePermanent(request.getId());
             return;
         }
-        roomRepository.sp_Rooms_Delete(request.getId());
+        roomRepository.sp_Room_Delete(request.getId());
     }
 
     @Override
     public RoomResponse Edit(EditRoomRequest request) {
-        roomRepository.sp_Rooms_Update(request.getId());
-        Room room = roomRepository.sp_Rooms_GetById(request.getId());
+        roomRepository.sp_Room_Update(request.getId(), request.getName(), request.getNr());
+        Room room = roomRepository.sp_Room_GetById(request.getId());
         return modelMapper.map(room, RoomResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class RoomServiceImpl implements RoomService {
         Iterable<Room> rooms;
 
         if (deleted) {
-            rooms = roomRepository.sp_Rooms_GetDeleted();
+            rooms = roomRepository.sp_Room_GetDeleted();
         } else {
-            rooms = roomRepository.sp_Rooms_Get();
+            rooms = roomRepository.sp_Room_Get();
         }
 
         return modelMapper.map(rooms, new TypeToken<Iterable<RoomResponse>>() {
@@ -57,13 +57,13 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomResponse GetById(GetRoomRequest request) {
-        Room room = roomRepository.sp_Rooms_GetById(request.getId());
+        Room room = roomRepository.sp_Room_GetById(request.getId());
         return modelMapper.map(room, RoomResponse.class);
     }
 
     @Override
     public Iterable<RoomResponse> Search(SearchRoomRequest request) {
-        Iterable<Room> rooms = roomRepository.sp_Rooms_Search();
+        Iterable<Room> rooms = roomRepository.sp_Room_Search(request.getName(), request.getNr());
         return modelMapper.map(rooms, new TypeToken<Iterable<RoomResponse>>() {
         }.getType());
     }

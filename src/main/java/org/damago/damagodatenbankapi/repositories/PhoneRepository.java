@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PhoneRepository extends JpaRepository<Phone, String> {
     @Procedure
-    String sp_Phones_Add();
+    String sp_Phone_Add(String phone);
 
     @Procedure
-    void sp_Phones_Delete(String id);
+    void sp_Phone_Delete(String id);
 
     @Procedure
-    void sp_Phones_DeletePermanent(String id);
+    void sp_Phone_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Phone> sp_Phones_Get();
+    Iterable<Phone> sp_Phone_Get();
 
     @Procedure
-    Phone sp_Phones_GetById(String id);
+    Phone sp_Phone_GetById(String id);
 
     @Procedure
-    Iterable<Phone> sp_Phones_GetDeleted();
+    Iterable<Phone> sp_Phone_GetDeleted();
 
     @Procedure
-    Iterable<Phone> sp_Phones_Search();
+    Iterable<Phone> sp_Phone_Search(String phone);
 
     @Procedure
-    void sp_Phones_Undelete(String id);
+    void sp_Phone_Undelete(String id);
 
     @Procedure
-    void sp_Phones_Update(String id);
+    void sp_Phone_Update(String id, String phone);
 }

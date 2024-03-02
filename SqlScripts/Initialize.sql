@@ -1,4 +1,4 @@
-create table if not exists addresses
+create table if not exists address
 (
     id           varchar(36)  not null,
     street       varchar(100) not null,
@@ -9,14 +9,14 @@ create table if not exists addresses
     is_deleted   tinyint(1)   not null
 );
 
-create table if not exists emails
+create table if not exists email
 (
     id         varchar(36)  not null,
     email      varchar(100) not null,
     is_deleted tinyint(1)   not null
 );
 
-create table if not exists inventories
+create table if not exists inventory
 (
     id         varchar(36)  not null,
     name       varchar(100) not null,
@@ -24,11 +24,43 @@ create table if not exists inventories
     is_deleted tinyint(1)   not null
 );
 
-create table if not exists klassen
+create table if not exists lesson
+(
+    id         varchar(36) not null,
+    begin_date date        not null,
+    end_date   date        not null,
+    is_deleted tinyint(1)  not null
+);
+
+create table if not exists location
 (
     id         varchar(36)  not null,
-    name       varchar(100) null,
+    name       varchar(100) not null,
     is_deleted tinyint(1)   not null
+);
+
+create table if not exists location_address
+(
+    id          varchar(36) not null,
+    location_id varchar(36) not null,
+    address_id  varchar(36) not null,
+    is_deleted  tinyint(1)  not null
+);
+
+create table if not exists location_email
+(
+    id          varchar(36) not null,
+    location_id varchar(36) not null,
+    email_id    varchar(36) not null,
+    is_deleted  tinyint(1)  not null
+);
+
+create table if not exists location_inventory
+(
+    id           varchar(36) not null,
+    location_id  varchar(36) not null,
+    inventory_id varchar(36) not null,
+    is_deleted   tinyint(1)  not null
 );
 
 create table if not exists location_person
@@ -39,42 +71,68 @@ create table if not exists location_person
     is_deleted  tinyint(1)  not null
 );
 
-create table if not exists locations
+create table if not exists location_phone
 (
-    id         varchar(36)  not null,
-    name       varchar(100) not null,
-    is_deleted tinyint(1)   not null
+    id          varchar(36) not null,
+    location_id varchar(36) not null,
+    phone_id    varchar(36) not null,
+    is_deleted  tinyint(1)  not null
 );
 
-create table if not exists modul_klasse
+create table if not exists location_room
 (
-    id         varchar(36) not null,
-    modul_id   varchar(36) not null,
-    klasse_id  varchar(36) not null,
-    is_deleted tinyint(1)  not null
+    id          varchar(36) not null,
+    location_id varchar(36) not null,
+    phone_id    varchar(36) not null,
+    is_deleted  tinyint(1)  not null
 );
 
-create table if not exists modul_person
+create table if not exists location_school_class
 (
-    id         varchar(36) not null,
-    modul_id   varchar(36) not null,
-    person_id  varchar(36) null,
-    is_deleted tinyint(1)  not null
+    id              varchar(36) not null,
+    location_id     varchar(36) not null,
+    school_class_id varchar(36) null,
+    is_deleted      tinyint(1)  not null
 );
 
 create table if not exists module
 (
-    id           varchar(36)  not null,
-    name         varchar(100) not null,
-    beschreibung varchar(500) null,
-    is_deleted   tinyint(1)   not null
+    id          varchar(36)  not null,
+    name        varchar(100) not null,
+    description varchar(500) null,
+    is_deleted  tinyint(1)   not null
 );
 
-create table if not exists person_adresse
+create table if not exists module_person
+(
+    id         varchar(36) not null,
+    module_id  varchar(36) not null,
+    person_id  varchar(36) null,
+    is_deleted tinyint(1)  not null
+);
+
+create table if not exists module_school_class
+(
+    id              varchar(36) not null,
+    module_id       varchar(36) not null,
+    school_class_id varchar(36) not null,
+    is_deleted      tinyint(1)  not null
+);
+
+create table if not exists person
+(
+    id         varchar(36)  not null,
+    last_name  varchar(100) not null,
+    first_name varchar(100) not null,
+    birthdate  date         not null,
+    is_deleted tinyint(1)   not null
+);
+
+create table if not exists person_address
 (
     id         varchar(36) not null,
     person_id  varchar(36) not null,
-    adresse_id varchar(36) not null,
+    address_id varchar(36) not null,
     is_deleted tinyint(1)  not null
 );
 
@@ -86,40 +144,45 @@ create table if not exists person_email
     is_deleted tinyint(1)  not null
 );
 
-create table if not exists person_klasse
+create table if not exists person_phone
 (
     id         varchar(36) not null,
     person_id  varchar(36) not null,
-    klasse_id  varchar(36) not null,
+    phone_id   varchar(36) not null,
     is_deleted tinyint(1)  not null
 );
 
-create table if not exists person_rolle
+create table if not exists person_role
 (
     id         varchar(36) not null,
     person_id  varchar(36) not null,
-    rolle_id   varchar(36) not null,
+    role_id    varchar(36) not null,
     is_deleted tinyint(1)  not null
 );
 
-create table if not exists person_telefonnummer
+create table if not exists person_school_class
 (
-    id               varchar(36) not null,
-    person_id        varchar(36) not null,
-    telefonnummer_id varchar(36) not null,
-    is_deleted       tinyint(1)  not null
+    id              varchar(36) not null,
+    person_id       varchar(36) not null,
+    school_class_id varchar(36) not null,
+    is_deleted      tinyint(1)  not null
 );
 
-create table if not exists persons
+create table if not exists phone
 (
     id         varchar(36)  not null,
-    last_name  varchar(100) not null,
-    first_name varchar(100) not null,
-    birthdate  date         not null,
+    phone      varchar(100) not null,
     is_deleted tinyint(1)   not null
 );
 
-create table if not exists raeume
+create table if not exists role
+(
+    id         varchar(36)  not null,
+    name       varchar(100) not null,
+    is_deleted tinyint(1)   not null
+);
+
+create table if not exists room
 (
     id         varchar(36)  not null,
     name       varchar(100) null,
@@ -127,115 +190,52 @@ create table if not exists raeume
     is_deleted tinyint(1)   not null
 );
 
-create table if not exists rollen
+create table if not exists school_class
 (
     id         varchar(36)  not null,
-    name       varchar(100) not null,
+    name       varchar(100) null,
     is_deleted tinyint(1)   not null
 );
 
-create table if not exists standort_adresse
-(
-    id          varchar(36) not null,
-    standort_id varchar(36) not null,
-    adresse_id  varchar(36) not null,
-    is_deleted  tinyint(1)  not null
-);
-
-create table if not exists standort_email
-(
-    id          varchar(36) not null,
-    standort_id varchar(36) not null,
-    email_id    varchar(36) not null,
-    is_deleted  tinyint(1)  not null
-);
-
-create table if not exists standort_inventar
-(
-    id          varchar(36) not null,
-    standort_id varchar(36) not null,
-    inventar_id varchar(36) not null,
-    is_deleted  tinyint(1)  not null
-);
-
-create table if not exists standort_klasse
-(
-    id          varchar(36) not null,
-    standort_id varchar(36) not null,
-    klasse_id   varchar(36) null,
-    is_deleted  tinyint(1)  not null
-);
-
-create table if not exists standort_raum
-(
-    id          varchar(36) not null,
-    standort_id varchar(36) not null,
-    raum_id     varchar(36) not null,
-    is_deleted  tinyint(1)  not null
-);
-
-create table if not exists standort_telefonnummer
-(
-    id               varchar(36) not null,
-    standort_id      varchar(36) not null,
-    telefonnummer_id varchar(36) not null,
-    is_deleted       tinyint(1)  not null
-);
-
-create table if not exists telefonnummern
-(
-    id            varchar(36)  not null,
-    telefonnummer varchar(100) not null,
-    is_deleted    tinyint(1)   not null
-);
-
-create table if not exists unterricht
-(
-    id           varchar(36) not null,
-    beginn_datum date        not null,
-    ende_datum   date        not null,
-    is_deleted   tinyint(1)  not null
-);
-
-create procedure sp_Addresses_Add(IN in_street varchar(100), IN in_house_number varchar(100),
-                                  IN in_postal_code varchar(100), IN in_location varchar(100),
-                                  IN in_country varchar(100), OUT out_id varchar(36))
+create procedure sp_Address_Add(IN in_street varchar(100), IN in_house_number varchar(100),
+                                IN in_postal_code varchar(100), IN in_location varchar(100), IN in_country varchar(100),
+                                OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO addresses (id, street, house_number, postal_code, location, country, is_deleted)
+    INSERT INTO address (id, street, house_number, postal_code, location, country, is_deleted)
     VALUES (out_id, in_street, in_house_number, in_postal_code, in_location, in_country, false);
 END;
 
-create procedure sp_Addresses_Delete(IN in_id varchar(36))
+create procedure sp_Address_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE addresses SET is_deleted = true WHERE id = in_id;
+    UPDATE address SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Addresses_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Address_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM addresses WHERE id = in_id;
+    DELETE FROM address WHERE id = in_id;
 END;
 
-create procedure sp_Addresses_Get()
+create procedure sp_Address_Get()
 BEGIN
-    SELECT * FROM addresses WHERE is_deleted = false;
+    SELECT * FROM address WHERE is_deleted = false;
 END;
 
-create procedure sp_Addresses_GetById(IN in_id varchar(36))
+create procedure sp_Address_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM addresses WHERE id = in_id;
+    SELECT * FROM address WHERE id = in_id;
 END;
 
-create procedure sp_Addresses_GetDeleted()
+create procedure sp_Address_GetDeleted()
 BEGIN
-    SELECT * FROM addresses WHERE is_deleted = true;
+    SELECT * FROM address WHERE is_deleted = true;
 END;
 
-create procedure sp_Addresses_Search(IN in_street varchar(100), IN in_house_number varchar(100),
-                                     IN in_postal_code varchar(100), IN in_location varchar(100),
-                                     IN in_country varchar(100))
+create procedure sp_Address_Search(IN in_street varchar(100), IN in_house_number varchar(100),
+                                   IN in_postal_code varchar(100), IN in_location varchar(100),
+                                   IN in_country varchar(100))
 BEGIN
-    SELECT * FROM addresses
+    SELECT * FROM address
     WHERE (street LIKE CONCAT('%', in_street, '%') OR in_street IS NULL)
       AND (house_number LIKE CONCAT('%', in_house_number, '%') OR in_house_number IS NULL)
       AND (postal_code LIKE CONCAT('%', in_postal_code, '%') OR in_postal_code IS NULL)
@@ -243,19 +243,19 @@ BEGIN
       AND (country LIKE CONCAT('%', in_country, '%') OR in_country IS NULL);
 END;
 
-create procedure sp_Adresses_Undelete(IN in_id varchar(36))
+create procedure sp_Adress_Undelete(IN in_id varchar(36))
 BEGIN
-    UPDATE addresses
+    UPDATE address
     SET
         is_deleted = false
     WHERE id = in_id;
 END;
 
-create procedure sp_Adresses_Update(IN in_id varchar(36), IN in_street varchar(100), IN in_house_number varchar(100),
-                                    IN in_postal_code varchar(100), IN in_location varchar(100),
-                                    IN in_country varchar(100))
+create procedure sp_Adress_Update(IN in_id varchar(36), IN in_street varchar(100), IN in_house_number varchar(100),
+                                  IN in_postal_code varchar(100), IN in_location varchar(100),
+                                  IN in_country varchar(100))
 BEGIN
-    UPDATE addresses
+    UPDATE address
     SET
         street = IF (in_street IS NOT NULL, in_street, street),
         house_number = IF (in_house_number IS NOT NULL, in_house_number, house_number),
@@ -265,155 +265,104 @@ BEGIN
     WHERE id = in_id;
 END;
 
-create procedure sp_Classes_Add(IN in_name varchar(100), OUT out_id varchar(36))
+create procedure sp_Email_Add(IN in_email varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO school_classes (id, name, is_deleted)
-    VALUES (out_id, in_name, false);
-END;
-
-create procedure sp_Classes_Delete(IN in_id varchar(36))
-BEGIN
-    UPDATE school_classes SET is_deleted = true WHERE id = in_id;
-END;
-
-create procedure sp_Classes_DeletePermanent(IN in_id varchar(36))
-BEGIN
-    DELETE FROM school_classes WHERE id = in_id;
-END;
-
-create procedure sp_Classes_Get()
-BEGIN
-    SELECT * FROM school_classes WHERE is_deleted = false;
-END;
-
-create procedure sp_Classes_GetById(IN in_id varchar(36))
-BEGIN
-    SELECT * FROM school_classes WHERE id = in_id;
-END;
-
-create procedure sp_Classes_GetDeleted()
-BEGIN
-    SELECT * FROM school_classes WHERE is_deleted = true;
-END;
-
-create procedure sp_Classes_Search(IN in_name varchar(100))
-BEGIN
-    SELECT * FROM school_classes
-    WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL);
-END;
-
-create procedure sp_Classes_Undelete(IN in_id varchar(36))
-BEGIN
-    UPDATE school_classes SET is_deleted = false WHERE id = in_id;
-END;
-
-create procedure sp_Classes_Update(IN in_id varchar(36), IN in_name varchar(100))
-BEGIN
-    UPDATE school_classes
-    SET
-        name = IF (in_name IS NOT NULL, in_name, name)
-    WHERE id = in_id;
-END;
-
-create procedure sp_Emails_Add(IN in_email varchar(100), OUT out_id varchar(36))
-BEGIN
-    SET out_id = UUID();
-    INSERT INTO emails (id, email, is_deleted)
+    INSERT INTO email (id, email, is_deleted)
     VALUES (out_id, in_email, false);
 END;
 
-create procedure sp_Emails_Delete(IN in_id varchar(36))
+create procedure sp_Email_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE emails SET is_deleted = true WHERE id = in_id;
+    UPDATE email SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Emails_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Email_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM emails WHERE id = in_id;
+    DELETE FROM email WHERE id = in_id;
 END;
 
-create procedure sp_Emails_Get()
+create procedure sp_Email_Get()
 BEGIN
-    SELECT * FROM emails WHERE is_deleted = false;
+    SELECT * FROM email WHERE is_deleted = false;
 END;
 
-create procedure sp_Emails_GetById(IN in_id varchar(36))
+create procedure sp_Email_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM emails WHERE id = in_id;
+    SELECT * FROM email WHERE id = in_id;
 END;
 
-create procedure sp_Emails_GetDeleted()
+create procedure sp_Email_GetDeleted()
 BEGIN
-    SELECT * FROM emails WHERE is_deleted = true;
+    SELECT * FROM email WHERE is_deleted = true;
 END;
 
-create procedure sp_Emails_Search(IN in_email varchar(100))
+create procedure sp_Email_Search(IN in_email varchar(100))
 BEGIN
-    SELECT * FROM emails
+    SELECT * FROM email
     WHERE (email LIKE CONCAT('%', in_email, '%') OR in_email IS NULL);
 END;
 
-create procedure sp_Emails_Undelete(IN in_id varchar(36))
+create procedure sp_Email_Undelete(IN in_id varchar(36))
 BEGIN
-    UPDATE emails SET is_deleted = false WHERE id = in_id;
+    UPDATE email SET is_deleted = false WHERE id = in_id;
 END;
 
-create procedure sp_Emails_Update(IN in_id varchar(36), IN in_email varchar(100))
+create procedure sp_Email_Update(IN in_id varchar(36), IN in_email varchar(100))
 BEGIN
-    UPDATE emails
+    UPDATE email
     SET
         email = IF (in_email IS NOT NULL, in_email, email)
     WHERE id = in_id;
 END;
 
-create procedure sp_Inventories_Add(IN in_name varchar(100), IN in_amount varchar(100), OUT out_id varchar(36))
+create procedure sp_Inventory_Add(IN in_name varchar(100), IN in_amount varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO inventories (id, name, amount, is_deleted)
+    INSERT INTO inventory (id, name, amount, is_deleted)
     VALUES (out_id, in_name, in_amount, false);
 END;
 
-create procedure sp_Inventories_Delete(IN in_id varchar(36))
+create procedure sp_Inventory_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE inventories SET is_deleted = true WHERE id = in_id;
+    UPDATE inventory SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Inventories_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Inventory_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM inventories WHERE id = in_id;
+    DELETE FROM inventory WHERE id = in_id;
 END;
 
-create procedure sp_Inventories_Get()
+create procedure sp_Inventory_Get()
 BEGIN
-    SELECT * FROM inventories WHERE is_deleted = false;
+    SELECT * FROM inventory WHERE is_deleted = false;
 END;
 
-create procedure sp_Inventories_GetById(IN in_id varchar(36))
+create procedure sp_Inventory_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM inventories WHERE id = in_id;
+    SELECT * FROM inventory WHERE id = in_id;
 END;
 
-create procedure sp_Inventories_GetDeleted()
+create procedure sp_Inventory_GetDeleted()
 BEGIN
-    SELECT * FROM inventories WHERE is_deleted = true;
+    SELECT * FROM inventory WHERE is_deleted = true;
 END;
 
-create procedure sp_Inventories_Search(IN in_name varchar(100), IN in_amount int)
+create procedure sp_Inventory_Search(IN in_name varchar(100), IN in_amount int)
 BEGIN
-    SELECT * FROM inventories
+    SELECT * FROM inventory
     WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL)
       AND (amount = in_amount OR in_amount IS NULL);
 END;
 
-create procedure sp_Inventories_Undelete(IN in_id varchar(36))
+create procedure sp_Inventory_Undelete(IN in_id varchar(36))
 BEGIN
-    UPDATE inventories SET is_deleted = false WHERE id = in_id;
+    UPDATE inventory SET is_deleted = false WHERE id = in_id;
 END;
 
-create procedure sp_Inventories_Update(IN in_id varchar(36), IN in_name varchar(100), IN in_amount int)
+create procedure sp_Inventory_Update(IN in_id varchar(36), IN in_name varchar(100), IN in_amount int)
 BEGIN
-    UPDATE inventories
+    UPDATE inventory
     SET
         name = IF (in_name IS NOT NULL, in_name, name),
         amount = IF (in_amount IS NOT NULL, in_amount, amount)
@@ -470,147 +419,100 @@ BEGIN
     WHERE Id = in_id;
 END;
 
-create procedure sp_Locations_Add(IN in_name varchar(100), OUT out_id varchar(36))
+create procedure sp_Location_Add(IN in_name varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO locations (id, name, is_deleted)
+    INSERT INTO location (id, name, is_deleted)
     VALUES (out_id, in_name, false);
 END;
 
-create procedure sp_Locations_Delete(IN in_id varchar(36))
+create procedure sp_Location_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE locations SET is_deleted = true WHERE id = in_id;
+    UPDATE location SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Locations_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Location_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM locations WHERE id = in_id;
+    DELETE FROM location WHERE id = in_id;
 END;
 
-create procedure sp_Locations_Get()
+create procedure sp_Location_Get()
 BEGIN
-    SELECT * FROM locations WHERE is_deleted = false;
+    SELECT * FROM location WHERE is_deleted = false;
 END;
 
-create procedure sp_Locations_GetById(IN in_id varchar(36))
+create procedure sp_Location_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM locations WHERE id = in_id;
+    SELECT * FROM location WHERE id = in_id;
 end;
 
-create procedure sp_Locations_GetDeleted()
+create procedure sp_Location_GetDeleted()
 BEGIN
-    SELECT * FROM locations WHERE is_deleted = true;
+    SELECT * FROM location WHERE is_deleted = true;
 END;
 
-create procedure sp_Locations_Search(IN in_name varchar(100))
+create procedure sp_Location_Search(IN in_name varchar(100))
 BEGIN
-    SELECT * FROM locations
+    SELECT * FROM location
     WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL);
 END;
 
-create procedure sp_Locations_Update(IN in_id varchar(36), IN in_name varchar(100))
+create procedure sp_Location_Update(IN in_id varchar(36), IN in_name varchar(100))
 BEGIN
-    UPDATE locations
+    UPDATE location
     SET
         name = IF (in_name IS NOT NULL, in_name, name)
     WHERE id = in_id;
 END;
 
-create procedure sp_PersonAdress_Add(IN in_personId varchar(36), IN in_adresseId varchar(36), OUT out_id varchar(36))
+create procedure sp_PersonAddress_Add(IN in_person_id varchar(36), IN in_address_id varchar(36), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO person_address (id, person_id, adresse_id, is_deleted)
-    VALUES (out_id, in_personId, in_adresseId, false);
+    INSERT INTO person_address (id, person_id, address_id, is_deleted)
+    VALUES (out_id, in_person_id, in_address_id, false);
 END;
 
-create procedure sp_PersonAdress_Delete(IN in_id varchar(36))
+create procedure sp_PersonAddress_Delete(IN in_id varchar(36))
 BEGIN
     UPDATE person_address SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_PersonAdress_DeletePermanent(IN in_id varchar(36))
+create procedure sp_PersonAddress_DeletePermanent(IN in_id varchar(36))
 BEGIN
     DELETE FROM person_address WHERE id = in_id;
 END;
 
-create procedure sp_PersonAdress_Get()
+create procedure sp_PersonAddress_Get()
 BEGIN
     SELECT * FROM person_address WHERE is_deleted = false;
 END;
 
-create procedure sp_PersonAdress_GetById(IN in_id varchar(36))
+create procedure sp_PersonAddress_GetById(IN in_id varchar(36))
 BEGIN
     SELECT * FROM person_address WHERE id = in_id;
 end;
 
-create procedure sp_PersonAdress_Search(IN in_personId varchar(36), IN in_adressId varchar(36))
+create procedure sp_PersonAddress_Search(IN in_person_id varchar(36), IN in_address_id varchar(36))
 BEGIN
     SELECT * FROM person_address
-    WHERE (person_id = in_personId OR in_personId IS NULL)
-      AND (adresse_id = in_adressId OR in_adressId IS NULL);
+    WHERE (person_id = in_person_id OR in_person_id IS NULL)
+      AND (address_id = in_address_id OR in_address_id IS NULL);
 END;
 
-create procedure sp_PersonAdress_Undelete(IN in_id varchar(36))
+create procedure sp_PersonAddress_Undelete(IN in_id varchar(36))
 BEGIN
     UPDATE person_address SET is_deleted = false WHERE id = in_id;
 END;
 
-create procedure sp_PersonAdress_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_adressId varchar(36))
+create procedure sp_PersonAddress_Update(IN in_id varchar(36), IN in_person_id varchar(36),
+                                         IN in_address_id varchar(36))
 BEGIN
     UPDATE person_address
     SET
-        person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
-        adresse_id = IF (in_adressId IS NOT NULL, in_adressId, adresse_id)
+        person_id = IF (in_person_id IS NOT NULL, in_person_id, person_id),
+        address_id = IF (in_address_id IS NOT NULL, in_address_id, address_id)
     WHERE Id = in_id;
 end;
-
-create procedure sp_PersonClass_Add(IN in_personId varchar(36), IN in_klasseId varchar(36), OUT out_id varchar(36))
-BEGIN
-    SET out_id = UUID();
-    INSERT INTO person_klasse (id, person_id, klasse_id, is_deleted)
-    VALUES (out_id, in_personId, in_klasseId, false);
-END;
-
-create procedure sp_PersonClass_Delete(IN in_id varchar(36))
-BEGIN
-    UPDATE person_klasse SET is_deleted = true WHERE id = in_id;
-END;
-
-create procedure sp_PersonClass_DeletePermanent(IN in_id varchar(36))
-BEGIN
-    DELETE FROM person_klasse WHERE id = in_id;
-END;
-
-create procedure sp_PersonClass_Get()
-BEGIN
-    SELECT * FROM person_klasse WHERE is_deleted = false;
-END;
-
-create procedure sp_PersonClass_GetById(IN in_id varchar(36))
-BEGIN
-    SELECT * FROM person_klasse WHERE id = in_id;
-end;
-
-create procedure sp_PersonClass_GetDeleted()
-BEGIN
-    SELECT * FROM person_klasse WHERE is_deleted = true;
-END;
-
-create procedure sp_PersonClass_Search(IN in_personId varchar(36), IN in_klasseId varchar(36))
-BEGIN
-    SELECT * FROM person_klasse
-    WHERE (person_id = in_personId OR in_personId IS NULL)
-      AND (klasse_id = in_klasseId OR in_klasseId IS NULL);
-END;
-
-create procedure sp_PersonClass_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_klasseId varchar(36))
-BEGIN
-    UPDATE person_klasse
-    SET
-        person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
-        klasse_id = IF (in_klasseId IS NOT NULL, in_klasseId, klasse_id)
-    WHERE id = in_id;
-END;
 
 create procedure sp_PersonEmail_Add(IN in_personId varchar(36), IN in_email varchar(36), OUT out_id varchar(36))
 BEGIN
@@ -660,61 +562,59 @@ BEGIN
     WHERE id = in_id;
 END;
 
-create procedure sp_PersonPhone_Add(IN in_personId varchar(36), IN in_telefonnummerId varchar(36),
-                                    OUT out_id varchar(36))
+create procedure sp_PersonPhone_Add(IN in_personId varchar(36), IN in_phone_id varchar(36), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO person_telefonnummer (id, person_id, telefonnummer_id, is_deleted)
-    VALUES (out_id, in_personId, in_telefonnummerId, false);
+    INSERT INTO person_phone (id, person_id, phone_id, is_deleted)
+    VALUES (out_id, in_personId, in_phone_id, false);
 END;
 
 create procedure sp_PersonPhone_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE person_telefonnummer SET is_deleted = true WHERE id = in_id;
+    UPDATE person_phone SET is_deleted = true WHERE id = in_id;
 END;
 
 create procedure sp_PersonPhone_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM person_telefonnummer WHERE id = in_id;
+    DELETE FROM person_phone WHERE id = in_id;
 END;
 
 create procedure sp_PersonPhone_Get()
 BEGIN
-    SELECT * FROM person_telefonnummer WHERE is_deleted = false;
+    SELECT * FROM person_phone WHERE is_deleted = false;
 END;
 
 create procedure sp_PersonPhone_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM person_telefonnummer WHERE id = in_id;
+    SELECT * FROM person_phone WHERE id = in_id;
 end;
 
 create procedure sp_PersonPhone_GetDeleted()
 BEGIN
-    SELECT * FROM person_telefonnummer WHERE is_deleted = true;
+    SELECT * FROM person_phone WHERE is_deleted = true;
 END;
 
-create procedure sp_PersonPhone_Search(IN in_personId varchar(36), IN in_telefonnummerId varchar(36))
+create procedure sp_PersonPhone_Search(IN in_personId varchar(36), IN in_phone_id varchar(36))
 BEGIN
-    SELECT * FROM person_telefonnummer
+    SELECT * FROM person_phone
     WHERE (person_id = in_personId OR in_personId IS NULL)
-      AND (telefonnummer_id = in_telefonnummerId OR in_telefonnummerId IS NULL);
+      AND (phone_id = in_phone_id OR in_phone_id IS NULL);
 END;
 
-create procedure sp_PersonPhone_Update(IN in_id varchar(36), IN in_personId varchar(36),
-                                       IN in_telefonnummerId varchar(36))
+create procedure sp_PersonPhone_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_phone_id varchar(36))
 BEGIN
-    UPDATE person_telefonnummer
+    UPDATE person_phone
     SET
         person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
-        telefonnummer_id = IF (in_telefonnummerId IS NOT NULL, in_telefonnummerId, telefonnummer_id)
+        phone_id = IF (in_phone_id IS NOT NULL, in_phone_id, phone_id)
     WHERE id = in_id;
 END;
 
-create procedure sp_PersonRole_Add(IN in_personId varchar(36), IN in_RolleId varchar(36), OUT out_id varchar(36))
+create procedure sp_PersonRole_Add(IN in_personId varchar(36), IN in_role_id varchar(36), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO person_role (id, person_id, rolle_id, is_deleted)
-    VALUES (out_id, in_personId, in_RolleId, false);
+    INSERT INTO person_role (id, person_id, role_id, is_deleted)
+    VALUES (out_id, in_personId, in_role_id, false);
 END;
 
 create procedure sp_PersonRole_Delete(IN in_id varchar(36))
@@ -742,56 +642,106 @@ BEGIN
     SELECT * FROM person_role WHERE is_deleted = true;
 END;
 
-create procedure sp_PersonRole_Search(IN in_personId varchar(36), IN in_RolleId varchar(36))
+create procedure sp_PersonRole_Search(IN in_personId varchar(36), IN in_role_id varchar(36))
 BEGIN
     SELECT * FROM person_role
     WHERE (person_id = in_personId OR in_personId IS NULL)
-      AND (rolle_id = in_RolleId OR in_RolleId IS NULL);
+      AND (role_id = in_role_id OR in_role_id IS NULL);
 END;
 
-create procedure sp_PersonRole_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_rolleId varchar(36))
+create procedure sp_PersonRole_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_role_id varchar(36))
 BEGIN
     UPDATE person_role
     SET
         person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
-        rolle_id = IF (in_rolleId IS NOT NULL, in_rolleId, rolle_id)
+        role_id = IF (in_role_id IS NOT NULL, in_role_id, role_id)
     WHERE id = in_id;
 END;
 
-create procedure sp_Persons_Add(IN in_last_name varchar(100), IN in_first_name varchar(100), IN in_birthdate date,
-                                OUT out_id varchar(36))
+create procedure sp_PersonSchoolClass_Add(IN in_personId varchar(36), IN in_school_class_id varchar(36),
+                                          OUT out_id varchar(36))
+BEGIN
+    SET out_id = UUID();
+    INSERT INTO person_school_class (id, person_id, school_class_id, is_deleted)
+    VALUES (out_id, in_personId, in_school_class_id, false);
+END;
+
+create procedure sp_PersonSchoolClass_Delete(IN in_id varchar(36))
+BEGIN
+    UPDATE person_school_class SET is_deleted = true WHERE id = in_id;
+END;
+
+create procedure sp_PersonSchoolClass_DeletePermanent(IN in_id varchar(36))
+BEGIN
+    DELETE FROM person_school_class WHERE id = in_id;
+END;
+
+create procedure sp_PersonSchoolClass_Get()
+BEGIN
+    SELECT * FROM person_school_class WHERE is_deleted = false;
+END;
+
+create procedure sp_PersonSchoolClass_GetById(IN in_id varchar(36))
+BEGIN
+    SELECT * FROM person_school_class WHERE id = in_id;
+end;
+
+create procedure sp_PersonSchoolClass_GetDeleted()
+BEGIN
+    SELECT * FROM person_school_class WHERE is_deleted = true;
+END;
+
+create procedure sp_PersonSchoolClass_Search(IN in_personId varchar(36), IN in_school_class_id varchar(36))
+BEGIN
+    SELECT * FROM person_school_class
+    WHERE (person_id = in_personId OR in_personId IS NULL)
+      AND (school_class_id = in_school_class_id OR in_school_class_id IS NULL);
+END;
+
+create procedure sp_PersonSchoolClass_Update(IN in_id varchar(36), IN in_personId varchar(36),
+                                             IN in_school_class_id varchar(36))
+BEGIN
+    UPDATE person_school_class
+    SET
+        person_id = IF (in_personId IS NOT NULL, in_personId, person_id),
+        school_class_id = IF (in_school_class_id IS NOT NULL, in_school_class_id, school_class_id)
+    WHERE id = in_id;
+END;
+
+create procedure sp_Person_Add(IN in_last_name varchar(100), IN in_first_name varchar(100), IN in_birthdate date,
+                               OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
     INSERT INTO person (id, last_name, first_name, birthdate, is_deleted)
     VALUES (out_id, in_last_name, in_first_name, in_birthdate, false);
 END;
 
-create procedure sp_Persons_Delete(IN in_id varchar(36))
+create procedure sp_Person_Delete(IN in_id varchar(36))
 BEGIN
     UPDATE person SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Persons_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Person_DeletePermanent(IN in_id varchar(36))
 BEGIN
     DELETE FROM person WHERE id = in_id;
 END;
 
-create procedure sp_Persons_Get()
+create procedure sp_Person_Get()
 BEGIN
     SELECT * FROM person WHERE is_deleted = false;
 END;
 
-create procedure sp_Persons_GetById(IN in_id varchar(36))
+create procedure sp_Person_GetById(IN in_id varchar(36))
 BEGIN
     SELECT * FROM person WHERE id = in_id;
 end;
 
-create procedure sp_Persons_GetDeleted()
+create procedure sp_Person_GetDeleted()
 BEGIN
     SELECT * FROM person WHERE is_deleted = true;
 END;
 
-create procedure sp_Persons_Search(IN in_last_name varchar(100), IN in_first_name varchar(100), IN in_birthdate date)
+create procedure sp_Person_Search(IN in_last_name varchar(100), IN in_first_name varchar(100), IN in_birthdate date)
 BEGIN
     SELECT * FROM person
     WHERE (last_name LIKE CONCAT('%', in_last_name, '%') OR in_last_name IS NULL)
@@ -799,8 +749,8 @@ BEGIN
       AND (birthdate = in_birthdate OR in_birthdate IS NULL);
 END;
 
-create procedure sp_Persons_Update(IN in_id varchar(36), IN in_last_name varchar(100), IN in_first_name varchar(100),
-                                   IN in_birthdate date)
+create procedure sp_Person_Update(IN in_id varchar(36), IN in_last_name varchar(100), IN in_first_name varchar(100),
+                                  IN in_birthdate date)
 BEGIN
     UPDATE person
     SET
@@ -810,143 +760,194 @@ BEGIN
     WHERE id = in_id;
 END;
 
-create procedure sp_Phones_Add(IN in_telefonnummer varchar(100), OUT out_id varchar(36))
+create procedure sp_Phone_Add(IN in_phone varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO telefonnummern (id, telefonnummer, is_deleted)
-    VALUES (out_id, in_telefonnummer, false);
+    INSERT INTO phone (id, phone, is_deleted)
+    VALUES (out_id, in_phone, false);
 END;
 
-create procedure sp_Phones_Delete(IN in_id varchar(36))
+create procedure sp_Phone_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE telefonnummern SET is_deleted = true WHERE id = in_id;
+    UPDATE phone SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Phones_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Phone_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM telefonnummern WHERE id = in_id;
+    DELETE FROM phone WHERE id = in_id;
 END;
 
-create procedure sp_Phones_Get()
+create procedure sp_Phone_Get()
 BEGIN
-    SELECT * FROM telefonnummern WHERE is_deleted = false;
+    SELECT * FROM phone WHERE is_deleted = false;
 END;
 
-create procedure sp_Phones_GetById(IN in_id varchar(36))
+create procedure sp_Phone_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM telefonnummern WHERE id = in_id;
+    SELECT * FROM phone WHERE id = in_id;
 end;
 
-create procedure sp_Phones_GetDeleted()
+create procedure sp_Phone_GetDeleted()
 BEGIN
-    SELECT * FROM telefonnummern WHERE is_deleted = true;
+    SELECT * FROM phone WHERE is_deleted = true;
 END;
 
-create procedure sp_Phones_Search(IN in_telefonnummer varchar(100))
+create procedure sp_Phone_Search(IN in_phone varchar(100))
 BEGIN
-    SELECT * FROM telefonnummern
-    WHERE (telefonnummer LIKE CONCAT('%', in_telefonnummer, '%') OR in_telefonnummer IS NULL);
+    SELECT * FROM phone
+    WHERE (phone LIKE CONCAT('%', in_phone, '%') OR in_phone IS NULL);
 END;
 
-create procedure sp_Phones_Update(IN in_id varchar(36), IN in_telefonnummer varchar(100))
+create procedure sp_Phone_Update(IN in_id varchar(36), IN in_phone varchar(100))
 BEGIN
-    UPDATE telefonnummern
+    UPDATE phone
     SET
-        telefonnummer = IF (in_telefonnummer IS NOT NULL, in_telefonnummer, telefonnummer)
+        phone = IF (in_phone IS NOT NULL, in_phone, phone)
     WHERE id = in_id;
 END;
 
-create procedure sp_Roles_Add(IN in_name varchar(100), OUT out_id varchar(36))
+create procedure sp_Role_Add(IN in_name varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO rollen (id, name, is_deleted)
+    INSERT INTO role (id, name, is_deleted)
     VALUES (out_id, in_name, false);
 END;
 
-create procedure sp_Roles_Delete(IN in_id varchar(36))
+create procedure sp_Role_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE rollen SET is_deleted = true WHERE id = in_id;
+    UPDATE role SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Roles_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Role_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM rollen WHERE id = in_id;
+    DELETE FROM role WHERE id = in_id;
 END;
 
-create procedure sp_Roles_Get()
+create procedure sp_Role_Get()
 BEGIN
-    SELECT * FROM rollen WHERE is_deleted = false;
+    SELECT * FROM role WHERE is_deleted = false;
 END;
 
-create procedure sp_Roles_GetById(IN in_id varchar(36))
+create procedure sp_Role_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM rollen WHERE id = in_id;
+    SELECT * FROM role WHERE id = in_id;
 end;
 
-create procedure sp_Roles_GetDeleted()
+create procedure sp_Role_GetDeleted()
 BEGIN
-    SELECT * FROM rollen WHERE is_deleted = true;
+    SELECT * FROM role WHERE is_deleted = true;
 END;
 
-create procedure sp_Roles_Search(IN in_name varchar(100))
+create procedure sp_Role_Search(IN in_name varchar(100))
 BEGIN
-    SELECT * FROM rollen
+    SELECT * FROM role
     WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL);
 END;
 
-create procedure sp_Roles_Update(IN in_id varchar(36), IN in_name varchar(100))
+create procedure sp_Role_Update(IN in_id varchar(36), IN in_name varchar(100))
 BEGIN
-    UPDATE rollen
+    UPDATE role
     SET
         name = IF (in_name IS NOT NULL, in_name, name)
     WHERE id = in_id;
 END;
 
-create procedure sp_Rooms_Add(IN in_name varchar(100), IN in_nr varchar(100), OUT out_id varchar(36))
+create procedure sp_Room_Add(IN in_name varchar(100), IN in_nr varchar(100), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
-    INSERT INTO raeume (id, name, nr, is_deleted)
+    INSERT INTO room (id, name, nr, is_deleted)
     VALUES (out_id, in_name, in_nr, false);
 END;
 
-create procedure sp_Rooms_Delete(IN in_id varchar(36))
+create procedure sp_Room_Delete(IN in_id varchar(36))
 BEGIN
-    UPDATE raeume SET is_deleted = true WHERE id = in_id;
+    UPDATE room SET is_deleted = true WHERE id = in_id;
 END;
 
-create procedure sp_Rooms_DeletePermanent(IN in_id varchar(36))
+create procedure sp_Room_DeletePermanent(IN in_id varchar(36))
 BEGIN
-    DELETE FROM raeume WHERE id = in_id;
+    DELETE FROM room WHERE id = in_id;
 END;
 
-create procedure sp_Rooms_Get()
+create procedure sp_Room_Get()
 BEGIN
-    SELECT * FROM raeume WHERE is_deleted = false;
+    SELECT * FROM room WHERE is_deleted = false;
 END;
 
-create procedure sp_Rooms_GetById(IN in_id varchar(36))
+create procedure sp_Room_GetById(IN in_id varchar(36))
 BEGIN
-    SELECT * FROM raeume WHERE id = in_id;
+    SELECT * FROM room WHERE id = in_id;
 end;
 
-create procedure sp_Rooms_GetDeleted()
+create procedure sp_Room_GetDeleted()
 BEGIN
-    SELECT * FROM raeume WHERE is_deleted = true;
+    SELECT * FROM room WHERE is_deleted = true;
 END;
 
-create procedure sp_Rooms_Search(IN in_name varchar(100), IN in_nr varchar(100))
+create procedure sp_Room_Search(IN in_name varchar(100), IN in_nr varchar(100))
 BEGIN
-    SELECT * FROM raeume
+    SELECT * FROM room
     WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL)
       AND (nr LIKE CONCAT('%', in_nr, '%') OR in_nr IS NULL);
 END;
 
-create procedure sp_Rooms_Update(IN in_id varchar(36), IN in_name varchar(100), IN in_nr varchar(100))
+create procedure sp_Room_Update(IN in_id varchar(36), IN in_name varchar(100), IN in_nr varchar(100))
 BEGIN
-    UPDATE raeume
+    UPDATE room
     SET
         name = IF (in_name IS NOT NULL, in_name, name),
         nr = IF (in_nr IS NOT NULL, in_nr, nr)
+    WHERE id = in_id;
+END;
+
+create procedure sp_SchoolClass_Add(IN in_name varchar(100), OUT out_id varchar(36))
+BEGIN
+    SET out_id = UUID();
+    INSERT INTO school_class (id, name, is_deleted)
+    VALUES (out_id, in_name, false);
+END;
+
+create procedure sp_SchoolClass_Delete(IN in_id varchar(36))
+BEGIN
+    UPDATE school_class SET is_deleted = true WHERE id = in_id;
+END;
+
+create procedure sp_SchoolClass_DeletePermanent(IN in_id varchar(36))
+BEGIN
+    DELETE FROM school_class WHERE id = in_id;
+END;
+
+create procedure sp_SchoolClass_Get()
+BEGIN
+    SELECT * FROM school_class WHERE is_deleted = false;
+END;
+
+create procedure sp_SchoolClass_GetById(IN in_id varchar(36))
+BEGIN
+    SELECT * FROM school_class WHERE id = in_id;
+END;
+
+create procedure sp_SchoolClass_GetDeleted()
+BEGIN
+    SELECT * FROM school_class WHERE is_deleted = true;
+END;
+
+create procedure sp_SchoolClass_Search(IN in_name varchar(100))
+BEGIN
+    SELECT * FROM school_class
+    WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL);
+END;
+
+create procedure sp_SchoolClass_Undelete(IN in_id varchar(36))
+BEGIN
+    UPDATE school_class SET is_deleted = false WHERE id = in_id;
+END;
+
+create procedure sp_SchoolClass_Update(IN in_id varchar(36), IN in_name varchar(100))
+BEGIN
+    UPDATE school_class
+    SET
+        name = IF (in_name IS NOT NULL, in_name, name)
     WHERE id = in_id;
 END;
 

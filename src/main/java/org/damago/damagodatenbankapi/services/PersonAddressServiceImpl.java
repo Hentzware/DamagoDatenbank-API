@@ -20,7 +20,7 @@ public class PersonAddressServiceImpl implements PersonAddressService {
 
     @Override
     public PersonAddressResponse Add(AddPersonAddressRequest request) {
-        String id = personAddressRepository.sp_PersonAddress_Add();
+        String id = personAddressRepository.sp_PersonAddress_Add(request.getPerson_id(), request.getAddress_id());
         PersonAddress personAddress = personAddressRepository.sp_PersonAddress_GetById(id);
         return modelMapper.map(personAddress, PersonAddressResponse.class);
     }
@@ -36,7 +36,7 @@ public class PersonAddressServiceImpl implements PersonAddressService {
 
     @Override
     public PersonAddressResponse Edit(EditPersonAddressRequest request) {
-        personAddressRepository.sp_PersonAddress_Update(request.getId());
+        personAddressRepository.sp_PersonAddress_Update(request.getId(), request.getPerson_id(), request.getAddress_id());
         PersonAddress personAddress = personAddressRepository.sp_PersonAddress_GetById(request.getId());
         return modelMapper.map(personAddress, PersonAddressResponse.class);
     }
@@ -63,7 +63,7 @@ public class PersonAddressServiceImpl implements PersonAddressService {
 
     @Override
     public Iterable<PersonAddressResponse> Search(SearchPersonAddressRequest request) {
-        Iterable<PersonAddress> personsAddresses = personAddressRepository.sp_PersonAddress_Search();
+        Iterable<PersonAddress> personsAddresses = personAddressRepository.sp_PersonAddress_Search(request.getPerson_id(), request.getAddress_id());
         return modelMapper.map(personsAddresses, new TypeToken<Iterable<PersonAddressResponse>>() {
         }.getType());
     }

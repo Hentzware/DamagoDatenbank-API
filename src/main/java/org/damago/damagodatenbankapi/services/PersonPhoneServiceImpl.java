@@ -20,24 +20,24 @@ public class PersonPhoneServiceImpl implements PersonPhoneService {
 
     @Override
     public PersonPhoneResponse Add(AddPersonPhoneRequest request) {
-        String id = personPhoneRepository.sp_PersonsPhones_Add();
-        PersonPhone personPhone = personPhoneRepository.sp_PersonsPhones_GetById(id);
+        String id = personPhoneRepository.sp_PersonPhone_Add(request.getPerson_id(), request.getPhone_id());
+        PersonPhone personPhone = personPhoneRepository.sp_PersonPhone_GetById(id);
         return modelMapper.map(personPhone, PersonPhoneResponse.class);
     }
 
     @Override
     public void Delete(DeletePersonPhoneRequest request, boolean permanent) {
         if (permanent) {
-            personPhoneRepository.sp_PersonsPhones_DeletePermanent(request.getId());
+            personPhoneRepository.sp_PersonPhone_DeletePermanent(request.getId());
             return;
         }
-        personPhoneRepository.sp_PersonsPhones_Delete(request.getId());
+        personPhoneRepository.sp_PersonPhone_Delete(request.getId());
     }
 
     @Override
     public PersonPhoneResponse Edit(EditPersonPhoneRequest request) {
-        personPhoneRepository.sp_PersonsPhones_Update(request.getId());
-        PersonPhone personPhone = personPhoneRepository.sp_PersonsPhones_GetById(request.getId());
+        personPhoneRepository.sp_PersonPhone_Update(request.getId(), request.getPerson_id(), request.getPhone_id());
+        PersonPhone personPhone = personPhoneRepository.sp_PersonPhone_GetById(request.getId());
         return modelMapper.map(personPhone, PersonPhoneResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class PersonPhoneServiceImpl implements PersonPhoneService {
         Iterable<PersonPhone> personsPhones;
 
         if (deleted) {
-            personsPhones = personPhoneRepository.sp_PersonsPhones_GetDeleted();
+            personsPhones = personPhoneRepository.sp_PersonPhone_GetDeleted();
         } else {
-            personsPhones = personPhoneRepository.sp_PersonsPhones_Get();
+            personsPhones = personPhoneRepository.sp_PersonPhone_Get();
         }
 
         return modelMapper.map(personsPhones, new TypeToken<Iterable<PersonPhoneResponse>>() {
@@ -57,13 +57,13 @@ public class PersonPhoneServiceImpl implements PersonPhoneService {
 
     @Override
     public PersonPhoneResponse GetById(GetPersonPhoneRequest request) {
-        PersonPhone personPhone = personPhoneRepository.sp_PersonsPhones_GetById(request.getId());
+        PersonPhone personPhone = personPhoneRepository.sp_PersonPhone_GetById(request.getId());
         return modelMapper.map(personPhone, PersonPhoneResponse.class);
     }
 
     @Override
     public Iterable<PersonPhoneResponse> Search(SearchPersonPhoneRequest request) {
-        Iterable<PersonPhone> personsPhones = personPhoneRepository.sp_PersonsPhones_Search();
+        Iterable<PersonPhone> personsPhones = personPhoneRepository.sp_PersonPhone_Search(request.getPerson_id(), request.getPhone_id());
         return modelMapper.map(personsPhones, new TypeToken<Iterable<PersonPhoneResponse>>() {
         }.getType());
     }

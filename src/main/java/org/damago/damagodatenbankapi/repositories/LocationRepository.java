@@ -8,26 +8,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface LocationRepository extends JpaRepository<Location, String> {
     @Procedure
-    String sp_Locations_Add(String name);
+    String sp_Location_Add(String name);
 
     @Procedure
-    void sp_Locations_Delete(String id);
+    void sp_Location_Delete(String id);
 
     @Procedure
-    void sp_Locations_DeletePermanent(String id);
+    void sp_Location_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Location> sp_Locations_Get();
+    Iterable<Location> sp_Location_Get();
 
     @Procedure
-    Location sp_Locations_GetById(String id);
+    Location sp_Location_GetById(String id);
 
     @Procedure
-    Iterable<Location> sp_Locations_GetDeleted();
+    Iterable<Location> sp_Location_GetDeleted();
 
     @Procedure
-    Iterable<Location> sp_Locations_Search(String name);
+    Iterable<Location> sp_Location_Search(String name);
 
     @Procedure
-    void sp_Locations_Update(String id, String name);
+    void sp_Location_Update(String id, String name);
 }

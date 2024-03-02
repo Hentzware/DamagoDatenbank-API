@@ -20,24 +20,24 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Override
     public PhoneResponse Add(AddPhoneRequest request) {
-        String id = phoneRepository.sp_Phones_Add();
-        Phone phone = phoneRepository.sp_Phones_GetById(id);
+        String id = phoneRepository.sp_Phone_Add(request.getPhone());
+        Phone phone = phoneRepository.sp_Phone_GetById(id);
         return modelMapper.map(phone, PhoneResponse.class);
     }
 
     @Override
     public void Delete(DeletePhoneRequest request, boolean permanent) {
         if (permanent) {
-            phoneRepository.sp_Phones_DeletePermanent(request.getId());
+            phoneRepository.sp_Phone_DeletePermanent(request.getId());
             return;
         }
-        phoneRepository.sp_Phones_Delete(request.getId());
+        phoneRepository.sp_Phone_Delete(request.getId());
     }
 
     @Override
     public PhoneResponse Edit(EditPhoneRequest request) {
-        phoneRepository.sp_Phones_Update(request.getId());
-        Phone phone = phoneRepository.sp_Phones_GetById(request.getId());
+        phoneRepository.sp_Phone_Update(request.getId(), request.getPhone());
+        Phone phone = phoneRepository.sp_Phone_GetById(request.getId());
         return modelMapper.map(phone, PhoneResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class PhoneServiceImpl implements PhoneService {
         Iterable<Phone> phones;
 
         if (deleted) {
-            phones = phoneRepository.sp_Phones_GetDeleted();
+            phones = phoneRepository.sp_Phone_GetDeleted();
         } else {
-            phones = phoneRepository.sp_Phones_Get();
+            phones = phoneRepository.sp_Phone_Get();
         }
 
         return modelMapper.map(phones, new TypeToken<Iterable<PhoneResponse>>() {
@@ -57,13 +57,13 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Override
     public PhoneResponse GetById(GetPhoneRequest request) {
-        Phone phone = phoneRepository.sp_Phones_GetById(request.getId());
+        Phone phone = phoneRepository.sp_Phone_GetById(request.getId());
         return modelMapper.map(phone, PhoneResponse.class);
     }
 
     @Override
     public Iterable<PhoneResponse> Search(SearchPhoneRequest request) {
-        Iterable<Phone> phones = phoneRepository.sp_Phones_Search();
+        Iterable<Phone> phones = phoneRepository.sp_Phone_Search(request.getPhone());
         return modelMapper.map(phones, new TypeToken<Iterable<PhoneResponse>>() {
         }.getType());
     }

@@ -20,24 +20,24 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public ModuleResponse Add(AddModuleRequest request) {
-        String id = moduleRepository.sp_Modules_Add();
-        Module module = moduleRepository.sp_Modules_GetById(id);
+        String id = moduleRepository.sp_Module_Add(request.getName(), request.getDescription());
+        Module module = moduleRepository.sp_Module_GetById(id);
         return modelMapper.map(module, ModuleResponse.class);
     }
 
     @Override
     public void Delete(DeleteModuleRequest request, boolean permanent) {
         if (permanent) {
-            moduleRepository.sp_Modules_DeletePermanent(request.getId());
+            moduleRepository.sp_Module_DeletePermanent(request.getId());
             return;
         }
-        moduleRepository.sp_Modules_Delete(request.getId());
+        moduleRepository.sp_Module_Delete(request.getId());
     }
 
     @Override
     public ModuleResponse Edit(EditModuleRequest request) {
-        moduleRepository.sp_Modules_Update(request.getId());
-        Module module = moduleRepository.sp_Modules_GetById(request.getId());
+        moduleRepository.sp_Module_Update(request.getId(), request.getName(), request.getDescription());
+        Module module = moduleRepository.sp_Module_GetById(request.getId());
         return modelMapper.map(module, ModuleResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class ModuleServiceImpl implements ModuleService {
         Iterable<Module> modules;
 
         if (deleted) {
-            modules = moduleRepository.sp_Modules_GetDeleted();
+            modules = moduleRepository.sp_Module_GetDeleted();
         } else {
-            modules = moduleRepository.sp_Modules_Get();
+            modules = moduleRepository.sp_Module_Get();
         }
 
         return modelMapper.map(modules, new TypeToken<Iterable<ModuleResponse>>() {
@@ -57,13 +57,13 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public ModuleResponse GetById(GetModuleRequest request) {
-        Module module = moduleRepository.sp_Modules_GetById(request.getId());
+        Module module = moduleRepository.sp_Module_GetById(request.getId());
         return modelMapper.map(module, ModuleResponse.class);
     }
 
     @Override
     public Iterable<ModuleResponse> Search(SearchModuleRequest request) {
-        Iterable<Module> modules = moduleRepository.sp_Modules_Search();
+        Iterable<Module> modules = moduleRepository.sp_Module_Search(request.getName(), request.getDescription());
         return modelMapper.map(modules, new TypeToken<Iterable<ModuleResponse>>() {
         }.getType());
     }

@@ -20,24 +20,24 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressResponse Add(AddAddressRequest request) {
-        String id = addressRepository.sp_Addresses_Add();
-        Address address = addressRepository.sp_Addresses_GetById(id);
+        String id = addressRepository.sp_Address_Add(request.getStreet(), request.getHouse_number(), request.getPostal_code(), request.getLocation(), request.getCountry());
+        Address address = addressRepository.sp_Address_GetById(id);
         return modelMapper.map(address, AddressResponse.class);
     }
 
     @Override
     public void Delete(DeleteAddressRequest request, boolean permanent) {
         if (permanent) {
-            addressRepository.sp_Addresses_DeletePermanent(request.getId());
+            addressRepository.sp_Address_DeletePermanent(request.getId());
             return;
         }
-        addressRepository.sp_Addresses_Delete(request.getId());
+        addressRepository.sp_Address_Delete(request.getId());
     }
 
     @Override
     public AddressResponse Edit(EditAddressRequest request) {
-        addressRepository.sp_Addresses_Update(request.getId());
-        Address address = addressRepository.sp_Addresses_GetById(request.getId());
+        addressRepository.sp_Address_Update(request.getId(), request.getStreet(), request.getHouse_number(), request.getPostal_code(), request.getLocation(), request.getCountry());
+        Address address = addressRepository.sp_Address_GetById(request.getId());
         return modelMapper.map(address, AddressResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class AddressServiceImpl implements AddressService {
         Iterable<Address> addresses;
 
         if (deleted) {
-            addresses = addressRepository.sp_Addresses_GetDeleted();
+            addresses = addressRepository.sp_Address_GetDeleted();
         } else {
-            addresses = addressRepository.sp_Addresses_Get();
+            addresses = addressRepository.sp_Address_Get();
         }
 
         return modelMapper.map(addresses, new TypeToken<Iterable<AddressResponse>>() {
@@ -57,13 +57,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressResponse GetById(GetAddressRequest request) {
-        Address address = addressRepository.sp_Addresses_GetById(request.getId());
+        Address address = addressRepository.sp_Address_GetById(request.getId());
         return modelMapper.map(address, AddressResponse.class);
     }
 
     @Override
     public Iterable<AddressResponse> Search(SearchAddressRequest request) {
-        Iterable<Address> addresses = addressRepository.sp_Addresses_Search();
+        Iterable<Address> addresses = addressRepository.sp_Address_Search(request.getStreet(), request.getHouse_number(), request.getPostal_code(), request.getLocation(), request.getCountry());
         return modelMapper.map(addresses, new TypeToken<Iterable<AddressResponse>>() {
         }.getType());
     }

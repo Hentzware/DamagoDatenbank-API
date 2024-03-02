@@ -20,24 +20,24 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleResponse Add(AddRoleRequest request) {
-        String id = roleRepository.sp_Roles_Add();
-        Role role = roleRepository.sp_Roles_GetById(id);
+        String id = roleRepository.sp_Role_Add(request.getName());
+        Role role = roleRepository.sp_Role_GetById(id);
         return modelMapper.map(role, RoleResponse.class);
     }
 
     @Override
     public void Delete(DeleteRoleRequest request, boolean permanent) {
         if (permanent) {
-            roleRepository.sp_Roles_DeletePermanent(request.getId());
+            roleRepository.sp_Role_DeletePermanent(request.getId());
             return;
         }
-        roleRepository.sp_Roles_Delete(request.getId());
+        roleRepository.sp_Role_Delete(request.getId());
     }
 
     @Override
     public RoleResponse Edit(EditRoleRequest request) {
-        roleRepository.sp_Roles_Update(request.getId());
-        Role role = roleRepository.sp_Roles_GetById(request.getId());
+        roleRepository.sp_Role_Update(request.getId(), request.getName());
+        Role role = roleRepository.sp_Role_GetById(request.getId());
         return modelMapper.map(role, RoleResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class RoleServiceImpl implements RoleService {
         Iterable<Role> roles;
 
         if (deleted) {
-            roles = roleRepository.sp_Roles_GetDeleted();
+            roles = roleRepository.sp_Role_GetDeleted();
         } else {
-            roles = roleRepository.sp_Roles_Get();
+            roles = roleRepository.sp_Role_Get();
         }
 
         return modelMapper.map(roles, new TypeToken<Iterable<RoleResponse>>() {
@@ -57,13 +57,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleResponse GetById(GetRoleRequest request) {
-        Role role = roleRepository.sp_Roles_GetById(request.getId());
+        Role role = roleRepository.sp_Role_GetById(request.getId());
         return modelMapper.map(role, RoleResponse.class);
     }
 
     @Override
     public Iterable<RoleResponse> Search(SearchRoleRequest request) {
-        Iterable<Role> roles = roleRepository.sp_Roles_Search();
+        Iterable<Role> roles = roleRepository.sp_Role_Search(request.getName());
         return modelMapper.map(roles, new TypeToken<Iterable<RoleResponse>>() {
         }.getType());
     }

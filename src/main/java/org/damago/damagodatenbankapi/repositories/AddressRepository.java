@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface AddressRepository extends JpaRepository<Address, String> {
     @Procedure
-    String sp_Addresses_Add();
+    String sp_Address_Add(String street, String houseNumber, String postalCode, String location, String country);
 
     @Procedure
-    void sp_Addresses_Delete(String id);
+    void sp_Address_Delete(String id);
 
     @Procedure
-    void sp_Addresses_DeletePermanent(String id);
+    void sp_Address_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Address> sp_Addresses_Get();
+    Iterable<Address> sp_Address_Get();
 
     @Procedure
-    Address sp_Addresses_GetById(String id);
+    Address sp_Address_GetById(String id);
 
     @Procedure
-    Iterable<Address> sp_Addresses_GetDeleted();
+    Iterable<Address> sp_Address_GetDeleted();
 
     @Procedure
-    Iterable<Address> sp_Addresses_Search();
+    Iterable<Address> sp_Address_Search(String street, String houseNumber, String postalCode, String location, String country);
 
     @Procedure
-    void sp_Addresses_Undelete(String id);
+    void sp_Address_Undelete(String id);
 
     @Procedure
-    void sp_Addresses_Update(String id);
+    void sp_Address_Update(String id, String street, String houseNumber, String postalCode, String location, String country);
 }

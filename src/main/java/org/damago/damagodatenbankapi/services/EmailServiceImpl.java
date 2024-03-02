@@ -20,24 +20,24 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public EmailResponse Add(AddEmailRequest request) {
-        String id = emailRepository.sp_Emails_Add(request.getEmail());
-        Email email = emailRepository.sp_Emails_GetById(id);
+        String id = emailRepository.sp_Email_Add(request.getEmail());
+        Email email = emailRepository.sp_Email_GetById(id);
         return modelMapper.map(email, EmailResponse.class);
     }
 
     @Override
     public void Delete(DeleteEmailRequest request, boolean permanent) {
         if (permanent) {
-            emailRepository.sp_Emails_DeletePermanent(request.getId());
+            emailRepository.sp_Email_DeletePermanent(request.getId());
             return;
         }
-        emailRepository.sp_Emails_Delete(request.getId());
+        emailRepository.sp_Email_Delete(request.getId());
     }
 
     @Override
     public EmailResponse Edit(EditEmailRequest request) {
-        emailRepository.sp_Emails_Update(request.getId(), request.getEmail());
-        Email email = emailRepository.sp_Emails_GetById(request.getId());
+        emailRepository.sp_Email_Update(request.getId(), request.getEmail());
+        Email email = emailRepository.sp_Email_GetById(request.getId());
         return modelMapper.map(email, EmailResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class EmailServiceImpl implements EmailService {
         Iterable<Email> emails;
 
         if (deleted) {
-            emails = emailRepository.sp_Emails_GetDeleted();
+            emails = emailRepository.sp_Email_GetDeleted();
         } else {
-            emails = emailRepository.sp_Emails_Get();
+            emails = emailRepository.sp_Email_Get();
         }
 
         return modelMapper.map(emails, new TypeToken<Iterable<EmailResponse>>() {
@@ -57,13 +57,13 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public EmailResponse GetById(GetEmailRequest request) {
-        Email email = emailRepository.sp_Emails_GetById(request.getId());
+        Email email = emailRepository.sp_Email_GetById(request.getId());
         return modelMapper.map(email, EmailResponse.class);
     }
 
     @Override
     public Iterable<EmailResponse> Search(SearchEmailRequest request) {
-        Iterable<Email> emails = emailRepository.sp_Emails_Search(request.getEmail());
+        Iterable<Email> emails = emailRepository.sp_Email_Search(request.getEmail());
         return modelMapper.map(emails, new TypeToken<Iterable<EmailResponse>>() {
         }.getType());
     }

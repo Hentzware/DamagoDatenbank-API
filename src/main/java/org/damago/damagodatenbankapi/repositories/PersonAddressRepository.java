@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface PersonAddressRepository extends JpaRepository<PersonAddress, String> {
     @Procedure
-    String sp_PersonAddress_Add();
+    String sp_PersonAddress_Add(String person_id, String address_id);
 
     @Procedure
     void sp_PersonAddress_Delete(String id);
@@ -26,11 +26,11 @@ public interface PersonAddressRepository extends JpaRepository<PersonAddress, St
     Iterable<PersonAddress> sp_PersonAddress_GetDeleted();
 
     @Procedure
-    Iterable<PersonAddress> sp_PersonAddress_Search();
+    Iterable<PersonAddress> sp_PersonAddress_Search(String person_id, String address_id);
 
     @Procedure
     void sp_PersonAddress_Undelete(String id);
 
     @Procedure
-    void sp_PersonAddress_Update(String id);
+    void sp_PersonAddress_Update(String id, String person_id, String address_id);
 }

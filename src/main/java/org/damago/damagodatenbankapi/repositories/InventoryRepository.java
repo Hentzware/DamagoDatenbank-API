@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface InventoryRepository extends JpaRepository<Inventory, String> {
     @Procedure
-    String sp_Inventories_Add(String name, int amount);
+    String sp_Inventory_Add(String name, int amount);
 
     @Procedure
-    void sp_Inventories_Delete(String id);
+    void sp_Inventory_Delete(String id);
 
     @Procedure
-    void sp_Inventories_DeletePermanent(String id);
+    void sp_Inventory_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Inventory> sp_Inventories_Get();
+    Iterable<Inventory> sp_Inventory_Get();
 
     @Procedure
-    Inventory sp_Inventories_GetById(String id);
+    Inventory sp_Inventory_GetById(String id);
 
     @Procedure
-    Iterable<Inventory> sp_Inventories_GetDeleted();
+    Iterable<Inventory> sp_Inventory_GetDeleted();
 
     @Procedure
-    Iterable<Inventory> sp_Inventories_Search(String name, int amount);
+    Iterable<Inventory> sp_Inventory_Search(String name, int amount);
 
     @Procedure
-    void sp_Inventories_Undelete(String id);
+    void sp_Inventory_Undelete(String id);
 
     @Procedure
-    void sp_Inventories_Update(String id, String name, int amount);
+    void sp_Inventory_Update(String id, String name, int amount);
 }

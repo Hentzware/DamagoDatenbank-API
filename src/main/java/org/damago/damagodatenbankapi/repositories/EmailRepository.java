@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface EmailRepository extends JpaRepository<Email, String> {
     @Procedure
-    String sp_Emails_Add(String email);
+    String sp_Email_Add(String email);
 
     @Procedure
-    void sp_Emails_Delete(String id);
+    void sp_Email_Delete(String id);
 
     @Procedure
-    void sp_Emails_DeletePermanent(String id);
+    void sp_Email_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Email> sp_Emails_Get();
+    Iterable<Email> sp_Email_Get();
 
     @Procedure
-    Email sp_Emails_GetById(String id);
+    Email sp_Email_GetById(String id);
 
     @Procedure
-    Iterable<Email> sp_Emails_GetDeleted();
+    Iterable<Email> sp_Email_GetDeleted();
 
     @Procedure
-    Iterable<Email> sp_Emails_Search(String email);
+    Iterable<Email> sp_Email_Search(String email);
 
     @Procedure
-    void sp_Emails_Undelete(String id);
+    void sp_Email_Undelete(String id);
 
     @Procedure
-    void sp_Emails_Update(String id, String email);
+    void sp_Email_Update(String id, String email);
 }

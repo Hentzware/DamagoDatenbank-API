@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface ModuleRepository extends JpaRepository<Module, String> {
     @Procedure
-    String sp_Modules_Add();
+    String sp_Module_Add(String name, String description);
 
     @Procedure
-    void sp_Modules_Delete(String id);
+    void sp_Module_Delete(String id);
 
     @Procedure
-    void sp_Modules_DeletePermanent(String id);
+    void sp_Module_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Module> sp_Modules_Get();
+    Iterable<Module> sp_Module_Get();
 
     @Procedure
-    Module sp_Modules_GetById(String id);
+    Module sp_Module_GetById(String id);
 
     @Procedure
-    Iterable<Module> sp_Modules_GetDeleted();
+    Iterable<Module> sp_Module_GetDeleted();
 
     @Procedure
-    Iterable<Module> sp_Modules_Search();
+    Iterable<Module> sp_Module_Search(String name, String description);
 
     @Procedure
-    void sp_Modules_Undelete(String id);
+    void sp_Module_Undelete(String id);
 
     @Procedure
-    void sp_Modules_Update(String id);
+    void sp_Module_Update(String id, String name, String description);
 }

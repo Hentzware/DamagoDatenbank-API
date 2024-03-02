@@ -8,29 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface RoomRepository extends JpaRepository<Room, String> {
     @Procedure
-    String sp_Rooms_Add();
+    String sp_Room_Add(String name, String nr);
 
     @Procedure
-    void sp_Rooms_Delete(String id);
+    void sp_Room_Delete(String id);
 
     @Procedure
-    void sp_Rooms_DeletePermanent(String id);
+    void sp_Room_DeletePermanent(String id);
 
     @Procedure
-    Iterable<Room> sp_Rooms_Get();
+    Iterable<Room> sp_Room_Get();
 
     @Procedure
-    Room sp_Rooms_GetById(String id);
+    Room sp_Room_GetById(String id);
 
     @Procedure
-    Iterable<Room> sp_Rooms_GetDeleted();
+    Iterable<Room> sp_Room_GetDeleted();
 
     @Procedure
-    Iterable<Room> sp_Rooms_Search();
+    Iterable<Room> sp_Room_Search(String name, String nr);
 
     @Procedure
-    void sp_Rooms_Undelete(String id);
+    void sp_Room_Undelete(String id);
 
     @Procedure
-    void sp_Rooms_Update(String id);
+    void sp_Room_Update(String id, String name, String nr);
 }

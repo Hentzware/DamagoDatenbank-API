@@ -20,24 +20,24 @@ public class ModulePersonServiceImpl implements ModulePersonService {
 
     @Override
     public ModulePersonResponse Add(AddModulePersonRequest request) {
-        String id = modulePersonRepository.sp_ModulesPersons_Add();
-        ModulePerson modulePerson = modulePersonRepository.sp_ModulesPersons_GetById(id);
+        String id = modulePersonRepository.sp_ModulePerson_Add(request.getModule_id(), request.getPerson_id());
+        ModulePerson modulePerson = modulePersonRepository.sp_ModulePerson_GetById(id);
         return modelMapper.map(modulePerson, ModulePersonResponse.class);
     }
 
     @Override
     public void Delete(DeleteModulePersonRequest request, boolean permanent) {
         if (permanent) {
-            modulePersonRepository.sp_ModulesPersons_DeletePermanent(request.getId());
+            modulePersonRepository.sp_ModulePerson_DeletePermanent(request.getId());
             return;
         }
-        modulePersonRepository.sp_ModulesPersons_Delete(request.getId());
+        modulePersonRepository.sp_ModulePerson_Delete(request.getId());
     }
 
     @Override
     public ModulePersonResponse Edit(EditModulePersonRequest request) {
-        modulePersonRepository.sp_ModulesPersons_Update(request.getId());
-        ModulePerson modulePerson = modulePersonRepository.sp_ModulesPersons_GetById(request.getId());
+        modulePersonRepository.sp_ModulePerson_Update(request.getId(), request.getModule_id(), request.getPerson_id());
+        ModulePerson modulePerson = modulePersonRepository.sp_ModulePerson_GetById(request.getId());
         return modelMapper.map(modulePerson, ModulePersonResponse.class);
     }
 
@@ -46,9 +46,9 @@ public class ModulePersonServiceImpl implements ModulePersonService {
         Iterable<ModulePerson> modulesPersons;
 
         if (deleted) {
-            modulesPersons = modulePersonRepository.sp_ModulesPersons_GetDeleted();
+            modulesPersons = modulePersonRepository.sp_ModulePerson_GetDeleted();
         } else {
-            modulesPersons = modulePersonRepository.sp_ModulesPersons_Get();
+            modulesPersons = modulePersonRepository.sp_ModulePerson_Get();
         }
 
         return modelMapper.map(modulesPersons, new TypeToken<Iterable<ModulePersonResponse>>() {
@@ -57,13 +57,13 @@ public class ModulePersonServiceImpl implements ModulePersonService {
 
     @Override
     public ModulePersonResponse GetById(GetModulePersonRequest request) {
-        ModulePerson modulePerson = modulePersonRepository.sp_ModulesPersons_GetById(request.getId());
+        ModulePerson modulePerson = modulePersonRepository.sp_ModulePerson_GetById(request.getId());
         return modelMapper.map(modulePerson, ModulePersonResponse.class);
     }
 
     @Override
     public Iterable<ModulePersonResponse> Search(SearchModulePersonRequest request) {
-        Iterable<ModulePerson> modulesPersons = modulePersonRepository.sp_ModulesPersons_Search();
+        Iterable<ModulePerson> modulesPersons = modulePersonRepository.sp_ModulePerson_Search(request.getModule_id(), request.getPerson_id());
         return modelMapper.map(modulesPersons, new TypeToken<Iterable<ModulePersonResponse>>() {
         }.getType());
     }
