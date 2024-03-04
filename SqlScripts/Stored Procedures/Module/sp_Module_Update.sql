@@ -3,5 +3,6 @@ BEGIN
     UPDATE module
         SET
             name = IF (in_name IS NOT NULL, in_name, name),
-            description = IF (in_description IS NOT NULL, in_description, description);
+            description = IF (in_description IS NOT NULL, in_description, description)
+    WHERE id = in_id;
 END
