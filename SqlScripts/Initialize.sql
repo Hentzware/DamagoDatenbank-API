@@ -465,6 +465,63 @@ BEGIN
     WHERE id = in_id;
 END;
 
+create procedure sp_Module_Add(IN in_name varchar(100), IN in_description varchar(250), OUT out_id varchar(36))
+BEGIN
+    SET out_id = UUID();
+    INSERT INTO module (id, name, description, is_deleted)
+    VALUES (out_id, in_name, in_description, false);
+END;
+
+create procedure sp_Module_Delete(IN in_id varchar(36))
+BEGIN
+    UPDATE module
+    SET is_deleted = true
+    WHERE id = in_id;
+END;
+
+create procedure sp_Module_DeletePermanent(IN in_id varchar(36))
+BEGIN
+    DELETE FROM module WHERE id = in_id;
+END;
+
+create procedure sp_Module_Get()
+BEGIN
+    SELECT * FROM module WHERE is_deleted = false;
+END;
+
+create procedure sp_Module_GetById(IN in_id varchar(36))
+BEGIN
+    SELECT * FROM module WHERE id = in_id;
+END;
+
+create procedure sp_Module_GetDeleted()
+BEGIN
+    SELECT * FROM module WHERE is_deleted = true;
+END;
+
+create procedure sp_Module_Search(IN in_name varchar(100), IN in_description varchar(250))
+BEGIN
+    SELECT * FROM module
+    WHERE (name LIKE CONCAT('%', in_name, '%') OR in_name IS NULL)
+      AND (description LIKE CONCAT('%', in_description, '%') OR in_description IS NULL);
+END;
+
+create procedure sp_Module_Undelete(IN in_id varchar(36))
+BEGIN
+    UPDATE module
+    SET is_deleted = false
+    WHERE id = in_id;
+END;
+
+create procedure sp_Module_Update(IN in_id varchar(36), IN in_name varchar(100), IN in_description varchar(250))
+BEGIN
+    UPDATE module
+    SET
+        name = IF (in_name IS NOT NULL, in_name, name),
+        description = IF (in_description IS NOT NULL, in_description, description)
+    WHERE id = in_id;
+END;
+
 create procedure sp_PersonAddress_Add(IN in_person_id varchar(36), IN in_address_id varchar(36), OUT out_id varchar(36))
 BEGIN
     SET out_id = UUID();
