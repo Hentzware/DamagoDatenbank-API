@@ -77,11 +77,13 @@ public class PersonPhoneController {
 
     @GetMapping("/search")
     public ResponseEntity<Iterable<PersonPhoneResponse>> Search(
-            @RequestParam(required = false, value = "name") String name) {
+            @RequestParam(required = false, value = "person_id") String person_id,
+            @RequestParam(required = false, value = "phone_id") String phone_id) {
 
         SearchPersonPhoneRequest request = new SearchPersonPhoneRequest();
 
-        // request.setName(name);
+        request.setPerson_id(person_id);
+        request.setPhone_id(phone_id);
 
         Iterable<PersonPhoneResponse> result = personPhoneService.Search(request);
 
