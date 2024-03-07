@@ -1,4 +1,4 @@
-CREATE PROCEDURE sp_Adress_Undelete (IN in_id VARCHAR(36))
+CREATE PROCEDURE sp_Address_Undelete (IN in_id VARCHAR(36))
 BEGIN
     UPDATE address
         SET

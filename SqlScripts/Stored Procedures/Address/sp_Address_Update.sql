@@ -1,4 +1,4 @@
-CREATE PROCEDURE sp_Adress_Update (IN in_id VARCHAR(36), IN in_street VARCHAR(100), IN in_house_number VARCHAR(100), IN in_postal_code VARCHAR(100), IN in_location VARCHAR(100), IN in_country VARCHAR(100))
+CREATE PROCEDURE sp_Address_Update (IN in_id VARCHAR(36), IN in_street VARCHAR(100), IN in_house_number VARCHAR(100), IN in_postal_code VARCHAR(100), IN in_location VARCHAR(100), IN in_country VARCHAR(100))
 BEGIN
     UPDATE address
         SET

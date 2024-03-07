@@ -243,7 +243,7 @@ BEGIN
       AND (country LIKE CONCAT('%', in_country, '%') OR in_country IS NULL);
 END;
 
-create procedure sp_Adress_Undelete(IN in_id varchar(36))
+create procedure sp_Address_Undelete(IN in_id varchar(36))
 BEGIN
     UPDATE address
     SET
@@ -251,9 +251,9 @@ BEGIN
     WHERE id = in_id;
 END;
 
-create procedure sp_Adress_Update(IN in_id varchar(36), IN in_street varchar(100), IN in_house_number varchar(100),
-                                  IN in_postal_code varchar(100), IN in_location varchar(100),
-                                  IN in_country varchar(100))
+create procedure sp_Address_Update(IN in_id varchar(36), IN in_street varchar(100), IN in_house_number varchar(100),
+                                   IN in_postal_code varchar(100), IN in_location varchar(100),
+                                   IN in_country varchar(100))
 BEGIN
     UPDATE address
     SET
@@ -405,8 +405,8 @@ END;
 create procedure sp_LocationPerson_Search(IN in_location_id varchar(36), IN in_person_id varchar(36))
 BEGIN
     SELECT * FROM location_person
-    WHERE (location_id = in_location_id OR in_location_id IS NULL)
-      AND (person_id = in_person_id OR in_person_id IS NULL);
+    WHERE (location_id LIKE in_location_id OR in_location_id IS NULL)
+      AND (person_id LIKE in_person_id OR in_person_id IS NULL);
 END;
 
 create procedure sp_LocationPerson_Update(IN in_id varchar(36), IN in_location_id varchar(36),
@@ -518,8 +518,7 @@ BEGIN
     UPDATE module
     SET
         name = IF (in_name IS NOT NULL, in_name, name),
-        description = IF (in_description IS NOT NULL, in_description, description)
-    WHERE id = in_id;
+        description = IF (in_description IS NOT NULL, in_description, description);
 END;
 
 create procedure sp_PersonAddress_Add(IN in_person_id varchar(36), IN in_address_id varchar(36), OUT out_id varchar(36))
@@ -658,6 +657,11 @@ BEGIN
       AND (phone_id = in_phone_id OR in_phone_id IS NULL);
 END;
 
+create procedure sp_PersonPhone_Undelete(IN in_id varchar(36))
+BEGIN
+    UPDATE person_phone SET is_deleted = false WHERE id = in_id;
+END;
+
 create procedure sp_PersonPhone_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_phone_id varchar(36))
 BEGIN
     UPDATE person_phone
@@ -702,8 +706,8 @@ END;
 create procedure sp_PersonRole_Search(IN in_personId varchar(36), IN in_role_id varchar(36))
 BEGIN
     SELECT * FROM person_role
-    WHERE (person_id = in_personId OR in_personId IS NULL)
-      AND (role_id = in_role_id OR in_role_id IS NULL);
+    WHERE (person_id LIKE in_personId OR in_personId IS NULL)
+      AND (role_id LIKE in_role_id OR in_role_id IS NULL);
 END;
 
 create procedure sp_PersonRole_Update(IN in_id varchar(36), IN in_personId varchar(36), IN in_role_id varchar(36))
@@ -751,8 +755,8 @@ END;
 create procedure sp_PersonSchoolClass_Search(IN in_personId varchar(36), IN in_school_class_id varchar(36))
 BEGIN
     SELECT * FROM person_school_class
-    WHERE (person_id = in_personId OR in_personId IS NULL)
-      AND (school_class_id = in_school_class_id OR in_school_class_id IS NULL);
+    WHERE (person_id LIKE in_personId OR in_personId IS NULL)
+      AND (school_class_id LIKE in_school_class_id OR in_school_class_id IS NULL);
 END;
 
 create procedure sp_PersonSchoolClass_Update(IN in_id varchar(36), IN in_personId varchar(36),
